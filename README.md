@@ -3,6 +3,7 @@ Just beta version, so please don't use it for product at this version.
 # How to install ? 
 Very easy, first you need 
     `git clone https://github.com/steveleetn91/vn-native-3.git`
+    `cd vn-native-3 && git checkout beta`
 .Then run 
     `npm install`
 # First run ?
