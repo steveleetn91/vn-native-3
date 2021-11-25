@@ -11,6 +11,7 @@ module.exports = {
         './src/bootstrap.ts'
     ],
     mode: "production",
+    devtool: "inline-source-map",
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, 'public'),

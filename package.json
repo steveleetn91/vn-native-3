@@ -1,6 +1,6 @@
 {
   "name": "vn-native-3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/steveleetn91/vn-native-3#readme",
   "devDependencies": {
+    "@types/node": "^16.11.10",
     "css-minimizer-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^2.4.5",
     "ts-loader": "^9.2.6",
@@ -28,6 +29,7 @@
     "webpack-dev-server": "^4.5.0"
   },
   "dependencies": {
+    "@types/mustache": "^4.1.2",
     "mustache": "^4.2.0",
     "vnnative3-console": "^1.0.0",
     "vnnative3-router": "^1.0.0",

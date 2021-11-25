@@ -1,7 +1,7 @@
-import VnNative3Router from "vnnative3-router";
+import VnNative3Router from "vnnative3-router/dist/vnnative3-router/index";
 import RouterConfig from "./router";
 let Router = new RouterConfig;
-let ModuleConfig = new VnNative3Router;
+let ModuleConfig = new VnNative3Router();
 ModuleConfig.set(Router.config());
 ModuleConfig.init();
 class VnNativeBootstrap {

@@ -1,5 +1,5 @@
-import HTMLPageInterFace from 'vnnative3-webview/HTMLPage'
-import VnNative3HTMLElement from 'vnnative3-webview/HTMLElement/index'
+import HTMLPageInterFace from 'vnnative3-webview/dist/HTMLPage'
+import VnNative3HTMLElement from 'vnnative3-webview/dist/HTMLElement/index';
 export default class IndexPage implements HTMLPageInterFace {
     state = {
         title : "",
