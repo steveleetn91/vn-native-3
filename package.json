@@ -32,6 +32,7 @@
     "@types/mustache": "^4.1.2",
     "mustache": "^4.2.0",
     "vnnative3-console": "^1.0.0",
+    "vnnative3-redirect": "^1.0.0",
     "vnnative3-router": "^1.0.0",
     "vnnative3-webview": "^1.0.0"
   }
