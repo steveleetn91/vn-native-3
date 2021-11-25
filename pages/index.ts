@@ -1,6 +1,7 @@
 import HTMLPageInterFace from 'vnnative3-webview/dist/HTMLPage'
 import VnNative3HTMLElement from 'vnnative3-webview/dist/HTMLElement/index';
 import VnNative3Redirect from 'vnnative3-redirect/dist/index'
+import '../styles/global.scss';
 export default class IndexPage implements HTMLPageInterFace {
     state = {
         title : "",
