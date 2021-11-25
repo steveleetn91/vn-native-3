@@ -5,6 +5,9 @@ Very easy, first you need
     `git clone https://github.com/steveleetn91/vn-native-3.git`
 .Then run 
     `npm install`
+# First run ?
+Only run 
+    `npm run build`
 # How to run ?
 Only run 
     `npm run serve`    
