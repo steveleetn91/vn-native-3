@@ -1,6 +1,11 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const ProxConfig = {
+    target: 'http://localhost:9000/index.html?page=',
+    secure: true,
+    changeOrigin: true
+};
 module.exports = {
     entry: [
         './src/bootstrap.ts'
@@ -9,6 +14,7 @@ module.exports = {
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, 'public'),
+        publicPath: "/",
     },
     optimization: {
         minimizer: [
@@ -42,12 +48,16 @@ module.exports = {
         static: {
             directory: path.join(__dirname, 'public'),
         },
-        compress: true,
         port: 9000,
+        hot: true,
+        compress: false,
+        proxy: {
+            "/home": ProxConfig,
+        }
     },
     performance: {
         hints: false,
-        maxEntrypointSize: 512000,
-        maxAssetSize: 512000
+        maxEntrypointSize: 5120000,
+        maxAssetSize: 5120000
     }
 };

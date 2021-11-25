@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./public/index.js && npx webpack --config webpack.config.js",
+    "build": "rm -rf ./public/app.js && npx webpack --config webpack.config.js",
     "serve": "npx webpack serve"
   },
   "repository": {
@@ -26,5 +26,11 @@
     "webpack": "^5.64.2",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0"
+  },
+  "dependencies": {
+    "mustache": "^4.2.0",
+    "vnnative3-console": "^1.0.0",
+    "vnnative3-router": "^1.0.0",
+    "vnnative3-webview": "^1.0.0"
   }
 }
