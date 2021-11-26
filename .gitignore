@@ -1,3 +1,6 @@
 /node_modules
 /plugins
 /public/dist
+/platforms/web/*
+/platforms/web/.*
+.env

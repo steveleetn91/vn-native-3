@@ -8,6 +8,9 @@
     "build": "rm -rf ./public/dist && npx webpack --config webpack.config.js",
     "serve": "npx webpack serve"
   },
+  "bin": {
+    "vn3-web-build": "./bin/web/build.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/steveleetn91/vn-native-3.git"
@@ -32,7 +35,10 @@
   },
   "dependencies": {
     "@types/mustache": "^4.1.2",
+    "cli": "^1.0.1",
     "css-loader": "^6.5.1",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
     "mustache": "^4.2.0",
     "vnnative3-console": "^1.0.0",
     "vnnative3-redirect": "^1.0.0",

@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+require('dotenv').config()
 const ProxConfig = {
     target: 'http://localhost:9000/index.html?page=',
     secure: true,
@@ -49,7 +50,7 @@ module.exports = {
         static: {
             directory: path.join(__dirname, 'public'),
         },
-        port: 9000,
+        port: process.env.PORT || 9000,
         hot: true,
         compress: false,
         proxy: {
