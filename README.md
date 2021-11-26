@@ -23,7 +23,11 @@ Run
     `npm link`
 
 Then
-    `npm run build`    
+    `npm run build`   
+
+# Permission
+
+`sudo chmod -R 777 ./bin`
 
 # How to run ?
 
