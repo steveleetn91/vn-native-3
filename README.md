@@ -53,5 +53,11 @@ Then go to
 
 Copy and upload to your hosting
 
+# Issue
+
+Let's give for me a some issue
+
+    `https://github.com/steveleetn91/vn-native-3/issues`
+
 # Licence 
 Licence : MIT
