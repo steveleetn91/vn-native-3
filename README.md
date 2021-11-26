@@ -7,7 +7,7 @@ Very easy, first you need
     `git clone https://github.com/steveleetn91/vn-native-3.git`
 
 Then
-    `cd vn-native-3 && git checkout beta`
+    `cd vn-native-3`
 
 .Then run 
     `npm install`
