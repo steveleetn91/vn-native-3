@@ -4,7 +4,7 @@ const fs = require('fs')
 const webpackConfig = './webpack.config.js'
 try {
     let buildWeb = () => {
-        cli.exec("mkdir -p ./platforms/web/dist && rm -rf ./platforms/web && cp -r ./public ./platforms/web && cp -r ./framework.json ./platforms/web/framework.json ", (success) => {
+        cli.exec("rm -rf ./platforms/web && cp -r ./public ./platforms/web && cp -r ./framework.json ./platforms/web/framework.json ", (success) => {
             if (success) {
                 cli.ok("Done!!!");
             }

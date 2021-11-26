@@ -42,6 +42,9 @@ Or
 
 # Production of web platform
 
+First step 
+    `mkdir -p ./platforms/web`
+
 Only run 
     `vn3-web-build`
 
