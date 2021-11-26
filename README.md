@@ -5,6 +5,8 @@ Just beta version, but us can use for web platform. But Android, Ios, Macos, Win
 # How to install ? 
 Very easy, first you need 
     `git clone https://github.com/steveleetn91/vn-native-3.git`
+
+Then
     `cd vn-native-3 && git checkout beta`
 
 .Then run 
