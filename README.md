@@ -57,6 +57,8 @@ Copy and upload to your hosting
 
 We use Electron for feature software. First step 
     `npm run electron-start`
+Install Electron packager
+    `npm install --save-dev electron-packager`
 
 # Windows software production
 We use Electron for feature software. First step
