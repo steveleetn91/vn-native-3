@@ -53,6 +53,18 @@ Then go to
 
 Copy and upload to your hosting
 
+# Windows software development
+
+We use Electron for feature software. First step 
+    `npm run electron-start`
+
+# Windows software production
+We use Electron for feature software. First step
+    `npm run electron-win-build`
+
+Then you can go to
+    `platforms/electron/dist`
+
 # Issue
 
 Let's give for me a some issue

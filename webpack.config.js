@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 require('dotenv').config()
 const ProxConfig = {
-    target: 'http://localhost:9000/index.html?page=',
+    target: `${process.env.DOMAIN}/index.html?page=`,
     secure: true,
     changeOrigin: true
 };
