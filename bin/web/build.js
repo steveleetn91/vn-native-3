@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 let cli = require('cli');
 const fs = require('fs')
-const webpackConfig = './webpack.config.js'
+const frameworkInfo = './framework.json'
 try {
     let buildWeb = () => {
         cli.exec("rm -rf ./platforms/web && cp -r ./public ./platforms/web && cp -r ./framework.json ./platforms/web/framework.json ", (success) => {
@@ -19,7 +19,7 @@ try {
             }
         });
     }
-    if (fs.existsSync(webpackConfig)) {
+    if (fs.existsSync(frameworkInfo)) {
         cli.ok("Starting build web ... ");
         //file exists
         buildStatic();
