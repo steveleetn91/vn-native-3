@@ -13,7 +13,7 @@
   "bin": {
     "vn3-web-build": "./bin/web/build.js",
     "vn3-web-serve": "./bin/web/server.js",
-    "vn3-electron-build-win":"./bin/electron/build-win.js"
+    "vn3-electron-build-win": "./bin/electron/build-win.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "css-minimizer-webpack-plugin": "^3.2.0",
     "electron": "^16.0.2",
     "electron-packager": "^15.4.0",
+    "electron-winstaller": "^5.0.0",
     "mini-css-extract-plugin": "^2.4.5",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.3.0",
