@@ -58,7 +58,7 @@ Now we using Mustache library for view engine, so to get advanced please read mo
 # Windows software development
 
 We use Electron for feature software. First step 
-    `npm run server:electron`
+    `npm run serve:electron`
 
 # Windows software production
 Install Electron packager
