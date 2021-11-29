@@ -5,18 +5,18 @@ require('dotenv').config()
 const ProxConfig = {
     target: `${process.env.DOMAIN}/index.html?page=`,
     secure: true,
-    changeOrigin: true
+    changeOrigin: false
 };
 module.exports = {
-    entry: [
-        './src/bootstrap.ts'
-    ],
-    mode: "production",
+    entry: {
+        app : './src/bootstrap.ts',
+    },
+    mode:"production",
     devtool: "inline-source-map",
     output: {
-        filename: 'app.js',
-        path: path.resolve(__dirname, 'public/dist'),
-        publicPath: "/",
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'public/assets'),
+        clean: true,
     },
     optimization: {
         minimizer: [
@@ -29,7 +29,8 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: 'styles.css'
-        })],
+        })
+    ],
     module: {
         rules: [
             {
@@ -44,7 +45,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js','scss'],
     },
     devServer: {
         static: {
@@ -53,6 +54,7 @@ module.exports = {
         port: process.env.PORT || 9000,
         hot: true,
         compress: false,
+        liveReload:true,
         proxy: {
             "/home": ProxConfig,
         }

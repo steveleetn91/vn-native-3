@@ -11,8 +11,8 @@ export default class IndexPage implements HTMLPageInterFace {
         
     }
     public beforeRender() : void {
-        this.state['title'] = "Vn Native 3 Framework";
-        this.state['slogan'] = "Cross Framework";
+        this.state['title'] = "Vn Native Framework - Beta";
+        this.state['slogan'] = "Cross Platforms";
     }
     public afterRender() : void {
         
@@ -23,7 +23,8 @@ export default class IndexPage implements HTMLPageInterFace {
     }
     public render() : string {
         return (new VnNative3HTMLElement).make(`
-        <div>
+        <div class="info-box">
+            <div class="logo"></div>
             <h1 onclick="IndexPage.test()">{{title}}</h1>
             <p>{{slogan}}</p>
         </div>

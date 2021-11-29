@@ -22,17 +22,14 @@ To
 Run 
     `npm link`
 
-Then
-    `npm run build`   
-
 # Permission
 
 `sudo chmod -R 777 ./bin`
 
-# How to run ?
+# How to run web server ?
 
 Only run 
-    `npm run serve`    
+    `npm run serve:web`    
 
 Then you can visit : 
     `http://localhost:9000`
@@ -43,10 +40,10 @@ Or
 # Production of web platform
 
 First step 
-    `mkdir -p ./platforms/web`
+    `mkdir -p ./platforms/web/build`
 
 Only run 
-    `vn3-web-build`
+    `npm run build:web`
 
 Then go to 
     `./platform/web`
@@ -61,13 +58,14 @@ Now we using Mustache library for view engine, so to get advanced please read mo
 # Windows software development
 
 We use Electron for feature software. First step 
-    `npm run electron-start`
+    `npm run server:electron`
+
+# Windows software production
 Install Electron packager
     `npm install --save-dev electron-packager`
 
-# Windows software production
 We use Electron for feature software. First step
-    `npm run electron-win-build`
+    `npm run build:electron-win`
 
 Then you can go to
     `platforms/electron/dist`
@@ -75,7 +73,6 @@ Then you can go to
 # Issue
 
 Let's give for me a some issue
-
     `https://github.com/steveleetn91/vn-native-3/issues`
 
 # Licence 

@@ -2,16 +2,18 @@
   "name": "vn-native-3",
   "version": "1.0.2",
   "description": "Vn Native Framework",
-  "main": "./bin/electron/serve.js",
+  "main": "./bin/electron/production.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./public/dist && npx webpack --config webpack.config.js",
-    "serve": "npx webpack serve",
-    "electron-start": "npx electron .",
-    "electron-win-build": "electron-packager . app --platform win32 --arch x64 --out ./platforms/electron/dist --overwrite"
+    "serve:web": "vn3-web-serve",
+    "serve:electron": "npx electron ./bin/electron/serve.js",
+    "build:web": "vn3-web-build",
+    "build:electron-win": "vn3-web-build && vn3-electron-build-win"
   },
   "bin": {
-    "vn3-web-build": "./bin/web/build.js"
+    "vn3-web-build": "./bin/web/build.js",
+    "vn3-web-serve": "./bin/web/server.js",
+    "vn3-electron-build-win":"./bin/electron/build-win.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,9 @@
   },
   "homepage": "https://github.com/steveleetn91/vn-native-3#readme",
   "devDependencies": {
+    "@types/mini-css-extract-plugin": "^2.4.0",
     "@types/node": "^16.11.10",
+    "@types/webpack-dev-server": "^4.5.0",
     "css-minimizer-webpack-plugin": "^3.2.0",
     "electron": "^16.0.2",
     "electron-packager": "^15.4.0",
