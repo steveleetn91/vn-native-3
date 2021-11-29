@@ -1,6 +1,6 @@
 # Vn Native Framework Version 3 - Beta
 
-Just beta version, but us can use for web platform. But Android, Ios, Macos, Windows App need a little time.
+Just beta version, but us can use for web platform. But Android, iOS need a little time.
 
 # How to install ? 
 Very easy, first you need 
