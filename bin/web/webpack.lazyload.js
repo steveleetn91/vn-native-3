@@ -1,22 +1,15 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-require('dotenv').config()
-const ProxConfig = {
-    target: `${process.env.DOMAIN}/index.html?page=`,
-    secure: true,
-    changeOrigin: false
-};
+require('dotenv').config();
+const webpackHelper = require('./helpers/webpack.vnf');
 module.exports = {
-    entry: {
-        app : './src/bootstrap.ts',
-    },
+    entry: webpackHelper.listPageNeedBuild(),
     mode:"production",
     devtool: "inline-source-map",
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'public/assets'),
-        clean: true,
+        path: path.resolve(__dirname, '../../public/assets')
     },
     optimization: {
         minimizer: [
@@ -46,18 +39,6 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js','scss'],
-    },
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
-        },
-        port: process.env.PORT || 9000,
-        hot: true,
-        compress: false,
-        liveReload:true,
-        proxy: {
-            "/home": ProxConfig,
-        }
     },
     performance: {
         hints: false,

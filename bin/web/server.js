@@ -12,6 +12,9 @@ try {
         cli.exec('npx webpack watch --config webpack.config.dev.js',(resp) => {
             cli.info(resp.toString());
         })
+        cli.exec('npx webpack watch --config ./bin/web/webpack.lazyload.js',(resp) => {
+            cli.info(resp.toString());
+        })
     }
 } catch (err) {
     cli.error(err.toString());

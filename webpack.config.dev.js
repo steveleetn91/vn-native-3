@@ -30,7 +30,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'styles.css'
+            filename: '[name].bundle.css'
         }),
         new webpack.HotModuleReplacementPlugin(),
     ],
