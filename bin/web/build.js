@@ -4,11 +4,19 @@ const fs = require('fs')
 const frameworkInfo = './framework.json';
 const webpackHelper = require('./helpers/webpack.vnf');
 try {
-    let buildWeb = () => {
-        cli.exec(`cp -r ./public ./platforms/web/build && cp -r ./framework.json ./platforms/web/build/framework.json 
-        && cp -r ./platforms/web/views/production.html ./platforms/web/build/index.html `, (success) => {
+    let restoreIndex = () => {
+        cli.exec("cp -r ./platforms/web/views/production.html ./platforms/web/build/index.html",(message) => {
+            if(message) {
+                cli.ok("Stop!!!");
+            }
+        });
+    }
+    let buildWeb = (next) => {
+        cli.exec(`cp -r ./public ./platforms/web/build 
+        && cp -r ./framework.json ./platforms/web/build/framework.json `, (success) => {
             if (success) {
-                cli.ok("Done!!!");
+                cli.ok("Done build web!!");
+                return next();
             }
         });
     }
@@ -27,11 +35,11 @@ try {
             if (success) {
                 cli.info(success.toString());
                 cli.info("Page build done !!!");
+                return next();
             }
         });
-        return next();
     }
-    let prepareBuild = async (callback) => {
+    let prepareBuild = async (next) => {
         const lazyloadTemplate = await fs.readFileSync('./platforms/web/tmp/lazyload.vnf',
         {encoding:'utf8', flag:'r'});
         let listPage = webpackHelper.listPage();
@@ -42,7 +50,7 @@ try {
             let tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}',page);
             fs.writeFileSync(`./platforms/web/tmp/pages/${page}.ts`,tmp_lazyloadTemplate);
             if((i+1)===listPage.length){
-                return callback();
+                return next();
             }
         }
         
@@ -53,7 +61,9 @@ try {
             prepareBuild(() => {
                 buildRouter(() => {
                     buildPage(() => {
-                        buildWeb();
+                        buildWeb(() => {
+                            restoreIndex();
+                        });
                     });
                 });
             });

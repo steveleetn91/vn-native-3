@@ -1,7 +1,9 @@
 /node_modules
 /plugins
 /public/dist
+/platforms/electron/dist
 /platforms/web/build/*
 /platforms/web/build/.*
+/platforms/web/tmp/pages/.*
 .env
 /public/assets
