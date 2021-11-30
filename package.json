@@ -54,7 +54,7 @@
     "mustache": "^4.2.0",
     "vnnative3-console": "^1.0.0",
     "vnnative3-redirect": "^1.0.0",
-    "vnnative3-router": "^1.0.7",
+    "vnnative3-router": "^1.0.8",
     "vnnative3-webview": "^1.0.0"
   }
 }
