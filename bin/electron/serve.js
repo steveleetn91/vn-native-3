@@ -21,6 +21,9 @@ try {
     myApp.get('/', (req, res) => {
         res.render('index');
     });
+    myApp.get('/:slug', (req, res) => {
+        res.render('index');
+    });
     myApp.listen(PORT);
     app.whenReady().then(() => {
         createWindow()
