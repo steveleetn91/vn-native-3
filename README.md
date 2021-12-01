@@ -2,7 +2,8 @@
 
 Just beta version, but us can use for Web, Windows, MacOS platform. But Android, iOS need a little time.
 
-Note : We need NodeJS version >= 16.x.x
+Vn Native Framework will using lazy load for all page, so it's ready for big project. 
+    `Note : We need NodeJS version >= 16.x.x`
 
 # How to install ? 
 Very easy, first you need 
