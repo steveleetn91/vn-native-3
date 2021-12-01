@@ -2,6 +2,8 @@
 
 Just beta version, but us can use for Web, Windows, MacOS platform. But Android, iOS need a little time.
 
+Note : We need NodeJS version >= 16.x.x
+
 # How to install ? 
 Very easy, first you need 
     `git clone https://github.com/steveleetn91/vn-native-3.git`
