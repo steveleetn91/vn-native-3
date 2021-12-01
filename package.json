@@ -8,12 +8,14 @@
     "serve:web": "vn3-web-serve",
     "serve:electron": "npx electron ./bin/electron/serve.js",
     "build:web": "vn3-web-build",
-    "build:electron-win": "vn3-web-build && vn3-electron-build-win"
+    "build:electron-win": "vn3-web-build && vn3-electron-build-win",
+    "build:electron-macos": "vn3-web-build && vn3-electron-build-macos"
   },
   "bin": {
     "vn3-web-build": "./bin/web/build.js",
     "vn3-web-serve": "./bin/web/server.js",
-    "vn3-electron-build-win": "./bin/electron/build-win.js"
+    "vn3-electron-build-win": "./bin/electron/build-win.js",
+    "vn3-electron-build-macos": "./bin/electron/build-macos.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,7 @@
     "@types/webpack-dev-server": "^4.5.0",
     "css-minimizer-webpack-plugin": "^3.2.0",
     "electron": "^16.0.2",
+    "electron-installer-dmg": "^3.0.0",
     "electron-packager": "^15.4.0",
     "electron-winstaller": "^5.0.0",
     "mini-css-extract-plugin": "^2.4.5",
