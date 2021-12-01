@@ -1,6 +1,6 @@
 # Vn Native Framework Version 3 - Beta
 
-Just beta version, but us can use for web platform. But Android, iOS need a little time.
+Just beta version, but us can use for Web, Windows, MacOS platform. But Android, iOS need a little time.
 
 # How to install ? 
 Very easy, first you need 
@@ -69,6 +69,21 @@ We use Electron for feature software. First step
 
 Then you can go to
     `platforms/electron/dist`
+
+# MacOS software development
+
+We use Electron for feature software. First step 
+    `npm run serve:electron`
+
+# MacOS software production
+Install Electron packager
+    `npm install --save-dev electron-packager`
+
+We use Electron for feature software. First step
+    `npm run build:electron-macos`
+
+Then you can go to
+    `platforms/electron/dist`    
 
 # Issue
 
