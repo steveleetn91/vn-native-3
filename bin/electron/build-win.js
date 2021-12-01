@@ -8,36 +8,36 @@ const frameworkInfo = './framework.json';
 try {
     if (fs.existsSync(frameworkInfo)) {
 
-        let installerBuild = async (nameFolderBuild) => {
+        let installerBuild = async (type) => {
             try {
                 await electronInstaller.createWindowsInstaller({
                     title:process.env.ELECTRON_APP_TITLE,
                     description:process.env.ELECTRON_APP_DESC,
-                    appDirectory: './platforms/electron/dist/application-' + nameFolderBuild + '-win32-x64',
-                    outputDirectory: './platforms/electron/dist/installer-' + nameFolderBuild,
+                    appDirectory: './platforms/electron/dist/' + process.env.ELECTRON_APP_NAME + '-win32-' + type,
+                    outputDirectory: './platforms/electron/dist/installer-' + process.env.ELECTRON_APP_NAME  + '-win32-' + type,
                     authors: process.env.ELECTRON_APP_AUTHOR,
                     version:process.env.ELECTRON_APP_VERSION,
-                    exe: 'application-' + nameFolderBuild +'.exe',
+                    exe: process.env.ELECTRON_APP_NAME +'.exe',
                     name:process.env.ELECTRON_APP_NAME
                 });
-                cli.ok("Done! Release happy ^^");
+                cli.ok("Done! "+type+" ^^");
             }catch(err) {
                 cli.error(err.toString());
             }
         }
 
-        let osBuild = (nameFolderBuild,callback) => {
-            cli.exec('npx electron-packager . application-' + nameFolderBuild
-                + ' --platform win32 --arch x64' 
+        let osBuild = (type,next) => {
+            cli.exec('npx electron-packager . ' + process.env.ELECTRON_APP_NAME
+                + ' --platform win32 --arch ' + type 
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite', 
                 async (resp) => {
                     cli.ok(resp.toString());
-                    installerBuild(nameFolderBuild);
-                    return callback();
+                    installerBuild(type);
+                    return next();
                 }, async (err) => {
                     cli.info(err.toString());
-                    installerBuild(nameFolderBuild);
-                    return callback();
+                    installerBuild(type);
+                    return next();
                 });
         }
 
@@ -53,8 +53,12 @@ try {
             const nameFolderBuild = (new Date()).getFullYear() +
             ((new Date()).getMonth() + 1)
             + (new Date()).getDate();
-            osBuild(nameFolderBuild,() => {
-                restoreIndex();
+            osBuild('ia32',() => {
+                osBuild('x64',() => {
+                    osBuild('arm64',() => {
+                        restoreIndex();
+                    });
+                });
             });
         });
         
