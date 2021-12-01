@@ -12,8 +12,7 @@ try {
         });
     }
     let buildWeb = (next) => {
-        cli.exec(`cp -r ./public ./platforms/web/build 
-        && cp -r ./framework.json ./platforms/web/build/framework.json `, (success) => {
+        cli.exec("cp -r ./public ./platforms/web/build && cp -r ./framework.json ./platforms/web/build/framework.json", (success) => {
             if (success) {
                 cli.ok("Done build web!!");
                 return next();
