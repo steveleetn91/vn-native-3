@@ -25,6 +25,9 @@ To
 Run 
     `npm link`
 
+Run 
+    `npm run build:web`
+
 # Permission
 
 `sudo chmod -R 777 ./bin`
