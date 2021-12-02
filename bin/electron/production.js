@@ -18,6 +18,12 @@ try {
     myApp.get('/:slug', (req, res) => {
         res.render('index');
     });
+    myApp.get('/:slug/:sub_slug', (req, res) => {
+        res.render('index');
+    });
+    myApp.get('/:slug/:sub_slug/:sub_slug', (req, res) => {
+        res.render('index');
+    });
     myApp.listen(PORT);
     app.whenReady().then(() => {
         createWindow()
