@@ -1,4 +1,4 @@
-![alt text](http://url/to/img.png)
+![alt text](https://vnnativeframework.club/assets/images/logo.png)
 # Vn Native Framework Version 3 - Beta
 
 Just beta version, but us can use for Web, Windows, MacOS platform. But Android, iOS need a little time.
