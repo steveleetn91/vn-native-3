@@ -18,11 +18,21 @@ export default class IndexPage implements HTMLPageInterFace {
         
     }
     public test(){
-        // 404 
-        return (new VnNative3Redirect).to('home/test2');
+        return (new VnNative3HTMLElement).next(() => {
+            console.log("Test event next 1");
+        }).next(() => {
+            console.log("Test event next 2");
+        });
     }
     public render() : string {
-        return (new VnNative3HTMLElement).make(`
+        return (new VnNative3HTMLElement).head({
+            title: "Vn Native Framework - V3",
+            slogan : "Cross platforms"
+        }).next(() => {
+            console.log("Hello I'm next 1!");
+        }).next(() => {
+            console.log("Hello I'm next 2!");
+        }).make(`
         <div class="info-box">
             <div class="logo"></div>
             <h1 onclick="IndexPage.test()">{{title}}</h1>
