@@ -7,7 +7,10 @@ const frameworkInfo = './framework.json';
 
 try {
     if (fs.existsSync(frameworkInfo)) {
-
+        if(process.env.ELECTRON_BUILD == 0 ) {
+            cli.error("You need change ELECTRON_BUILD to 1 to build.");
+            return;
+        }
         let installerBuild = async (type) => {
             try {
                 await electronInstaller.createWindowsInstaller({

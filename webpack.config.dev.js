@@ -62,12 +62,11 @@ module.exports = {
             "/home": ProxConfig,
         },
         watchFiles: ['./src/*', './assets/styles/*','./pages/*'],
-        open: true,
-        client: {},
+        open: true
     },
     performance: {
-        hints: false,
-        maxEntrypointSize: 5120000,
-        maxAssetSize: 5120000
+        hints: "error",
+        maxEntrypointSize: 2560000,
+        maxAssetSize: 2560000
     }
 };

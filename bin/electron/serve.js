@@ -7,12 +7,17 @@ let path = require('path');
 require('dotenv').config()
 
 try {
-    cli.exec('npx webpack watch --config webpack.config.dev.js',(resp) => {
-        cli.info(resp.toString());
-    })
-    cli.exec('npx webpack watch --config ./bin/web/webpack.lazyload.js',(resp) => {
-        cli.info(resp.toString());
-    })
+    /**
+     * If is development 
+     */
+    if(process.env.ELECTRON_BUILD == 0) {
+        cli.exec(`vn3-web-serve`,(resp) => {
+            cli.info(resp.toString());
+        });
+    }
+    /**
+     * Production serve
+     */
     const PORT = 43468;
     myApp.use(express.static(path.join(__dirname, '../../public')));
     myApp.set('views', path.join(__dirname, '../../platforms/electron/views'));
@@ -24,7 +29,7 @@ try {
     myApp.get('/:slug', (req, res) => {
         res.render('index');
     });
-    
+
     myApp.get('/:slug/:sub_slug', (req, res) => {
         res.render('index');
     });
@@ -32,6 +37,9 @@ try {
         res.render('index');
     });
     myApp.listen(PORT);
+    /**
+     * App
+     */
     app.whenReady().then(() => {
         createWindow()
         app.on('activate', () => {
@@ -43,10 +51,18 @@ try {
         const win = new BrowserWindow({
             width: 800,
             height: 600,
-            autoHideMenuBar: true
+            autoHideMenuBar: true,
+            webPreferences: {}
         })
-
-        win.loadURL(`http://localhost:${PORT}/`);
+        if(process.env.ELECTRON_BUILD == 1) {
+            win.loadURL(`http://localhost:${PORT}/`);
+        } else{
+            /**
+             * For development
+             */
+            win.loadURL(`http://localhost:${process.env.PORT}/`);
+            win.webContents.openDevTools();
+        }
     }
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {

@@ -7,6 +7,10 @@ const frameworkInfo = './framework.json';
 
 try {
     if (fs.existsSync(frameworkInfo)) {
+        if(process.env.ELECTRON_BUILD == 0 ) {
+            cli.error("You need change ELECTRON_BUILD to 1 to build.");
+            return;
+        }
         let installerBuild = async () => {
             await createDMG({
                 title: process.env.ELECTRON_APP_TITLE,
