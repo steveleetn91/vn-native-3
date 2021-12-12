@@ -1,6 +1,6 @@
 {
   "name": "vn-native-3",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "Vn Native Framework",
   "main": "./bin/electron/production.js",
   "scripts": {
