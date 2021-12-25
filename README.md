@@ -1,7 +1,9 @@
 ![alt text](https://vnnativeframework.club/assets/images/logo.png)
 # Vn Native Framework Version 3 - Beta
 
-Just beta version, but us can use for Web, Windows, MacOS platform. But Android, iOS need a little time.
+Just beta version, but us can use for Web, Windows, MacOS platform. But Android, iOS need a little time. Slack room : 
+
+https://join.slack.com/t/vnnative/shared_invite/zt-10c6aiylx-GBQ8e2M_skQyh1i4fW879A
 
 Vn Native Framework using lazy load for all page, so it's ready for big project. 
     `Note : We need NodeJS version >= 16.x.x`
