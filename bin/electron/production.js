@@ -1,12 +1,11 @@
-let express = require('express');
-let myApp = express();
+const express = require('express');
+const myApp = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { app, BrowserWindow } = require('electron');
-let path = require('path');
+const path = require('path');
 require('dotenv').config()
-
+if (require('electron-squirrel-startup')) return;
 try {
-   
     const PORT = 43468;
     myApp.use(express.static(path.join(__dirname, '../../public')));
     myApp.set('views', path.join(__dirname, '../../platforms/electron/views'));
