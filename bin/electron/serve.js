@@ -13,6 +13,8 @@ try {
     if(process.env.ELECTRON_BUILD == 0) {
         cli.exec(`vn3-web-serve`,(resp) => {
             cli.info(resp.toString());
+        },(resp) => {
+            cli.info(resp.toString());
         });
     }
     /**
