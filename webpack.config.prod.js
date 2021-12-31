@@ -42,17 +42,24 @@ module.exports = {
                 test: /.s?css$/,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            }
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js','scss'],
+        extensions: ['.tsx', '.ts', '.js'],
     },
     devServer: {
         static: {
             directory: path.join(__dirname, 'public'),
         },
         port: process.env.PORT || 9000,
-        hot: true,
         compress: false,
         liveReload:true,
         proxy: {

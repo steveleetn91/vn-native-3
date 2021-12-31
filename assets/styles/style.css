@@ -1,11 +1,11 @@
 h1 {
     color: red;
 }
-.logo {
-    background-image: url('../images/logo.png');
-    background-position: 50%;
-    background-size: cover;
+.site-logo {
     height: 250px;
     width: 320px;
     margin: auto;
+}
+.site-logo img {
+    max-width: 100%;
 }

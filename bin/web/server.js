@@ -8,11 +8,17 @@ try {
         //file exists
         cli.exec(`npx webpack serve --config webpack.config.dev.js --mode=production --live-reload`,(resp) => {
             cli.info(resp.toString());
+        },(resp) => {
+            cli.info(resp.toString());
         })
         cli.exec('npx webpack watch --config webpack.config.dev.js',(resp) => {
             cli.info(resp.toString());
+        },(resp) => {
+            cli.info(resp.toString());
         })
         cli.exec('npx webpack watch --config ./bin/web/webpack.lazyload.js',(resp) => {
+            cli.info(resp.toString());
+        },(resp) => {
             cli.info(resp.toString());
         })
     }

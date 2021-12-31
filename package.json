@@ -36,6 +36,7 @@
     "electron-installer-dmg": "^3.0.0",
     "electron-packager": "^15.4.0",
     "electron-winstaller": "^5.0.0",
+    "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.4.5",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.3.0",

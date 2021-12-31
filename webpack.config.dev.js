@@ -10,11 +10,10 @@ const ProxConfig = {
 };
 module.exports = {
     entry: {
-        hot : 'webpack/hot/dev-server.js',
-        app : './src/bootstrap.ts',
-        client: 'webpack-dev-server/client/index.js?hot=true&live-reload=true'
+        app: './src/bootstrap.ts',
+        client: 'webpack-dev-server/client/index.js?live-reload=true'
     },
-    mode:"production",
+    mode: "production",
     devtool: "inline-source-map",
     output: {
         filename: '[name].bundle.js',
@@ -31,8 +30,7 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].bundle.css'
-        }),
-        new webpack.HotModuleReplacementPlugin(),
+        })
     ],
     module: {
         rules: [
@@ -45,10 +43,18 @@ module.exports = {
                 test: /.s?css$/,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
             },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            }
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', 'scss'],
+        extensions: ['.tsx', '.ts', '.js'],
     },
     devServer: {
         historyApiFallback: true,
@@ -57,11 +63,10 @@ module.exports = {
             './assets'
         ],
         port: process.env.PORT || 9000,
-        hot: true,
         proxy: {
             "/home": ProxConfig,
         },
-        watchFiles: ['./src/*', './assets/styles/*','./pages/*'],
+        watchFiles: ['./src/*', './assets/styles/*', './pages/*'],
         open: true
     },
     performance: {

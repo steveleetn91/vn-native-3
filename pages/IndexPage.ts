@@ -5,7 +5,8 @@ import '../assets/styles/global.scss';
 export default class IndexPage implements HTMLPageInterFace {
     state = {
         title : "",
-        slogan: ""
+        slogan: "",
+        logo : require('../assets/images/logo.png')
     };
     constructor() {
         
@@ -17,25 +18,17 @@ export default class IndexPage implements HTMLPageInterFace {
     public afterRender() : void {
         
     }
-    public test(){
-        return (new VnNative3HTMLElement).next(() => {
-            console.log("Test event next 1");
-        }).next(() => {
-            console.log("Test event next 2");
-        });
-    }
     public render() : string {
-        return (new VnNative3HTMLElement).head({
-            title: "Vn Native Framework - V3",
-            slogan : "Cross platforms"
-        }).next(() => {
+        return (new VnNative3HTMLElement).head(this.state).next(() => {
             console.log("Hello I'm next 1!");
         }).next(() => {
             console.log("Hello I'm next 2!");
         }).make(`
         <div class="info-box">
-            <div class="logo"></div>
-            <h1 onclick="IndexPage.test()">{{title}}</h1>
+            <div class="site-logo">
+                <img src="{{logo.default}}"/>
+            </div>
+            <h1>{{title}}</h1>
             <p>{{slogan}}</p>
         </div>
         `,this.state);
