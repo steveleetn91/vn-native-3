@@ -64,7 +64,7 @@ module.exports = {
         ],
         port: process.env.PORT || 9000,
         proxy: {
-            "/#": ProxConfig,
+            "/page": ProxConfig,
         },
         watchFiles: ['./src/*', './assets/styles/*', './pages/*'],
         open: true

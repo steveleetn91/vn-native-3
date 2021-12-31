@@ -6,7 +6,7 @@ export default class RouterConfig {
                 name:"IndexPage"
             },
             {
-                url:"/#/test",
+                url:"/page/test",
                 name:"IndexPage"
             }
         ]

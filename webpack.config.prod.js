@@ -63,7 +63,7 @@ module.exports = {
         compress: false,
         liveReload:true,
         proxy: {
-            "/#": ProxConfig,
+            "/page": ProxConfig,
         }
     },
     performance: {
