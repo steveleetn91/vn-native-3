@@ -9,6 +9,11 @@ https://join.slack.com/t/vnnative/shared_invite/zt-10c6aiylx-GBQ8e2M_skQyh1i4fW8
 Vn Native Framework using lazy load for all page, so it's ready for big project. 
     `Note : We need NodeJS version >= 16.x.x`
 
+
+# Video how to install ? 
+
+    https://www.youtube.com/watch?v=FxlP5eiV2kw&t=17s
+
 # How to install ? 
 Very easy, first you need 
     `git clone https://github.com/steveleetn91/vn-native-3.git`
