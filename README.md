@@ -97,8 +97,10 @@ Then you can go to
 # Plugins dependencies 
 vnnative3-webview
     `https://github.com/steveleetn91/vnnative3-webview`
+
 vnnative3-form
     `https://github.com/steveleetn91/vnnative3-form`
+    
 vnnative3-location    
     `https://github.com/steveleetn91/vnnative3-location`
 
