@@ -1,7 +1,8 @@
 ![alt text](https://vnnativeframework.club/assets/images/logo.png)
 # Vn Native Framework Version 3 - Beta
 
-Just beta version, but us can use for Web, Windows, MacOS platform. But Android, iOS need a little time. Slack room : 
+Vn native framework is a framework useful all platforms, it's help you develop software, game, e-commerce for : 
+Android, iOS, MacOS, Windows, Web, Linux, with struction lazy load you can use for big project. Slack room : 
 
 https://join.slack.com/t/vnnative/shared_invite/zt-10c6aiylx-GBQ8e2M_skQyh1i4fW879A
 
@@ -100,9 +101,20 @@ vnnative3-webview
 
 vnnative3-form
     `https://github.com/steveleetn91/vnnative3-form`
-    
-vnnative3-location    
+
+vnnative3-location
     `https://github.com/steveleetn91/vnnative3-location`
+
+# Game ( Phaser )
+
+Install 
+    `npm i phaser`
+
+And
+    `npm install @types/phaser`
+
+Full document 
+    `https://phaser.io/`
 
 # Issue
 
