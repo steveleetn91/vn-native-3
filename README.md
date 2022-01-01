@@ -12,7 +12,7 @@ Vn Native Framework using lazy load for all page, so it's ready for big project.
 
 # Video how to install ? 
 
-    https://www.youtube.com/watch?v=FxlP5eiV2kw&t=17s
+    https://www.youtube.com/watch?v=fwB5k8Edp6Q
 
 # How to install ? 
 Very easy, first you need 
