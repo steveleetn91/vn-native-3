@@ -4,6 +4,6 @@
 /platforms/electron/dist
 /platforms/web/build/*
 /platforms/web/build/.*
-/platforms/web/tmp/pages/*
+/platforms/web/tmp/pages/*.ts
 .env
 /public/assets
