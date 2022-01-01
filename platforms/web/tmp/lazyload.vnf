@@ -1,3 +1,3 @@
 import VnNative3Router from 'vnnative3-router/dist/index';
-import {page_name} from '../../../../pages/{page_name}';
+import {page_name} from '../../../../pages/{page_name}/{page_name}';
 (new VnNative3Router).renderCurrentPage('{page_name}',new {page_name});
