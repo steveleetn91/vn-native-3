@@ -59,7 +59,7 @@ Then go to
 
 Copy and upload to your hosting
 
-# Vn Native 3 Webview
+# Vn Native 3 View
 
 Now we using Mustache library for view engine, so to get advanced please read more at here :  
     `https://github.com/steveleetn91/vnnative3-webview`
@@ -93,6 +93,12 @@ We use Electron for feature software. First step
 
 Then you can go to
     `platforms/electron/dist`    
+
+# Plugins dependencies 
+We have a some plugins support : 
+    `https://github.com/steveleetn91/vnnative3-webview`
+    `https://github.com/steveleetn91/vnnative3-form`
+    `https://github.com/steveleetn91/vnnative3-location`
 
 # Issue
 
