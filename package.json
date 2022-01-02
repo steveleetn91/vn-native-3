@@ -48,16 +48,21 @@
     "webpack-dev-server": "^4.5.0"
   },
   "dependencies": {
+    "@types/bootstrap": "^5.1.8",
     "@types/mustache": "^4.1.2",
+    "bootstrap": "^5.1.3",
     "cli": "^1.0.1",
     "css-loader": "^6.5.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
     "fs": "^0.0.1-security",
     "http-proxy-middleware": "^2.0.1",
+    "mdb-ui-kit": "^3.10.1",
     "mustache": "^4.2.0",
     "vnnative3-console": "^1.0.0",
+    "vnnative3-form": "^1.0.13",
     "vnnative3-router": "^1.0.8",
     "vnnative3-webview": "^1.0.0"
   }

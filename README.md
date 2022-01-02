@@ -2,12 +2,17 @@
 # Vn Native Framework Version 3 - Beta
 
 Vn native framework is a framework useful all platforms, it's help you develop software, game, e-commerce for : 
-Android, iOS, MacOS, Windows, Web, Linux, with struction lazy load you can use for big project. Slack room : 
+Android, iOS, MacOS, Windows, Web, Linux, with struct lazy load you can use for big project. Slack room : 
 
 https://join.slack.com/t/vnnative/shared_invite/zt-10c6aiylx-GBQ8e2M_skQyh1i4fW879A
 
 Vn Native Framework using lazy load for all page, so it's ready for big project. 
     `Note : We need NodeJS version >= 16.x.x`
+
+
+# Video how to install ? 
+
+    https://www.youtube.com/watch?v=fwB5k8Edp6Q
 
 # How to install ? 
 Very easy, first you need 
