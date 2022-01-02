@@ -4,8 +4,16 @@ const fs = require('fs')
 const frameworkInfo = './framework.json';
 const webpackHelper = require('./helpers/webpack.vnf');
 try {
+    let InstallIndex = (next) => {
+        cli.exec("cp -r ./platforms/web/views/production.html ./public/index.html",(message) => {
+            if(message) {
+                cli.ok("Start!!!");
+            }
+            return next();
+        });
+    }
     let restoreIndex = () => {
-        cli.exec("cp -r ./platforms/web/views/production.html ./platforms/web/build/index.html",(message) => {
+        cli.exec("cp -r ./platforms/web/views/development.html ./public/index.html",(message) => {
             if(message) {
                 cli.ok("Stop!!!");
             }
@@ -55,19 +63,19 @@ try {
         
     }
     if (fs.existsSync(frameworkInfo)) {
-        cli.ok("Starting build web ... ");
-        cli.exec('rm -rf ./platforms/web/tmp/pages/*.ts',(message) => {
-            prepareBuild(() => {
-                buildRouter(() => {
-                    buildPage(() => {
-                        buildWeb(() => {
-                            restoreIndex();
+        InstallIndex(() => {
+            cli.exec('rm -rf ./platforms/web/tmp/pages/*.ts',(message) => {
+                prepareBuild(() => {
+                    buildRouter(() => {
+                        buildPage(() => {
+                            buildWeb(() => {
+                                restoreIndex();
+                            });
                         });
                     });
                 });
             });
         });
-        
     }
 } catch (err) {
     cli.error(err.toString());

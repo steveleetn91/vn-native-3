@@ -7,3 +7,4 @@
 /platforms/web/tmp/pages/*.ts
 .env
 /public/assets
+/public/index.html
