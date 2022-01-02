@@ -5,6 +5,8 @@ import IndexPageStateInterface from './IndexPage.State.Interface';
 import header from '../../components/header/header';
 import homeIntro from '../../components/homeIntro/homeIntro';
 import footer from '../../components/footer/footer';
+import { Dropdown } from "bootstrap";
+import VnNative3Form from 'vnnative3-form/dist/index';
 export default class IndexPage implements HTMLPageInterFace {
     state : IndexPageStateInterface = {
         title : "Vn Native Framework 3",
@@ -16,7 +18,16 @@ export default class IndexPage implements HTMLPageInterFace {
     };
     constructor() {}
     public beforeRender() : void {}
-    public afterRender() : void {}
+    public afterRender() : void {
+        let button = new VnNative3Form("button_navbar").subscribe();
+        let menu = new VnNative3Form("navbarNavDropdown").subscribe();
+        menu.addEventListener("bs.collapse.show",(ev : Event) => {
+            new Dropdown(menu,{}).show();
+        })
+        menu.addEventListener("bs.collapse.hide",(ev : Event) => {
+            new Dropdown(menu,{}).hide();
+        })
+    }
     public render() : string {
         return (new VnNative3HTMLElement).head(this.state).next(() => {
             console.log("Hello I'm next action ! You can use a lots actions");

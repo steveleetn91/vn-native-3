@@ -1,25 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 @import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../../node_modules/mdb-ui-kit/css/mdb.min.css";
+@import "../../node_modules/font-awesome/css/font-awesome.min.css";
 .logo-box {
     position: relative;
     overflow: hidden;
-}
-.logo-box img {
-    max-width: 100%;
+    img {
+        max-width: 100%;
+    }
 }
 .text-right {
     text-align: right;
 }
 .intro-box-text {
     margin-top: 25px;
+    .intro-box-text-title {
+        line-height: 60px;
+        .text-strong-title {
+            padding: 5px;
+        }
+    }
 }
-.intro-box-text-title {
-    line-height: 60px;
+.header-banner-box {
+    margin-top: 35px;
 }
-.text-strong-title {
-    padding: 5px;
+.intro-banner {
+    overflow: hidden;
+    position: relative;
+    img {
+        max-width: 100%;
+    }
 }
-.contact-box {
-    list-style: none;
+.footer {
+    .footer-title-address {
+        color: #5e5e5e!important;
+        font-weight: bold;
+    }
 }

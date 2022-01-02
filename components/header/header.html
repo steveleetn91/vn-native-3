@@ -3,41 +3,41 @@
         <div class="logo-box col-xs-12 col-sm-4 col-md-3 col-lg-3">
             <img class="logo" src="{{logo}}" />
         </div>
-        <div class="logo-box col-xs-12 col-sm-8 col-md-9 col-lg-9 text-right mt-1">
-            <ul class="contact-box mt-1">
-                <li class="h4">+84 935 0932 78</li>
-                <li class="h5">contact@tani.technology</li>
-                <li class="h5">24/7</li>
-            </ul>
+        <div class="logo-box col-xs-12 col-sm-8 col-md-9 col-lg-9 text-right mt-1 mb-1">
+            <div class="header-banner-box">
+                <img src="{{banner}}"/>
+            </div>
         </div>
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning text-white" id="navbar">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarExample01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" 
-                        href="#">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Dịch vụ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Bản quyền sản phẩm</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Giới thiệu</a>
-                    </li>
+          <a class="navbar-brand" href="#">Trang chủ</a>
+          <button id="button_navbar" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Dịch vụ</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản phẩm
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Vn native framework 2</a></li>
+                  <li class="border-top"><a class="dropdown-item" href="#">Vn native framework 3</a></li>
                 </ul>
-            </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Liên hệ</a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
     <!-- Navbar -->
 
     <!-- Background image -->
