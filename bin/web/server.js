@@ -74,7 +74,7 @@ try {
          const robotLoadPage = (listPageNeedBuild,key = 0) => {
             webHelper.buildSinglePage(listPageNeedBuild[key], true,() => {
                 if((key + 1) < listPageNeedBuild.length) {
-                    robotLoadPage(listPageNeedBuild,key);
+                    robotLoadPage(listPageNeedBuild,key + 1);
                 } else if ((key + 1) == listPageNeedBuild.length) {
                     myServe();
                     reloadEvent();
