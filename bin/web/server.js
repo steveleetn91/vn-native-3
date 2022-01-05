@@ -52,8 +52,13 @@ try {
                     cli.ok(`Added ${path}`)
                 })
                 .on('change', (path) => {
-                    if (path.includes('.ts')) {
-                        path = path.replace(_path.join(__dirname + "/../../pages"), '').replace('.ts', '');
+                    if (path.includes('.ts') || path.includes('.scss') || path.includes('.html')) {
+                        path = path.replace(_path.join(__dirname + "/../../pages"), '')
+                            .replace('.Interface.ts', '')
+                            .replace('.Service.ts', '')
+                            .replace('.ts', '')
+                            .replace('.scss', '')
+                            .replace('.html', '');
                         const totalString = path.split('');
                         let name = '';
                         for (let i = 1; i < (totalString.length / 2); i++) {
@@ -71,17 +76,17 @@ try {
         /**
          * INIT 
          */
-         const robotLoadPage = (listPageNeedBuild,key = 0) => {
-            webHelper.buildSinglePage(listPageNeedBuild[key], true,() => {
-                if((key + 1) < listPageNeedBuild.length) {
-                    robotLoadPage(listPageNeedBuild,key + 1);
+        const robotLoadPage = (listPageNeedBuild, key = 0) => {
+            webHelper.buildSinglePage(listPageNeedBuild[key], true, () => {
+                if ((key + 1) < listPageNeedBuild.length) {
+                    robotLoadPage(listPageNeedBuild, key + 1);
                 } else if ((key + 1) == listPageNeedBuild.length) {
                     myServe();
                     reloadEvent();
                 }
             });
         }
-        robotLoadPage(listPageNeedBuild,0);
+        robotLoadPage(listPageNeedBuild, 0);
     }
 } catch (err) {
     cli.error(err.toString());
