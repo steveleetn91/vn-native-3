@@ -10,17 +10,17 @@ try {
     /**
      * If is development 
      */
-    if(process.env.ELECTRON_BUILD == 0) {
-        cli.exec(`vn3-web-serve`,(resp) => {
+    if (process.env.ELECTRON_BUILD == 0) {
+        cli.exec(`vn3-web-serve`, (resp) => {
             cli.info(resp.toString());
-        },(resp) => {
+        }, (resp) => {
             cli.info(resp.toString());
         });
     }
     /**
      * Production serve
      */
-     const PORT = 43000 + Number(Math.floor(Math.random() * 990));
+    const PORT = 43000 + Number(Math.floor(Math.random() * 990));
     myApp.use(express.static(path.join(__dirname, '../../public')));
     myApp.set('views', path.join(__dirname, '../../platforms/electron/views'));
     myApp.set('view engine', 'ejs');
@@ -55,13 +55,13 @@ try {
         const win = new BrowserWindow({
             width: 800,
             height: 600,
-            icon : "./platforms/electron/data-build/icon.png",
+            icon: "./platforms/electron/data-build/icon.png",
             autoHideMenuBar: true,
             webPreferences: {}
         })
-        if(process.env.ELECTRON_BUILD == 1) {
+        if (process.env.ELECTRON_BUILD == 1) {
             win.loadURL(`http://localhost:${PORT}/`);
-        } else{
+        } else {
             /**
              * For development
              */

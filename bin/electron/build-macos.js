@@ -50,9 +50,6 @@ try {
         cli.ok("Start electron build");
         cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (resp) => {
             cli.ok("Setup index", resp.toString());
-            // const nameFolderBuild = (new Date()).getFullYear() +
-            //     ((new Date()).getMonth() + 1)
-            //     + (new Date()).getDate();
             osBuild(() => {
                 restoreIndex();
             });
