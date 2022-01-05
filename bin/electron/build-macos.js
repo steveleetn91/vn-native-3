@@ -42,13 +42,13 @@ try {
         }
 
         let restoreIndex = () => {
-            cli.exec('cp -r ./platforms/web/views/development.html ./public/index.html', (res) => {
+            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res) => {
                 cli.ok("Restore index", res.toString());
             });
         }
 
         cli.ok("Start electron build");
-        cli.exec('cp -r ./platforms/web/views/production.html ./public/index.html', (resp) => {
+        cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (resp) => {
             cli.ok("Setup index", resp.toString());
             // const nameFolderBuild = (new Date()).getFullYear() +
             //     ((new Date()).getMonth() + 1)

@@ -6,7 +6,7 @@ const path = require('path');
 require('dotenv').config()
 if (require('electron-squirrel-startup')) return;
 try {
-    const PORT = 43468;
+    const PORT = 43000 + Number(Math.floor(Math.random() * 990));
     myApp.use(express.static(path.join(__dirname, '../../public')));
     myApp.set('views', path.join(__dirname, '../../platforms/electron/views'));
     myApp.set('view engine', 'ejs');
@@ -17,10 +17,13 @@ try {
     myApp.get('/:slug', (req, res) => {
         res.render('index');
     });
-    myApp.get('/:slug/:sub_slug', (req, res) => {
+    myApp.get('/:slug/:slug', (req, res) => {
         res.render('index');
     });
-    myApp.get('/:slug/:sub_slug/:sub_sub_slug', (req, res) => {
+    myApp.get('/:slug/:slugg/:slug', (req, res) => {
+        res.render('index');
+    });
+    myApp.get('/:slug/:slugg/:slug/:slug', (req, res) => {
         res.render('index');
     });
     myApp.listen(PORT);

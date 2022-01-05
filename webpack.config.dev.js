@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const webpack = require('webpack');
+const cli = require('cli');
 require('dotenv').config()
 const ProxConfig = {
     target: `${process.env.DOMAIN}/index.html?page=`,

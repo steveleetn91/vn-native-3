@@ -49,14 +49,17 @@
   },
   "dependencies": {
     "@types/mustache": "^4.1.2",
+    "chokidar": "^3.5.2",
     "cli": "^1.0.1",
     "css-loader": "^6.5.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
     "http-proxy-middleware": "^2.0.1",
     "mustache": "^4.2.0",
+    "socket.io": "^4.4.0",
     "vnnative3-console": "^1.0.0",
     "vnnative3-router": "^1.0.8",
     "vnnative3-webview": "^1.0.0"

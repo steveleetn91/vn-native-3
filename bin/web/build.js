@@ -1,79 +1,89 @@
 #!/usr/bin/env node
-let cli = require('cli');
+const cli = require('cli');
 const fs = require('fs')
 const frameworkInfo = './framework.json';
 const webpackHelper = require('./helpers/webpack.vnf');
+const webHelper = require('./helpers/webpack.vnf');
 try {
-    let InstallIndex = (next) => {
-        cli.exec("cp -r ./platforms/web/views/production.html ./public/index.html",(message) => {
-            if(message) {
+    const InstallIndex = (next) => {
+        cli.exec("cp -r ./platforms/web/views/production.ejs ./public/index.html", (resp) => {
+            if (resp) {
                 cli.ok("Start!!!");
+                return next();
             }
-            return next();
         });
     }
-    let restoreIndex = () => {
-        cli.exec("cp -r ./platforms/web/views/development.html ./public/index.html",(message) => {
-            if(message) {
+    const restoreIndex = () => {
+        cli.exec("cp -r ./platforms/web/views/development.ejs ./public/index.html", (resp) => {
+            if (resp) {
                 cli.ok("Stop!!!");
             }
         });
     }
-    let buildWeb = (next) => {
-        cli.exec("cp -r ./public ./platforms/web/build && cp -r ./framework.json ./platforms/web/build/framework.json", (success) => {
-            if (success) {
-                cli.ok("Done build web!!");
+    const buildWeb = (next) => {
+        cli.exec("cp -r ./public ./platforms/web/build && cp -r ./framework.json ./platforms/web/build/framework.json", (resp) => {
+            if (resp) {
+                cli.ok("Done build web!!", resp);
                 return next();
             }
         });
     }
-    let buildRouter = (next) => {
-        cli.exec("rm -rf ./public/assets && rm -rf ./platforms/web/build && npx webpack --config webpack.config.prod.js", (success) => {
-            if (success) {
-                cli.info(success.toString());
-                cli.info("Router build done !!!");
+    const buildRouter = (next) => {
+        cli.exec("rm -rf ./public/assets && rm -rf ./platforms/web/build", (resp) => {
+            if (resp) {
+                cli.info("Core build", resp);
+                webHelper.buildRouterPage();
                 return next();
             }
         });
-        
+
     }
-    let buildPage = (next) => {
-        cli.exec("npx webpack --config ./bin/web/webpack.lazyload.js", (success) => {
-            if (success) {
-                cli.info(success.toString());
-                cli.info("Page build done !!!");
-                return next();
-            }
-        });
+    const buildPage = (next) => {
+        cli.info("Some times us need the wait");
+        const listPageNeedBuild = webHelper.listPage();
+        /**
+         * INIT 
+         */
+         const robotLoadPage = (listPageNeedBuild,key = 0) => {
+            webHelper.buildSinglePage(listPageNeedBuild[key], true,() => {
+                if((key + 1) < listPageNeedBuild.length) {
+                    robotLoadPage(listPageNeedBuild,key);
+                } else if ((key + 1) == listPageNeedBuild.length) {
+                   return next();
+                }
+            });
+        }
+        robotLoadPage(listPageNeedBuild,0);
     }
-    let prepareBuild = async (next) => {
+    const prepareBuild = async (next) => {
         const lazyloadTemplate = await fs.readFileSync('./platforms/web/tmp/lazyload.vnf',
-        {encoding:'utf8', flag:'r'});
+            { encoding: 'utf8', flag: 'r' });
         let listPage = webpackHelper.listPage();
 
-        for(let i=0;i<listPage.length;i++){
+        for (let i = 0; i < listPage.length; i++) {
             let page = listPage[i];
-            page = page.toString().replaceAll('.ts','');
-            let tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}',page);
-            fs.writeFileSync(`./platforms/web/tmp/pages/${page}.ts`,tmp_lazyloadTemplate);
-            if((i+1)===listPage.length){
+            page = page.toString().replaceAll('.ts', '');
+            let tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}', page);
+            fs.writeFileSync(`./platforms/web/tmp/pages/${page}.ts`, tmp_lazyloadTemplate);
+            if ((i + 1) === listPage.length) {
                 return next();
             }
         }
-        
     }
     if (fs.existsSync(frameworkInfo)) {
         InstallIndex(() => {
-            cli.exec('rm -rf ./platforms/web/tmp/pages/*.ts',(message) => {
-                prepareBuild(() => {
-                    buildRouter(() => {
-                        buildPage(() => {
-                            buildWeb(() => {
-                                restoreIndex();
+            cli.exec('rm -rf ./platforms/web/tmp/pages/*.ts', (resp) => {
+                if (resp) {
+                    prepareBuild(() => {
+                        buildRouter(() => {
+                            buildPage(() => {
+                                buildWeb(() => {
+                                    restoreIndex();
+                                });
                             });
                         });
                     });
-                });
+                }
             });
         });
     }
