@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-let fs = require('fs');
-let cli = require('cli');
+const fs = require('fs');
+const cli = require('cli');
 require('dotenv').config();
 const createDMG = require('electron-installer-dmg');
 const frameworkInfo = './framework.json';
@@ -11,7 +11,7 @@ try {
             cli.error("You need change ELECTRON_BUILD to 1 to build.");
             return;
         }
-        let installerBuild = async () => {
+        const installerBuild = async () => {
             await createDMG({
                 title: process.env.ELECTRON_APP_TITLE,
                 description: process.env.ELECTRON_APP_DESC,
@@ -26,7 +26,7 @@ try {
             });
         }
 
-        let osBuild = (callback) => {
+        const osBuild = (callback) => {
             cli.exec('npx electron-packager . ' + process.env.ELECTRON_APP_NAME
                 + ' --platform darwin --arch x64'
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.icns --overwrite',
@@ -41,7 +41,7 @@ try {
                 });
         }
 
-        let restoreIndex = () => {
+        const restoreIndex = () => {
             cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res) => {
                 cli.ok("Restore index", res.toString());
             });

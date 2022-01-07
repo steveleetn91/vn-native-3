@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-let fs = require('fs');
-let cli = require('cli');
+const fs = require('fs');
+const cli = require('cli');
 require('dotenv').config();
 const electronInstaller = require('electron-winstaller');
 const frameworkInfo = './framework.json';
@@ -11,7 +11,7 @@ try {
             cli.error("You need change ELECTRON_BUILD to 1 to build.");
             return;
         }
-        let installerBuild = async (type) => {
+        const installerBuild = async (type) => {
             try {
                 await electronInstaller.createWindowsInstaller({
                     title:process.env.ELECTRON_APP_TITLE,
@@ -29,7 +29,7 @@ try {
             }
         }
 
-        let osBuild = (type,next) => {
+        const osBuild = (type,next) => {
             cli.exec('npx electron-packager . ' + process.env.ELECTRON_APP_NAME
                 + ' --platform win32 --arch ' + type 
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite', 
@@ -44,7 +44,7 @@ try {
                 });
         }
 
-        let restoreIndex = () => {
+        const restoreIndex = () => {
             cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res) => {
                 cli.ok("Restore index", res.toString());
             });
