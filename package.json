@@ -9,13 +9,19 @@
     "serve:electron": "npx electron ./bin/electron/serve.js",
     "build:web": "vn3-web-build",
     "build:electron-win": "vn3-web-build && vn3-electron-build-win",
-    "build:electron-macos": "vn3-web-build && vn3-electron-build-macos"
+    "build:electron-macos": "vn3-web-build && vn3-electron-build-macos",
+    "add:android" : "vn3-android-clone",
+    "build:android" : "vn3-android-build",
+    "remove:android" : "vn3-android-remove"
   },
   "bin": {
     "vn3-web-build": "./bin/web/build.js",
     "vn3-web-serve": "./bin/web/server.js",
     "vn3-electron-build-win": "./bin/electron/build-win.js",
-    "vn3-electron-build-macos": "./bin/electron/build-macos.js"
+    "vn3-electron-build-macos": "./bin/electron/build-macos.js",
+    "vn3-android-clone" : "./bin/android/add.js",
+    "vn3-android-build" : "./bin/android/build.js",
+    "vn3-android-remove" : "./bin/android/remove.js"
   },
   "repository": {
     "type": "git",
