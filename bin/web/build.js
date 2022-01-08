@@ -58,7 +58,7 @@ try {
     const prepareBuild = async (next) => {
         const lazyloadTemplate = await fs.readFileSync('./platforms/web/tmp/lazyload.vnf',
             { encoding: 'utf8', flag: 'r' });
-        const listPage = webpackHelper.listPage();
+        let listPage = webpackHelper.listPage();
 
         for (let i = 0; i < listPage.length; i++) {
             const page = listPage[i];
