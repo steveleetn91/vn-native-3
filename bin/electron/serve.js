@@ -1,9 +1,9 @@
-let express = require('express');
-let myApp = express();
-let cli = require('cli');
+const express = require('express');
+const myApp = express();
+const cli = require('cli');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { app, BrowserWindow } = require('electron');
-let path = require('path');
+const path = require('path');
 require('dotenv').config()
 
 try {
