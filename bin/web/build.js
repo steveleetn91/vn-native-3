@@ -61,7 +61,7 @@ try {
         const listPage = webpackHelper.listPage();
 
         for (let i = 0; i < listPage.length; i++) {
-            const page = listPage[i];
+            let page = listPage[i];
             page = page.toString().replaceAll('.ts', '');
             const tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}', page);
             fs.writeFileSync(`./platforms/web/tmp/pages/${page}.ts`, tmp_lazyloadTemplate);

@@ -22,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
         myWebView.getSettings().setUseWideViewPort(true);
         myWebView.setWebViewClient(new MyWebViewClient());
         myWebView.setWebChromeClient(new WebChromeClient());
-        myWebView.loadUrl("file:///android_asset/index.html");
+        myWebView.loadUrl("{{development_serve}}");
     }
 }

@@ -1,14 +1,14 @@
 import HTMLPageInterFace from 'vnnative3-webview/dist/HTMLPage'
 import VnNative3HTMLElement from 'vnnative3-webview/dist/HTMLElement/index';
-import './IndexPage.scss';
-import IndexPageStateInterface from './IndexPage.State.Interface';
+import './ExamplePage.scss';
+import ExamplePageStateInterface from './ExamplePage.State.Interface';
 import VnNative3Location from 'vnnative3-location/dist/index';
-export default class IndexPage implements HTMLPageInterFace {
-    state : IndexPageStateInterface = {
-        title : "Vn Native Framework 3 ",
-        slogan : "Cross platforms - Version 1.3",
+export default class ExamplePage implements HTMLPageInterFace {
+    state : ExamplePageStateInterface = {
+        title : "Example page ",
+        slogan : "Document",
         logo : require('../../assets/images/logo.png').default,
-        examplePageUrl : (new VnNative3Location).redirect.goUrl('/page/example',[])
+        homePage : (new VnNative3Location).redirect.goUrl('/index.html',[]) 
     }; 
     constructor() {} 
     public beforeRender() : void {}  
@@ -16,6 +16,6 @@ export default class IndexPage implements HTMLPageInterFace {
     public render() : string {
         return (new VnNative3HTMLElement).head(this.state).next(() => {
             console.log("Hello I'm next action ! You can use a lots actions");
-        }).make(require('./IndexPage.html').default,this.state); 
+        }).make(require('./ExamplePage.html').default,this.state); 
     }  
 }             
