@@ -100,6 +100,21 @@ We use Electron for feature software. First step
 Then you can go to
     `platforms/electron/dist`    
 
+# Android OS development
+
+Now I created android project at `./platform/android`. So you only need run: 
+    `npm run development:android`
+
+Then run web server. Right, this is webview, so it can't connect hardware if project need. To testing hardware you need build android production.
+    `npm run serve:web`
+
+Last step open android studio and open project at `./platforms/android`. Then run app.    
+
+# Android OS production
+
+To build android production you need two step, first step run this command line, after if you need upload to Google Play, so please view document android about how to upload to Goog Play ?
+    `npm run production:android`
+
 # Plugins dependencies 
 vnnative3-webview
     `https://github.com/steveleetn91/vnnative3-webview`
