@@ -113,7 +113,7 @@ Last step open android studio and open project at `./platforms/android`. Then ru
 # Android OS production
 
 To build android production you need two step, first step run this command line, after if you need upload to Google Play, so please view document android about how to upload to Goog Play ?
-    `npm run production:android`
+    `npm run build:android`
 
 # Plugins dependencies 
 vnnative3-webview
