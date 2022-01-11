@@ -103,6 +103,8 @@ Then you can go to
 
 # Android OS development
 
+Video https://www.youtube.com/watch?v=VqENPZfoY1I. 
+
 Now I created android project at `./platform/android`. So you only need run: 
     `npm run development:android`
 
