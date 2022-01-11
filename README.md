@@ -1,3 +1,4 @@
+![alt text](https://vnnativeframework.club/assets/images/solution.png)
 ![alt text](https://vnnativeframework.club/assets/images/logo.png)
 # Vn Native Framework Version 3 - Beta
 
