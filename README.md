@@ -1,5 +1,5 @@
-![alt text](https://vnnativeframework.club/assets/images/solution.jpg)
-![alt text](https://vnnativeframework.club/assets/images/logo.png)
+![alt text](https://raw.githubusercontent.com/steveleetn91/vn-native-3/master/assets/images/solution.jpg)
+![alt text](https://raw.githubusercontent.com/steveleetn91/vn-native-3/master/assets/images/logo.png)
 # Vn Native Framework Version 3 - Beta
 
 Vn native framework is a framework useful all platforms, it's help you develop software, game, e-commerce for : 
