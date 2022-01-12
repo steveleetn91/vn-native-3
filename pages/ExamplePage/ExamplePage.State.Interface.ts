@@ -1,6 +1,6 @@
 export default interface ExamplePageStateInterface {
     title : string;
     slogan: string;
-    logo : string;
+    header : string;
     homePage: string 
 }
