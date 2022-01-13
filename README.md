@@ -133,9 +133,6 @@ vnnative3-location
 Install 
     `npm i phaser`
 
-And
-    `npm install @types/phaser`
-
 Full document 
     `https://phaser.io/`
 
