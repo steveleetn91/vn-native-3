@@ -11,6 +11,9 @@
     "build:electron-win": "vn3-web-build && vn3-electron-build-win",
     "build:electron-macos": "vn3-web-build && vn3-electron-build-macos",
     "add:android": "vn3-android-clone",
+    "add:ios":"vn3-ios-clone",
+    "build:ios":"vn3-ios-clone && vn3-ios-build",
+    "development:ios":"vn3-ios-serve",
     "build:android": "vn3-android-build",
     "remove:android": "vn3-android-remove",
     "development:android": "vn3-android-development"
@@ -23,7 +26,10 @@
     "vn3-android-clone": "./bin/android/add.js",
     "vn3-android-build": "./bin/android/build.js",
     "vn3-android-remove": "./bin/android/remove.js",
-    "vn3-android-development": "./bin/android/development.js"
+    "vn3-android-development": "./bin/android/development.js",
+    "vn3-ios-clone":"./bin/ios/add.js",
+    "vn3-ios-build" : "./bin/ios/build.js",
+    "vn3-ios-serve" : "./bin/ios/serve.js"
   },
   "repository": {
     "type": "git",

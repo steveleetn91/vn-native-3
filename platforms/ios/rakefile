@@ -1,0 +1,5 @@
+require 'rubygems'
+require 'xcodeproject'
+app_id = ARGV[0]
+proj = XcodeProject::Project.new(app_id + '/' + app_id + '.xcodeproj')
+XcodeProject::Tasks::BuildTask.new(proj)

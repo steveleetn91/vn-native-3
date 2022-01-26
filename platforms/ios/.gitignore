@@ -1,0 +1,12 @@
+build.json
+www/*.html
+www/*.ts
+www/*.js
+www/*.png
+www/*.jpeg
+www/*.jpg 
+www/*.gif
+www/*.mp4
+www/*.mp3
+www/*.css
+vnf3
