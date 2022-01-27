@@ -2,7 +2,7 @@
 const cli = require('cli');
 require('dotenv').config()
 const xcodeprojectBuild = (next) => {
-    cli.exec("cd ./platforms/ios && ruby ./prepare.rb",(info) => {
+    cli.exec("cd ./platforms/ios && ruby ./prepare.rb && ruby ./build.rb",(info) => {
         cli.info(info);
         return next();
     },(success) => {
