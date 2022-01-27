@@ -24,10 +24,20 @@ const copyStaticFile = () => {
 }
 
 const setupSwiftView = () => {
-    cli.exec("cp -r ./platforms/ios/ViewController.production.swift ./platforms/ios/vnf3/vnf3/ViewController.swift",(resp) => {
-        copyStaticFile();
-    },() => {
-        copyStaticFile();
+    setTimeout(() => {
+        cli.exec("cp -r ./platforms/ios/ViewController.production.swift ./platforms/ios/vnf3/vnf3/ViewController.swift",(resp) => {
+            copyStaticFile();
+        },() => {
+            copyStaticFile();
+        })
+    },10000);
+}
+const WWW = () => {
+    cli.exec("cd platforms/ios && mkdir -p ./www && chmod -R 777 ./www",(info) => { 
+        cli.info(info); 
+        setupSwiftView();
+    } ,(resp) => {
+        setupSwiftView();
     })
 }
-setupSwiftView();
+WWW();

@@ -22,7 +22,7 @@ class ViewController: UIViewController, WKUIDelegate, UIWebViewDelegate {
                 
                 let filePath:String = myProjectBundle.path(forResource: "index", ofType: "html")!
                 
-                let myURL = URL(string: filePath);
+                let myURL = URL(string: filePath + "?vn3page=/");
                 let myURLRequest:URLRequest = URLRequest(url: myURL!)
                 
                 myWebView.loadRequest(myURLRequest)
