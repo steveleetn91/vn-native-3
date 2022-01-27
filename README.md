@@ -111,12 +111,29 @@ Now I created android project at `./platform/android`. So you only need run:
 Then run web server. Right, this is webview, so it can't connect hardware if project need. To testing hardware you need build android production.
     `npm run serve:web`
 
-Last step open android studio and open project at `./platforms/android`. Then run app.    
+Last step open android studio and open project at `./platforms/android`. Then run app.
 
 # Android OS production
 
 To build android production you need two step, first step run this command line, after if you need upload to Google Play, so please view document android about how to upload to Goog Play ?
     `npm run build:android`
+
+You can change config at Android Studio.
+
+# Add iOS 
+
+First step you need add ios platform 
+    `npm run add:ios`
+
+## Development iOS 
+
+To prepare for development iOS us need : 
+    `npm run development:ios`
+
+## Production iOS 
+
+To build production us need : 
+    `npm run build:ios`
 
 # Plugins dependencies 
 vnnative3-webview
