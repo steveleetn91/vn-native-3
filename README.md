@@ -120,7 +120,7 @@ To build android production you need two step, first step run this command line,
 
 You can change config at Android Studio.
 
-# Add iOS 
+# iOS platform
  
 We need install ruby gem.    
     `sudo gem install xcodeproj`
@@ -129,6 +129,9 @@ To add iOS platform
     `npm run add:ios`
 
 ## Development iOS 
+
+If this is first run, so you need : 
+    `npm run build:ios`
 
 You need start web serve, after to prepare for development iOS us need : 
     `npm run development:ios`
