@@ -4,11 +4,12 @@ import './IndexPage.scss';
 import IndexPageStateInterface from './IndexPage.State.Interface';
 import VnNative3Location from 'vnnative3-location/dist/index';
 import header from '../../components/header/header';
+const packageJson = require('../../package.json');
 export default class IndexPage implements HTMLPageInterFace {
     state : IndexPageStateInterface = {
         title : "Vn Native Framework 3 ",
-        slogan : "Cross platforms - Version 1.3.3",
-        header : header(),
+        slogan : "Cross platforms - Version " + packageJson.version,
+        header : header(), 
         examplePageUrl : (new VnNative3Location).redirect.goUrl('/page/example',[])
     }; 
     constructor() {} 
