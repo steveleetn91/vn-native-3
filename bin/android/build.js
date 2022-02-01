@@ -13,16 +13,25 @@ try {
             cli.ok("You need read Android document about how to upload app to Google Play! ");
         })
     }
+    const prepare = (next) => {
+        cli.exec("cd ./platforms/android/app/src/main && rm -rf ./assets && mkdir assets",(req,res) => {
+            return next();
+        },(req,res) => {
+            return next();
+        });
+    }
     if (fs.existsSync(frameworkInfo) && fs.existsSync(androidConfig)) {
-        cli.exec("vn3-web-build && rm -rf ./platforms/android/app/src/main/assets/* && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",(resp) =>{
-            cli.info(resp);
-            cli.ok("Completed prepare building Androis OS");
-            installProduction();
-        } ,
-        (resp) => {
-            cli.info(resp);
-            cli.ok("Completed prepare building Androis OS");
-            installProduction();
+        prepare(() => {
+            cli.exec("vn3-web-build && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",(resp) =>{
+                cli.info(resp);
+                cli.ok("Completed prepare building Androis OS");
+                installProduction();
+            },
+            (resp) => {
+                cli.info(resp);
+                cli.ok("Completed prepare building Androis OS");
+                installProduction();
+            });
         });
     }
 }catch(error) {
