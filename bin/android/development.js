@@ -23,18 +23,27 @@ try {
             cli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
         })
     }
+    const prepare = (next) => {
+        cli.exec("cd ./platforms/android/app/src/main && rm -rf ./assets && mkdir assets",(req,res) => {
+            return next();
+        },(req,res) => {
+            return next();
+        });
+    }
     if (fs.existsSync(frameworkInfo) && fs.existsSync(androidConfig)) {
-        cli.exec("vn3-web-build && rm -rf ./platforms/android/app/src/main/assets/* && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",(resp) =>{
-            cli.info(resp);
-            cli.ok("Completed prepare building Androis OS");
-            cli.info("Installing development");
-            installDevelopment();
-        } ,
-        (resp) => {
-            cli.info(resp);
-            cli.ok("Completed prepare building Androis OS");
-            cli.info("Installing development");
-            installDevelopment();
+        prepare(() => {
+            cli.exec("vn3-web-build && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",(resp) =>{
+                cli.info(resp);
+                cli.ok("Completed prepare building Androis OS");
+                cli.info("Installing development");
+                installDevelopment();
+            },
+            (resp) => {
+                cli.info(resp);
+                cli.ok("Completed prepare building Androis OS");
+                cli.info("Installing development");
+                installDevelopment();
+            });
         });
     }
 }catch(error) {
