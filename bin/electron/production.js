@@ -1,7 +1,7 @@
 const express = require('express');
 const myApp = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow} = require('electron');
 const path = require('path');
 require('dotenv').config()
 if (require('electron-squirrel-startup')) return;
@@ -33,14 +33,17 @@ try {
             if (BrowserWindow.getAllWindows().length === 0) createWindow()
         })
     })
-
     const createWindow = () => {
         const win = new BrowserWindow({
             width: 800,
             height: 600,
-            autoHideMenuBar: true
+            autoHideMenuBar: true,
+            webPreferences: {
+                contextIsolation: true,
+                preload:__dirname +"/preload.js"
+            }
         })
-
+        
         win.loadURL(`http://localhost:${PORT}/`);
     }
     app.on('window-all-closed', () => {

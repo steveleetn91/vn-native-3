@@ -57,7 +57,10 @@ try {
             height: 600,
             icon: "./platforms/electron/data-build/icon.png",
             autoHideMenuBar: true,
-            webPreferences: {}
+            webPreferences: {
+                contextIsolation: true,
+                preload:__dirname +"/preload.js"
+            }
         })
         if (process.env.ELECTRON_BUILD == 1) {
             win.loadURL(`http://localhost:${PORT}/`);
