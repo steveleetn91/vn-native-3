@@ -101,19 +101,23 @@ We use Electron for feature software. First step
 Then you can go to
     `platforms/electron/dist`    
 
-# Android OS development
+# How to add android platforms
+To add android platform only run.
+    `npm run add:android`
+    
+## Android OS development
 
 Video https://www.youtube.com/watch?v=VqENPZfoY1I. 
 
 Now I created android project at `./platform/android`. So you only need run: 
     `npm run development:android`
 
-Then run web server. Right, this is webview, so it can't connect hardware if project need. To testing hardware you need build android production.
+Then run web server.
     `npm run serve:web`
 
 Last step open android studio and open project at `./platforms/android`. Then run app.
 
-# Android OS production
+## Android OS production
 
 To build android production you need two step, first step run this command line, after if you need upload to Google Play, so please view document android about how to upload to Goog Play ?
     `npm run build:android`
