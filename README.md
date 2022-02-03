@@ -155,6 +155,9 @@ vnnative3-form
 vnnative3-location
     `https://github.com/steveleetn91/vnnative3-location`
 
+vnnative-3-os
+    `https://github.com/steveleetn91/vnnative-3-os`    
+
 # Game ( Phaser )
 
 Install 
