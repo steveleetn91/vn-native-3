@@ -1,37 +1,33 @@
-import UIKit
 import WebKit
-class ViewController: UIViewController, WKUIDelegate, UIWebViewDelegate {
+
+class ViewController: UIViewController {
     
-    var webView: WKWebView!
-    
-    override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        view = webView
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myWebView:UIWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-                
-                self.view.addSubview(myWebView)
-                
-                myWebView.delegate = self;
-                
-                let myProjectBundle:Bundle = Bundle.main
-                
-                let filePath:String = myProjectBundle.path(forResource: "index", ofType: "html")!
-                
-                let myURL = URL(string: filePath + "?vn3page=/");
-                let myURLRequest:URLRequest = URLRequest(url: myURL!)
-                
-                myWebView.loadRequest(myURLRequest)
-    }}
-    func webViewDidStartLoad(_ webView: UIWebView)
-    {
-        print("Started to load")
+        
+        let contentController = WKUserContentController()
+        let scriptSource = "window.vnnativeos = { getOsName : () => { return `iOS` } }  "
+        let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        contentController.addUserScript(script)
+
+        let config = WKWebViewConfiguration()
+        config.userContentController = contentController
+
+        let webView = WKWebView(frame: .zero, configuration: config)
+
+        
+        view.addSubview(webView)
+        let layoutGuide = view.safeAreaLayoutGuide
+        
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: layoutGuide.topAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor).isActive = true
+        guard let  url = Bundle.main.url(forResource: "index", withExtension: "html") else {
+                    return
+           }
+           let request = URLRequest(url: url)
+            webView.load(request)
     }
-    func webViewDidFinishLoad(_ webView: UIWebView)
-    {
-        print("Finished loading")
-    }
+}
