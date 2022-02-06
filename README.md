@@ -36,6 +36,9 @@ Run
     `npm link`
 
 Run 
+    `npm run build`    
+
+Run 
     `npm run build:web`
 
 # Permission
