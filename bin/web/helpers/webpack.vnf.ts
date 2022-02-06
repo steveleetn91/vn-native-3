@@ -1,5 +1,4 @@
 import WebPackVNFInterface from "./webpack.vnf.interface";
-
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -10,8 +9,15 @@ const output = `${__dirname}/../../../../public/assets`;
 const iosOutput = `${__dirname}/../../../../platforms/ios/www`
 const staticDirectory = `${__dirname}/../../../../public`;
 const iosStaticDirectory = `${__dirname}/../../../../public`
+
+let configWebServe = require('dotenv').config().parsed;
+
+let targetProxy : string = configWebServe.DOMAIN ? configWebServe.DOMAIN : "";
+
+let servePort :number = configWebServe.PORT ? configWebServe.PORT : 9000;
+
 const ProxConfig = {
-    target: `${process.env.DOMAIN}/index.html?page=`,
+    target: `${targetProxy}/index.html?page=`,
     secure: true,
     changeOrigin: false
 };
@@ -67,8 +73,6 @@ export default class WebPackVNF implements WebPackVNFInterface {
             },
             optimization: {
                 minimizer: [
-                    // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-                    // `...`,
                     new CssMinimizerPlugin(),
 
                 ],
@@ -110,7 +114,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 static: {
                     directory: staticDirectory,
                 },
-                port: process.env.PORT || 9000,
+                port: servePort,
                 compress: false,
                 liveReload: false,
                 proxy: {
@@ -154,8 +158,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
             },
             optimization: {
                 minimizer: [
-                    // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-                    // `...`,
+                    
                     new CssMinimizerPlugin(),
         
                 ],
@@ -197,7 +200,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 static: {
                     directory: staticDirectory,
                 },
-                port: process.env.PORT || 9000,
+                port: servePort,
                 compress: false,
                 liveReload:true,
                 proxy: {
@@ -244,8 +247,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
             },
             optimization: {
                 minimizer: [
-                    // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-                    // `...`,
+                    
                     new CssMinimizerPlugin(),
 
                 ],
@@ -287,7 +289,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 static: {
                     directory: iosStaticDirectory,
                 },
-                port: process.env.PORT || 9000,
+                port: servePort,
                 compress: false,
                 liveReload: false,
                 proxy: {
@@ -331,8 +333,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
             },
             optimization: {
                 minimizer: [
-                    // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-                    // `...`,
+                    
                     new CssMinimizerPlugin(),
         
                 ],
@@ -374,7 +375,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 static: {
                     directory: iosStaticDirectory,
                 },
-                port: process.env.PORT || 9000,
+                port: servePort,
                 compress: false,
                 liveReload:true,
                 proxy: {

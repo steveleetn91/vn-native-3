@@ -6,12 +6,13 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-require('dotenv').config()
+let configWebServe = require('dotenv').config().parsed;
 const chokidar = require('chokidar');
 const watcher = chokidar.watch(__dirname + "/../../../pages", { ignored: /^\./, persistent: true });
 const _path = require('path');
 let frameworkInfo : string;
-frameworkInfo = './framework.json'
+frameworkInfo = './framework.json';
+const servePort : Number = configWebServe.PORT ? Number(configWebServe.PORT) : 3000;
 try {
     let webHelper : WebPackVNF;
     webHelper = new WebPackVNF();
@@ -40,8 +41,8 @@ try {
                     serveCli.info("Has update");
                 });
             });
-            http.listen(process.env.PORT, () => {
-                serveCli.ok(`Server running at http://localhost:${process.env.PORT}/`);
+            http.listen(servePort, () => {
+                serveCli.ok(`Server running at http://localhost:${servePort}/`);
             });
         }
         /**

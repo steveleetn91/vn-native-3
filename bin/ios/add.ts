@@ -1,6 +1,5 @@
 #!/usr/bin/env node 
 const iosAddcli = require('cli');
-require('dotenv').config()
 const help = require('../web/helpers/webpack.vnf');
 const fs = require('fs');
 const iOSAddframeworkInfoFile = './framework.json';

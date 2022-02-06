@@ -1,6 +1,5 @@
 #!/usr/bin/env node 
 const cli = require('cli');
-require('dotenv').config()
 const iOSBuildframeworkInfoFile = './framework.json';
 
 
