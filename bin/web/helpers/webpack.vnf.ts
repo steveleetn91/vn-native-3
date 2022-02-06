@@ -21,7 +21,6 @@ const ProxConfig = {
     secure: true,
     changeOrigin: false
 };
-require('dotenv').config()
 export default class WebPackVNF implements WebPackVNFInterface {
     listPage() : Array<any> {
         const directoryPage = __dirname + '/../../../../pages';
