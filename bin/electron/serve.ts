@@ -1,20 +1,22 @@
 const express = require('express');
 const myApp = express();
-const cli = require('cli');
+const ElectronServecli = require('cli');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 require('dotenv').config()
-
+let env : any = process.env;
+let ELECTRON_BUILD : number = 0;
+ELECTRON_BUILD = env.ELECTRON_BUILD == 0 ? 0 : 1;
 try {
     /**
      * If is development 
      */
-    if (process.env.ELECTRON_BUILD == 0) {
-        cli.exec(`vn3-web-serve`, (resp) => {
-            cli.info(resp.toString());
-        }, (resp) => {
-            cli.info(resp.toString());
+    if (ELECTRON_BUILD == 0) {
+        ElectronServecli.exec(`vn3-web-serve`, (resp : any) => {
+            ElectronServecli.info(resp.toString());
+        }, (resp : any) => {
+            ElectronServecli.info(resp.toString());
         });
     }
     /**
@@ -25,19 +27,19 @@ try {
     myApp.set('views', path.join(__dirname, '../../platforms/electron/views'));
     myApp.set('view engine', 'ejs');
     myApp.use('/', createProxyMiddleware({ target: `http://localhost:${PORT}/?page=`, changeOrigin: true }));
-    myApp.get('/', (req, res) => {
+    myApp.get('/', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug', (req, res) => {
+    myApp.get('/:slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slug', (req, res) => {
+    myApp.get('/:slug/:slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug', (req, res) => {
+    myApp.get('/:slug/:slugg/:slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug/:slug', (req, res) => {
+    myApp.get('/:slug/:slugg/:slug/:slug', (req : Request, res : any) => {
         res.render('index');
     });
     myApp.listen(PORT);
@@ -62,7 +64,7 @@ try {
                 preload:__dirname +"/preload.js"
             }
         })
-        if (process.env.ELECTRON_BUILD == 1) {
+        if (ELECTRON_BUILD == 1) {
             win.loadURL(`http://localhost:${PORT}/`);
         } else {
             /**

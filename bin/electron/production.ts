@@ -1,29 +1,34 @@
+import ElectronHelper from "./helpers/ElectronHelper";
+
 const express = require('express');
 const myApp = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { app, BrowserWindow} = require('electron');
 const path = require('path');
 require('dotenv').config()
-if (require('electron-squirrel-startup')) return;
+
+let ElectronHelp : ElectronHelper= new ElectronHelper;
+
 try {
+    ElectronHelp.makeShortcut();
     const PORT = 43000 + Number(Math.floor(Math.random() * 990));
     myApp.use(express.static(path.join(__dirname, '../../public')));
     myApp.set('views', path.join(__dirname, '../../platforms/electron/views'));
     myApp.set('view engine', 'ejs');
     myApp.use('/', createProxyMiddleware({ target: `http://localhost:${PORT}/?page=`, changeOrigin: true }));
-    myApp.get('/', (req, res) => {
+    myApp.get('/', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug', (req, res) => {
+    myApp.get('/:slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slug', (req, res) => {
+    myApp.get('/:slug/:slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug', (req, res) => {
+    myApp.get('/:slug/:slugg/:slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug/:slug', (req, res) => {
+    myApp.get('/:slug/:slugg/:slug/:slug', (req : Request, res : any) => {
         res.render('index');
     });
     myApp.listen(PORT);

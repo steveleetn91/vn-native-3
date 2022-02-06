@@ -1,12 +1,15 @@
 #!/usr/bin/env node 
 const cli = require('cli');
 require('dotenv').config()
-const xcodeprojectBuild = (next) => {
-    cli.exec("cd ./platforms/ios && ruby ./prepare.rb && ruby ./build.rb",(info) => {
+const iOSBuildframeworkInfoFile = './framework.json';
+
+
+const xcodeprojectBuild = (next : Function ) => {
+    cli.exec("cd ./platforms/ios && ruby ./prepare.rb && ruby ./build.rb",(info : any) => {
         cli.info(info);
         return next();
-    },(success) => {
-        cli.info(success);
+    },(success : any) => {
+        cli.info(success.toString());
         return next();
     });
 }
@@ -25,7 +28,7 @@ const copyStaticFile = () => {
 
 const setupSwiftView = () => {
     setTimeout(() => {
-        cli.exec("cp -r ./platforms/ios/ViewController.production.swift ./platforms/ios/vnf3/vnf3/ViewController.swift",(resp) => {
+        cli.exec("cp -r ./platforms/ios/ViewController.production.swift ./platforms/ios/vnf3/vnf3/ViewController.swift",(resp : any) => {
             copyStaticFile();
         },() => {
             copyStaticFile();
@@ -33,11 +36,13 @@ const setupSwiftView = () => {
     },10000);
 }
 const WWW = () => {
-    cli.exec("cd platforms/ios && mkdir -p ./www && chmod -R 777 ./www",(info) => { 
+    cli.exec("cd platforms/ios && mkdir -p ./www && chmod -R 777 ./www",(info : any) => { 
         cli.info(info); 
         setupSwiftView();
-    } ,(resp) => {
+    } ,(resp : any) => {
         setupSwiftView();
     })
 }
-WWW();
+if (fs.existsSync(iOSAddframeworkInfoFile)) {
+    WWW();
+}

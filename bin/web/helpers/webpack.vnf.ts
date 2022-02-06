@@ -1,3 +1,5 @@
+import WebPackVNFInterface from "./webpack.vnf.interface";
+
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -14,19 +16,21 @@ const ProxConfig = {
     changeOrigin: false
 };
 require('dotenv').config()
-module.exports = {
-    listPage: () => {
-        const directoryPage = __dirname + '/../../../pages';
-        let data = [];
+export default class WebPackVNF implements WebPackVNFInterface {
+    listPage() : Array<any> {
+        const directoryPage = __dirname + '/../../../../pages';
+        let data : Array<any>
+        data = [];
         let list = fs.readdirSync(directoryPage);
         if (list.length < 1) {
             return data;
         }
         return list;
-    },
-    listPageNeedBuild: () => {
-        const directoryPage = __dirname + '/../../../platforms/web/tmp/pages/';
-        let data = {};
+    }
+    listPageNeedBuild() : Array<any>{
+        const directoryPage = __dirname + '/../../../../platforms/web/tmp/pages/';
+        let data : Array<any>;
+        data = []
         let list = fs.readdirSync(directoryPage);
         if (list.length < 1) {
             return data;
@@ -34,24 +38,24 @@ module.exports = {
         for (let i = 0; i < list.length; i++) {
             if (list[i].includes("ts")) {
                 let key = list[i].toString().replaceAll('.ts', '').replaceAll('-', '_');
-                data[key] = `${__dirname}/../../../platforms/web/tmp/pages/${list[i]}`;
+                data[key] = `${__dirname}/../../../../platforms/web/tmp/pages/${list[i]}`;
             }
             if ((i + 1) === list.length) {
                 return data;
             }
         }
-    },
-    buildSinglePage: (pageName,rebuild = true,callback = false) => {
-        const build = async (next) => {
-            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../platforms/web/tmp/lazyload.vnf`,
+    }
+    buildSinglePage(pageName : string,rebuild : boolean = true,callback : Function) : void {
+        const build = async (next : Function) => {
+            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../../platforms/web/tmp/lazyload.vnf`,
                 { encoding: 'utf8', flag: 'r' });
 
             const tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}', pageName);
-            fs.writeFileSync(`${__dirname}/../../../platforms/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
+            fs.writeFileSync(`${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
             return next();
         }
-        let entry = {};
-        entry[pageName] = `${__dirname}/../../../platforms/web/tmp/pages/${pageName}.ts`
+        let entry : any = {}
+        entry[pageName] = `${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`
         const config = {
             entry: entry,
             mode: "production",
@@ -120,7 +124,7 @@ module.exports = {
             }
         }
         build(() => {
-            webpack(config, (err, stats) => {
+            webpack(config, (err : any, stats: any) => {
                 if (err) {
                      cli.error(err.toString());
                 }
@@ -130,16 +134,16 @@ module.exports = {
                 }
 
                  cli.info(stats);
-                 if(callback !== false ) {
+                 if(callback) {
                      return callback();
                  }
             });
         });
-    },
-    buildRouterPage: (rebuild = true) => {
+    }
+    buildRouterPage (rebuild : boolean = true) : void {
         const config = {
             entry: {
-                app : `${__dirname}/../../../src/bootstrap.ts`,
+                app : `${__dirname}/../../../../src/bootstrap.ts`,
             },
             mode:"production",
             devtool: "inline-source-map",
@@ -206,7 +210,7 @@ module.exports = {
                 maxAssetSize: 2560000
             }
         }
-        webpack(config, (err, stats) => {
+        webpack(config, (err : any, stats : any) => {
             if (err) {
                 return cli.error(err.toString());
             }
@@ -217,18 +221,18 @@ module.exports = {
 
             return cli.info(stats);
         });
-    },
-    buildSinglePageiOS: (pageName,rebuild = true,callback = false) => {
-        const build = async (next) => {
-            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../platforms/web/tmp/lazyload.vnf`,
+    }
+    buildSinglePageiOS(pageName : string,rebuild : boolean = true,callback : Function) : void {
+        const build = async (next : Function) => {
+            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../../platforms/web/tmp/lazyload.vnf`,
                 { encoding: 'utf8', flag: 'r' });
 
             const tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}', pageName);
-            fs.writeFileSync(`${__dirname}/../../../platforms/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
+            fs.writeFileSync(`${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
             return next();
         }
-        let entry = {};
-        entry[pageName] = `${__dirname}/../../../platforms/web/tmp/pages/${pageName}.ts`
+        let entry : any = {};
+        entry[pageName] = `${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`
         const config = {
             entry: entry,
             mode: "production",
@@ -297,7 +301,7 @@ module.exports = {
             }
         }
         build(() => {
-            webpack(config, (err, stats) => {
+            webpack(config, (err : any, stats : any) => {
                 if (err) {
                      cli.error(err.toString());
                 }
@@ -307,16 +311,16 @@ module.exports = {
                 }
 
                  cli.info(stats);
-                 if(callback !== false ) {
+                 if(callback) {
                      return callback();
                  }
             });
         });
-    },
-    buildRouterPageiOS: (rebuild = true) => {
+    }
+    buildRouterPageiOS(rebuild : boolean = true) : void {
         const config = {
             entry: {
-                app : `${__dirname}/../../../src/bootstrap.ts`,
+                app : `${__dirname}/../../../../src/bootstrap.ts`,
             },
             mode:"production",
             devtool: "inline-source-map",
@@ -383,7 +387,7 @@ module.exports = {
                 maxAssetSize: 2560000
             }
         }
-        webpack(config, (err, stats) => {
+        webpack(config, (err : any, stats : any) => {
             if (err) {
                 return cli.error(err.toString());
             }
