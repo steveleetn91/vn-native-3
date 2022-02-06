@@ -13,7 +13,7 @@ try {
      * If is development 
      */
     if (ELECTRON_BUILD == 0) {
-        ElectronServecli.exec(`vn3-web-serve`, (resp : any) => {
+        ElectronServecli.exec(`vn3-web-development`, (resp : any) => {
             ElectronServecli.info(resp.toString());
         }, (resp : any) => {
             ElectronServecli.info(resp.toString());
@@ -23,8 +23,8 @@ try {
      * Production serve
      */
     const PORT = 43000 + Number(Math.floor(Math.random() * 990));
-    myApp.use(express.static(path.join(__dirname, '../../public')));
-    myApp.set('views', path.join(__dirname, '../../platforms/electron/views'));
+    myApp.use(express.static(__dirname + '/../../../public'));
+    myApp.set('views', __dirname + '/../../../public');
     myApp.set('view engine', 'ejs');
     myApp.use('/', createProxyMiddleware({ target: `http://localhost:${PORT}/?page=`, changeOrigin: true }));
     myApp.get('/', (req : Request, res : any) => {

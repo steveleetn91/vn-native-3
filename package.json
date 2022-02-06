@@ -7,7 +7,7 @@
     "build":"tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve:web": "vn3-web-development",
-    "serve:electron": "npx electron ./bin/electron/serve.js",
+    "serve:electron": "npx electron ./dist/bin/electron/serve.js",
     "build:web": "vn3-web-build",
     "build:electron-win": "vn3-web-build && vn3-electron-build-win",
     "build:electron-macos": "vn3-web-build && vn3-electron-build-macos",

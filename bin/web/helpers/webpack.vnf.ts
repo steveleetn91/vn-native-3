@@ -6,10 +6,10 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const fs = require('fs');
 const webpack = require('webpack');
 const cli = require('cli');
-const output = `${__dirname}/../../../public/assets`;
-const iosOutput = `${__dirname}/../../../platforms/ios/www`
-const staticDirectory = `${__dirname}/../../../public`;
-const iosStaticDirectory = `${__dirname}/../../../public`
+const output = `${__dirname}/../../../../public/assets`;
+const iosOutput = `${__dirname}/../../../../platforms/ios/www`
+const staticDirectory = `${__dirname}/../../../../public`;
+const iosStaticDirectory = `${__dirname}/../../../../public`
 const ProxConfig = {
     target: `${process.env.DOMAIN}/index.html?page=`,
     secure: true,
