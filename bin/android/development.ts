@@ -10,17 +10,17 @@ try {
         AndroiDevelopmentcli.exec("cp -r ./bin/android/java/Development.java ./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java"
         ,async (resp : any) => {
             AndroiDevelopmentcli.info(resp.toString());
-            let javaFile = await fs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
+            let javaFile = await AndroiDevelopmentfs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
             { encoding: 'utf8', flag: 'r' });
             javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + process.env.PORT + '/index.html');
-            await fs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
+            await AndroiDevelopmentfs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
             AndroiDevelopmentcli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
         },async (resp : any) => {
             AndroiDevelopmentcli.info(resp.toString());
-            let javaFile = await fs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
+            let javaFile = await AndroiDevelopmentfs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
             { encoding: 'utf8', flag: 'r' });
             javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + process.env.PORT);
-            await fs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
+            await AndroiDevelopmentfs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
             AndroiDevelopmentcli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
         })
     }
@@ -31,7 +31,7 @@ try {
             return next();
         });
     }
-    if (fs.existsSync(AndroiDevelopmentframeworkInfo) && fs.existsSync(AndroiDevelopmentAndroidConfig)) {
+    if (AndroiDevelopmentfs.existsSync(AndroiDevelopmentframeworkInfo) && AndroiDevelopmentfs.existsSync(AndroiDevelopmentAndroidConfig)) {
         prepare(() => {
             AndroiDevelopmentcli.exec("vn3-web-build && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",
             (resp : any) =>{

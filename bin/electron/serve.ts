@@ -4,10 +4,8 @@ const ElectronServecli = require('cli');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-require('dotenv').config()
-let env : any = process.env;
-let ELECTRON_BUILD : number = 0;
-ELECTRON_BUILD = env.ELECTRON_BUILD == 0 ? 0 : 1;
+let config = require('dotenv').config().parsed;
+let ELECTRON_BUILD : number = config.ELECTRON_BUILD ? Number(config.ELECTRON_BUILD) : 0;
 try {
     /**
      * If is development 
@@ -70,7 +68,7 @@ try {
             /**
              * For development
              */
-            win.loadURL(`http://localhost:${process.env.PORT}/`);
+            win.loadURL(`http://localhost:${config.PORT}/`);
             win.webContents.openDevTools();
         }
     }

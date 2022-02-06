@@ -20,7 +20,7 @@ try {
             return next();
         });
     }
-    if (AndroidBuildfs.existsSync(AndroidBuildframeworkInfo) && fs.existsSync(AndroidBuildandroidConfig)) {
+    if (AndroidBuildfs.existsSync(AndroidBuildframeworkInfo) && AndroidBuildfs.existsSync(AndroidBuildandroidConfig)) {
         prepare(() => {
             Androidcli.exec("vn3-web-build && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",(resp: any) =>{
                 Androidcli.info(resp.toString());

@@ -5,8 +5,7 @@ const myApp = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const { app, BrowserWindow} = require('electron');
 const path = require('path');
-require('dotenv').config()
-
+let config = require('dotenv').config();
 let ElectronHelp : ElectronHelper= new ElectronHelper;
 
 try {

@@ -6,11 +6,11 @@ const androidConfig = './platforms/android/app/src/main/AndroidManifest.xml';
 try {
     if (AndroidRemovefs.existsSync(frameworkInfo) && AndroidRemovefs.existsSync(androidConfig)) {
         AndroidRemovecli.exec("rm -rf ./platforms/android",(resp : any) =>{
-            AndroiDevelopmentcli.info(resp.toString());
+            AndroidRemovecli.info(resp.toString());
             AndroidRemovecli.ok("Completed remove Androis OS");
         } ,
         (resp : any) => {
-            AndroiDevelopmentcli.info(resp.toString());
+            AndroidRemovecli.info(resp.toString());
             AndroidRemovecli.ok("Completed remove Androis OS");
         });
     }
