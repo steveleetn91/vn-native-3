@@ -36,7 +36,10 @@ Run
     `npm link`
 
 Run 
-    `npm run build`    
+    `npm run build`
+
+If is MacOS
+    `sudo chmod -R 777 ./dist`    
 
 Run 
     `npm run build:web`
