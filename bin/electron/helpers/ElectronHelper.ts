@@ -1,5 +1,5 @@
 import ElectronInterfaceHelper from "./ElectronInterfaceHelper";
-const iOSCli = require('cli');
+import * as cli from "cli";;
 let configHelper = require('dotenv').config().parsed;
 export default class ElectronHelper implements ElectronInterfaceHelper {
     checkFlagBuild(callback: Function): Function | void {
@@ -13,13 +13,13 @@ export default class ElectronHelper implements ElectronInterfaceHelper {
     cli(type: string = "ok",message : string = ""): void {
         switch (type) {
             case "ok":
-                iOSCli.ok(message)
+                cli.ok(message)
                 break;
             case "error":
-                iOSCli.error(message)
+                cli.error(message)
                 break;
             default:
-                iOSCli.info(message);
+                cli.info(message);
                 break;
         }
         return;

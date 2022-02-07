@@ -1,20 +1,20 @@
-const express = require('express');
-const myApp = express();
-const ElectronServecli = require('cli');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const { app, BrowserWindow } = require('electron');
+import * as express from "express";
+import * as cli from "cli";;
+import {createProxyMiddleware} from "http-proxy-middleware";
+import { app, BrowserWindow } from 'electron';
 const path = require('path');
 let config = require('dotenv').config().parsed;
 let ELECTRON_BUILD : number = config.ELECTRON_BUILD ? Number(config.ELECTRON_BUILD) : 0;
+const myApp = express();
 try {
     /**
      * If is development 
      */
     if (ELECTRON_BUILD == 0) {
-        ElectronServecli.exec(`vn3-web-development`, (resp : any) => {
-            ElectronServecli.info(resp.toString());
+        cli.exec(`vn3-web-development`, (resp : any) => {
+            cli.info(resp.toString());
         }, (resp : any) => {
-            ElectronServecli.info(resp.toString());
+            cli.info(resp.toString());
         });
     }
     /**

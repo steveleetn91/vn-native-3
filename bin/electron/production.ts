@@ -1,15 +1,11 @@
-import ElectronHelper from "./helpers/ElectronHelper";
-
-const express = require('express');
+import * as express from "express";
+import {createProxyMiddleware} from "http-proxy-middleware";
+import { app, BrowserWindow} from "electron";
 const myApp = express();
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const { app, BrowserWindow} = require('electron');
-const path = require('path');
-let config = require('dotenv').config();
-let ElectronHelp : ElectronHelper= new ElectronHelper;
-
 try {
-    ElectronHelp.makeShortcut();
+    (() => {
+        if (require('electron-squirrel-startup')) return;
+    })
     const PORT = 43000 + Number(Math.floor(Math.random() * 990));
     myApp.use(express.static(__dirname + '/../../../public'));
     myApp.set('views', __dirname + '/../../../platforms/electron/views');

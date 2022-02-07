@@ -1,8 +1,7 @@
 #!/usr/bin/env node 
-const cli = require('cli');
-const iOSBuildframeworkInfoFile = './framework.json';
-
-
+import * as cli from "cli";
+let fs : any = require('fs');
+let iOSBuildframeworkInfoFile : string = './framework.json';
 const xcodeprojectBuild = (next : Function ) => {
     cli.exec("cd ./platforms/ios && ruby ./prepare.rb && ruby ./build.rb",(info : any) => {
         cli.info(info);
@@ -42,6 +41,6 @@ const WWW = () => {
         setupSwiftView();
     })
 }
-if (fs.existsSync(iOSAddframeworkInfoFile)) {
+if (fs.existsSync(iOSBuildframeworkInfoFile)) {
     WWW();
 }

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-
+import * as cli from "cli";;
 import ElectronHelper from "./helpers/ElectronHelper";
 const BuildiOSfs = require('fs');
-const BuildiOSCli = require('cli');
+
 let process = require('dotenv').config();
 const createDMG = require('electron-installer-dmg');
 let ElectronHelp : ElectronHelper = new ElectronHelper();
@@ -41,30 +41,30 @@ try {
         }
 
         const osBuild = (callback : Function) => {
-            BuildiOSCli.exec('npx electron-packager . ' + env.ELECTRON_APP_NAME
+            cli.exec('npx electron-packager . ' + env.ELECTRON_APP_NAME
                 + ' --platform darwin --arch x64'
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.icns --overwrite',
                 async (resp : any) => {
-                    BuildiOSCli.ok(resp.toString());
+                    cli.ok(resp.toString());
                     await installerBuild();
                     return callback();
                 }, async (err : any) => {
-                    BuildiOSCli.info(err.toString());
+                    cli.info(err.toString());
                     await installerBuild();
                     return callback();
                 });
         }
 
         const restoreIndex = () => {
-            BuildiOSCli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
-                BuildiOSCli.ok("Restore index", res.toString());
+            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
+                cli.ok("Restore index" + res.toString());
             });
         }
 
         ElectronHelp.checkFlagBuild(() => {
-            BuildiOSCli.ok("Start electron build");
-            BuildiOSCli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (res : any) => {
-                BuildiOSCli.ok("Setup index", res.toString());
+            cli.ok("Start electron build");
+            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (res : any) => {
+                cli.ok("Setup index" + res.toString());
                 osBuild(() => {
                     restoreIndex();
                 });
@@ -72,5 +72,5 @@ try {
         })
     }
 } catch (err) {
-    BuildiOSCli.error(err.toString());
+    cli.error(err.toString());
 }

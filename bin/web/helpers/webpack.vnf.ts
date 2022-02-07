@@ -1,10 +1,11 @@
 import WebPackVNFInterface from "./webpack.vnf.interface";
+import * as cli from "cli";
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const fs = require('fs');
 const webpack = require('webpack');
-const cli = require('cli');
+
 const output = `${__dirname}/../../../../public/assets`;
 const iosOutput = `${__dirname}/../../../../platforms/ios/www`
 const staticDirectory = `${__dirname}/../../../../public`;

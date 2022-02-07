@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import ElectronHelper from "./helpers/ElectronHelper";
+import * as cli from "cli";;
 const BuildWinfs = require('fs');
-const BuildWincli = require('cli');
 let process = require('dotenv').config();
 const electronInstaller = require('electron-winstaller');
 const BuildWinframeworkInfo = './framework.json';
@@ -40,7 +40,7 @@ try {
         }
 
         const osBuild = (type : string,next : Function) => {
-            BuildWincli.exec('npx electron-packager . ' + config.ELECTRON_APP_NAME
+            cli.exec('npx electron-packager . ' + config.ELECTRON_APP_NAME
                 + ' --platform win32 --arch ' + type 
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite', 
                 async (resp : any) => {
@@ -55,14 +55,14 @@ try {
         }
 
         const restoreIndex = () => {
-            BuildWincli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
+            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
                 ElectronHelp.cli("ok","Restore index" + res.toString());
             });
         }
         
         ElectronHelp.checkFlagBuild(() => {
             ElectronHelp.cli("ok","Start electron build");
-            BuildWincli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (resp : any) => {
+            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (resp : any) => {
                 ElectronHelp.cli("ok","Setup index " + resp.toString());
                 osBuild('ia32',() => {
                     osBuild('x64',() => {

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const cli = require('cli');
+import * as cli from "cli";
+import WebPackVNF from "./helpers/webpack.vnf";
 const fs = require('fs')
 const BuildframeworkInfo = './framework.json';
-import WebPackVNF from "./helpers/webpack.vnf";
 try {
     let BuildwebHelper : WebPackVNF;
     BuildwebHelper = new WebPackVNF();
@@ -24,7 +24,7 @@ try {
     const buildWeb = (next : Function) => {
         cli.exec("cp -r ./public ./platforms/web/build && cp -r ./framework.json ./platforms/web/build/framework.json", (resp: any) => {
             if (resp) {
-                cli.ok("Done build web!!", resp);
+                cli.ok("Done build web!!" + resp.toString());
                 return next();
             }
         });
@@ -32,7 +32,7 @@ try {
     const buildRouter = (next : Function) => {
         cli.exec("rm -rf ./public/assets && rm -rf ./platforms/web/build", (resp: any) => {
             if (resp) {
-                cli.info("Core build", resp);
+                cli.info("Core build" +  resp.toString());
                 BuildwebHelper.buildRouterPage();
                 return next();
             }
@@ -89,6 +89,6 @@ try {
             });
         });
     }
-} catch (err) {
+} catch (err : any) {
     cli.error(err.toString());
 }

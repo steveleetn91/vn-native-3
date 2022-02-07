@@ -1,11 +1,8 @@
 #!/usr/bin/env node
-const serveCli = require('cli');
-const serveFs = require('fs')
+import * as cli from "cli";;
 import WebPackVNF from "./helpers/webpack.vnf";
-const express = require('express');
-const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+import * as express from "express";
+const serveFs = require('fs')
 let configWebServe = require('dotenv').config().parsed;
 const chokidar = require('chokidar');
 const watcher = chokidar.watch(__dirname + "/../../../pages", { ignored: /^\./, persistent: true });
@@ -13,6 +10,11 @@ const _path = require('path');
 let frameworkInfo : string;
 frameworkInfo = './framework.json';
 const servePort : Number = configWebServe.PORT ? Number(configWebServe.PORT) : 3000;
+
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 try {
     let webHelper : WebPackVNF;
     webHelper = new WebPackVNF();
@@ -38,11 +40,11 @@ try {
             });
             io.on('connection', (socket : any) => {
                 socket.on('has reload', (msg : string) => {
-                    serveCli.info("Has update");
+                    cli.info("Has update");
                 });
             });
             http.listen(servePort, () => {
-                serveCli.ok(`Server running at http://localhost:${servePort}/`);
+                cli.ok(`Server running at http://localhost:${servePort}/`);
             });
         }
         /**
@@ -51,10 +53,10 @@ try {
         const reloadEvent = () => {
             watcher
                 .on('add', (path : string) => {
-                    serveCli.ok(`Added ${path}`)
+                    cli.ok(`Added ${path}`)
                 })
                 .on('change', (path : string) => {
-                    serveCli.info("Changed " + path.toString());
+                    cli.info("Changed " + path.toString());
                     if (path.includes('.ts') || path.includes('.scss') || path.includes('.html')) {
                         path = path.replace(_path.join(__dirname,"/../../../pages"), '')
                             .replace('.Interface.ts', '')
@@ -70,7 +72,7 @@ try {
                             if ((i + 1) === (totalString.length / 2)) {
                                 webHelper.buildSinglePage(name, true, () => {
                                     io.emit('has reload', `Rebuild ${name}`);
-                                    serveCli.ok(`Rebuild ${name}`)
+                                    cli.ok(`Rebuild ${name}`)
                                 });
                             }
                         }
@@ -81,5 +83,5 @@ try {
         reloadEvent();
     }
 } catch (err) {
-    serveCli.error(err.toString());
+    cli.error(err.toString());
 } 

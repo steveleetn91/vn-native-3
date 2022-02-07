@@ -1,16 +1,16 @@
 #!/usr/bin/env node 
-const iosServeCli = require('cli');
+import * as cli from "cli";;
 let iOSConfig = require('dotenv').config().parsed;
-const iosServefs = require('fs');
+let fs : any = require('fs');
 const iosServeIp = require('ip');
-const iOSServeframeworkInfoFile = './framework.json';
+let iOSServeframeworkInfoFile : string = './framework.json';
 const PORT = iOSConfig.PORT ? iOSConfig.PORT : 3000;
 if (fs.existsSync(iOSServeframeworkInfoFile)) {
-    let ViewController = iosServefs.readFileSync("./platforms/ios/ViewController.development.swift",{
+    let ViewController = fs.readFileSync("./platforms/ios/ViewController.development.swift",{
         encoding:"utf-8"
     });
-    iosServeCli.ok("Setup development serve");
+    cli.ok("Setup development serve");
     ViewController = ViewController.replaceAll("{{development_serve}}","http://" + iosServeIp.address() + ':' + PORT);
-    iosServefs.writeFileSync("./platforms/ios/vnf3/vnf3/ViewController.swift",ViewController);
-    iosServeCli.ok("Please start webserve, then open project by xcode, next select your device and run");
+    fs.writeFileSync("./platforms/ios/vnf3/vnf3/ViewController.swift",ViewController);
+    cli.ok("Please start webserve, then open project by xcode, next select your device and run");
 }
