@@ -1,9 +1,9 @@
 #!/usr/bin/env node 
 import * as cli from "cli";;
-const help = require('../web/helpers/webpack.vnf');
+import WebPackVNF from '../web/helpers/webpack.vnf';
 let fs : any = require('fs');
 let iOSAddframeworkInfoFile : string = './framework.json';
-
+let help : WebPackVNF = new WebPackVNF
 
 const start = (next : Function) => {
     cli.exec("cd ./platforms/ios && rm -rf ./vnf3");
@@ -38,7 +38,7 @@ const setupIndex = () => {
 }
 
 const BuildCache = () => {
-    const directoryPage = __dirname + '/../../platforms/ios/www/';
+    const directoryPage = __dirname + '/../../../platforms/ios/www/';
         let data : Array<any>
         data = [];
         let list = fs.readdirSync(directoryPage);
