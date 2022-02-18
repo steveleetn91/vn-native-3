@@ -42,7 +42,7 @@ try {
         const osBuild = (type : string,next : Function) => {
             cli.exec('npx electron-packager . ' + config.ELECTRON_APP_NAME
                 + ' --platform win32 --arch ' + type 
-                + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite', 
+                + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite --asar', 
                 async (resp : any) => {
                     ElectronHelp.cli("ok",resp.toString());
                     await installerBuild(type);

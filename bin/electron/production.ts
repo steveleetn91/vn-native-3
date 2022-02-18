@@ -3,9 +3,7 @@ import {createProxyMiddleware} from "http-proxy-middleware";
 import { app, BrowserWindow} from "electron";
 const myApp = express();
 try {
-    (() => {
-        if (require('electron-squirrel-startup')) return;
-    })
+    if (require('electron-squirrel-startup')) {}
     const PORT = 43000 + Number(Math.floor(Math.random() * 990));
     myApp.use(express.static(__dirname + '/../../../public'));
     myApp.set('views', __dirname + '/../../../platforms/electron/views');
@@ -17,13 +15,13 @@ try {
     myApp.get('/:slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:_slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:_slug/:__slug', (req : Request, res : any) => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:_slug/:__slug/:___slug', (req : Request, res : any) => {
         res.render('index');
     });
     myApp.listen(PORT);
