@@ -33,6 +33,7 @@ To
     `.env`
 Run 
     `npm run build`
+    
 Run 
     `npm link` or `sudo npm link`
 
