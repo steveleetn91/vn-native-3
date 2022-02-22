@@ -31,12 +31,10 @@ Copy
 
 To
     `.env`
-
-Run 
-    `npm link`
-
 Run 
     `npm run build`
+Run 
+    `npm link` or `sudo npm link`
 
 If is MacOS
     `sudo chmod -R 777 ./dist`    
