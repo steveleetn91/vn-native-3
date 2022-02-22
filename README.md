@@ -25,6 +25,10 @@ Then
 .Then run 
     `npm install`
 
+# Permission
+
+`sudo chmod -R 777 ./bin`
+
 # First run or reinstall ?
 Copy 
     `.env.example`
@@ -43,9 +47,6 @@ If is MacOS
 Run 
     `npm run build:web`
 
-# Permission
-
-`sudo chmod -R 777 ./bin`
 
 # How to run web server ?
 
