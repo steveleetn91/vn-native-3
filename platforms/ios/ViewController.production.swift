@@ -6,6 +6,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let contentController = WKUserContentController()
+
+        // native
         let scriptSource = "window.vnnativeos = { getOsName : () => { return `iOS` } }  "
         let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         contentController.addUserScript(script)

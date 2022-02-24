@@ -4,4 +4,6 @@ contextBridge.exposeInMainWorld('vnnativeos', {
   getOsName: () => {
       return "software";
   }
-})
+});
+
+// native

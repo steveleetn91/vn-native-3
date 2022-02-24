@@ -38,7 +38,7 @@ try {
             autoHideMenuBar: true,
             webPreferences: {
                 contextIsolation: true,
-                preload:__dirname +"/preload.js"
+                preload:__dirname +"/../../../platforms/electron/preload.js"
             }
         })
         
