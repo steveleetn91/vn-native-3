@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "vn3-prepare",
+    "setup": "vn3-setup",
     "serve:web": "vn3-web-development",
     "serve:electron": "npx electron ./dist/bin/electron/serve.js",
     "build:web": "vn3-web-build",
@@ -32,7 +32,7 @@
     "vn3-ios-clone": "./dist/bin/ios/add.js",
     "vn3-ios-build": "./dist/bin/ios/build.js",
     "vn3-ios-serve": "./dist/bin/ios/serve.js",
-    "vn3-prepare": "./dist/bin/setup/prepare.js"
+    "vn3-setup": "./dist/bin/setup/prepare.js"
   },
   "repository": {
     "type": "git",

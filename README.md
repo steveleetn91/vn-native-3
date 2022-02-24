@@ -46,7 +46,7 @@ If is MacOS
     `sudo chmod -R 777 ./dist`    
 
 Run 
-    `npm run build:web`
+    `npm run setup`
 
 
 # How to run web server ?
