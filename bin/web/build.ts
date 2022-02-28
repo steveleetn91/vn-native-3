@@ -39,6 +39,13 @@ try {
         });
 
     }
+    const cleanCachePage = (next : Function) => {
+        cli.exec("rm -rf ./platforms/web/tmp/pages/*.ts",(resp) => {
+            return next();
+        },(resp) => {
+            return next();
+        })
+    }
     const buildPage = (next : Function) => {
         cli.info("Some times us need the wait");
         let listPageNeedBuild : Array<any>
@@ -78,10 +85,12 @@ try {
                 if (resp) {
                     prepareBuild(() => {
                         buildRouter(() => {
-                            buildPage(() => {
-                                buildWeb(() => {
-                                    restoreIndex();
-                                });
+                            cleanCachePage(() => {
+                                buildPage(() => {
+                                    buildWeb(() => {
+                                        restoreIndex();
+                                    });
+                                });    
                             });
                         });
                     });
