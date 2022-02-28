@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         myWebView.setWebChromeClient(new WebChromeClient());
         VnNativeOs vnos = new VnNativeOs(this, getPreferences(Context.MODE_PRIVATE), myWebView);
         myWebView.addJavascriptInterface(vnos, "vnnativeos");
+        // native
         myWebView.loadUrl("{{development_serve}}");
     }
 }
