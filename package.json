@@ -8,17 +8,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "vn3-setup",
     "serve:web": "vn3-web-development",
-    "serve:electron": "npx electron ./dist/bin/electron/serve.js",
+    "serve:electron": "vn3-prepare-software-build && npx electron ./dist/bin/electron/serve.js",
     "build:web": "vn3-web-build",
-    "build:electron-win": "vn3-web-build && vn3-electron-build-win",
-    "build:electron-macos": "vn3-web-build && vn3-electron-build-macos",
-    "add:android": "vn3-android-clone",
-    "add:ios": "vn3-ios-clone",
-    "build:ios": "vn3-ios-clone && vn3-ios-build",
-    "development:ios": "vn3-ios-serve",
-    "build:android": "vn3-android-build && vnnative3-plugin-rebuild",
+    "build:electron-win": "vn3-prepare-software-build && vn3-web-build && vn3-electron-build-win",
+    "build:electron-macos": "vn3-prepare-software-build && vn3-web-build && vn3-electron-build-macos",
+    "add:android": "vn3-android-clone && vnnative3-plugin-reinstall",
+    "add:ios": "vn3-ios-clone && vnnative3-plugin-reinstall",
+    "build:ios": "vn3-ios-clone && vn3-ios-build && vnnative3-plugin-reinstall",
+    "development:ios": "vn3-ios-serve && vnnative3-plugin-reinstall",
+    "build:android": "vn3-android-build && vnnative3-plugin-reinstall",
     "remove:android": "vn3-android-remove",
-    "development:android": "vn3-android-development"
+    "development:android": "vn3-android-development && vnnative3-plugin-reinstall"
   },
   "bin": {
     "vn3-web-build": "./dist/bin/web/build.js",
@@ -32,7 +32,8 @@
     "vn3-ios-clone": "./dist/bin/ios/add.js",
     "vn3-ios-build": "./dist/bin/ios/build.js",
     "vn3-ios-serve": "./dist/bin/ios/serve.js",
-    "vn3-setup": "./dist/bin/setup/prepare.js"
+    "vn3-setup": "./dist/bin/setup/prepare.js",
+    "vn3-prepare-software-build":"./dist/bin/electron/prepare-build.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import ElectronHelper from "./helpers/ElectronHelper";
-import * as cli from "cli";;
+import * as cli from "cli";
 const BuildWinfs = require('fs');
 let process = require('dotenv').config();
 const electronInstaller = require('electron-winstaller');
