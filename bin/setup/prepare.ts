@@ -2,16 +2,33 @@
 import * as cli from "cli";
 let fsPrepare : any = require("fs");
 const BuildSetupframeworkInfo = './framework.json';
-const firstBuild = () => {
+const firstBuild = () : void => {
     electronPrepare(() => {
-        cli.exec("npm run build && npm run build:web",(resp) => {
-            cli.ok("Done prepare");
-        },(resp) => {
-            cli.ok("Done prepare");
-        });    
+        setupConstructionPlugin(() => {
+            setupConstructionGlobal(() => {
+                cli.ok("Done prepare construction");
+            })    
+        })
     });
 }
-const electronPrepare = (callback : Function) => {
+
+const setupConstructionGlobal = (callback : Function) : void  => {
+    cli.exec("cp -r .env.example .env && mkdir plugins",(resp) => {
+        return callback()
+    },(resp) => {
+        return callback();
+    });    
+}
+
+const setupConstructionPlugin = (callback : Function) : void => {
+    cli.exec("rm -rf ./plugins",(resp) => {
+        return callback();
+    },(resp) => {
+        return callback();
+    })
+}
+
+const electronPrepare = (callback : Function) : void => {
     cli.exec("cp -r ./bin/electron/preload.ts ./platforms/electron/preload.ts",(resp) => {
         return callback();
     },(resp) => {

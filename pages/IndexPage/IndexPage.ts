@@ -7,14 +7,14 @@ import header from '../../components/header/header';
 const packageJson = require('../../package.json');
 export default class IndexPage implements HTMLPageInterFace {
     state : IndexPageStateInterface = {
-        title : "Vn Native Framework 3",
+        title : "Vn Native 3",
         slogan : "Cross platforms - Version " + packageJson.version,
         header : header(), 
         examplePageUrl : (new VnNative3Location).redirect.goUrl('/page/example',[])
     }; 
     constructor() {}      
-    public beforeRender() : void {}  
-    public afterRender() : void {}     
+    public beforeRender() : void {}   
+    public afterRender() : void {}      
     public render() : string { 
         return (new VnNative3HTMLElement).head(this.state).next(() => {
             console.log("Hello 2 I'm next action ! You can use a lots of actions ");

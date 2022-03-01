@@ -16,7 +16,7 @@
     "add:ios": "vn3-ios-clone",
     "build:ios": "vn3-ios-clone && vn3-ios-build",
     "development:ios": "vn3-ios-serve",
-    "build:android": "vn3-android-build",
+    "build:android": "vn3-android-build && vnnative3-plugin-rebuild",
     "remove:android": "vn3-android-remove",
     "development:android": "vn3-android-development"
   },
