@@ -33,7 +33,7 @@
     "vn3-ios-build": "./dist/bin/ios/build.js",
     "vn3-ios-serve": "./dist/bin/ios/serve.js",
     "vn3-setup": "./dist/bin/setup/prepare.js",
-    "vn3-prepare-software-build":"./dist/bin/electron/prepare-build.js"
+    "vn3-prepare-software-build": "./dist/bin/electron/prepare-build.js"
   },
   "repository": {
     "type": "git",
