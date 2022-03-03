@@ -1,5 +1,8 @@
 export default class RouterConfig {
-    config(){
+    config() : Array<{
+        url : string,
+        name : string
+    }>{
         return [
             {
                 url:"/",
@@ -14,5 +17,9 @@ export default class RouterConfig {
                 name:"IndexPage"
             }
         ]
+    }
+    notFound() : string {
+         // 404 page
+        return "NotFoundPage";
     }
 }
