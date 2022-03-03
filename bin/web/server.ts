@@ -10,7 +10,6 @@ const _path = require('path');
 let frameworkInfo : string;
 frameworkInfo = './framework.json';
 const servePort : Number = configWebServe.PORT ? Number(configWebServe.PORT) : 3000;
-
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -20,42 +19,42 @@ try {
     webHelper = new WebPackVNF();
     if (serveFs.existsSync(frameworkInfo)) {
         webHelper.buildRouterPage();
-        const myServe = () => {
+        const myServe : Function = () : void => {
             app.set('view engine', 'ejs');
             app.use(express.static(`${__dirname}/../../../public`));
-            app.get('/', (req : any, res : any) => {
+            app.get('/', (req : any, res : any) : void => {
                 res.render(`${__dirname}/../../../public/index.html`);
             });
-            app.get('/:slug', (req : any, res : any) => {
+            app.get('/:slug', (req : any, res : any) : void => {
                 res.render(`${__dirname}/../../../platforms/web/views/development.ejs`);
             });
-            app.get('/:slug/:slug', (req : any, res : any) => {
+            app.get('/:slug/:slug', (req : any, res : any) : void => {
                 res.render(`${__dirname}/../../../platforms/web/views/development.ejs`);
             });
-            app.get('/:slug/:slug/:slug', (req : any, res : any) => {
+            app.get('/:slug/:slug/:slug', (req : any, res : any) : void => {
                 res.render(`${__dirname}/../../../platforms/web/views/development.ejs`);
             });
-            app.get('/:slug/:slug/:slug/:slug', (req : any, res : any) => {
+            app.get('/:slug/:slug/:slug/:slug', (req : any, res : any) : void => {
                 res.render(`${__dirname}/../../../platforms/web/views/development.ejs`);
             });
-            io.on('connection', (socket : any) => {
+            io.on('connection', (socket : any) : void => {
                 socket.on('has reload', (msg : string) => {
                     cli.info("Has update");
                 });
             });
-            http.listen(servePort, () => {
+            http.listen(servePort, () : void => {
                 cli.ok(`Server running at http://localhost:${servePort}/`);
             });
         }
         /**
          * Server Listen change or add  
          */
-        const reloadEvent = () => {
+        const reloadEvent : Function = () : void => {
             watcher
-                .on('add', (path : string) => {
+                .on('add', (path : string) : void => {
                     cli.ok(`Added ${path}`)
                 })
-                .on('change', (path : string) => {
+                .on('change', (path : string) : void => {
                     cli.info("Changed " + path.toString());
                     if (path.includes('.ts') || path.includes('.scss') || path.includes('.html')) {
                         path = path.replace(_path.join(__dirname,"/../../../pages"), '')

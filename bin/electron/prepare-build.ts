@@ -5,17 +5,17 @@ const PrepareBuildSoftwarefs = require('fs');
 const PrepareBuildSoftwareframeworkInfo = './framework.json';
 try {
     if (PrepareBuildSoftwarefs.existsSync(PrepareBuildSoftwareframeworkInfo)) {
-        const prepareCoreFile = () : void => {
-            cli.exec(`cp -r ./bin/electron/preload.ts ./platforms/electron/preload.ts`,(resp) => {
-                reBuildPlugin()
-            },(resp) => {
-                reBuildPlugin()
+        const prepareCoreFile : Function = () : void => {
+            cli.exec(`cp -r ./bin/electron/preload.ts ./platforms/electron/preload.ts`,(resp) : Function => {
+                return reBuildPlugin()
+            },(resp) : Function => {
+                return reBuildPlugin()
             })
         }
-        const reBuildPlugin = () : void => {
-            cli.exec(`vnnative3-plugin-reinstall`,(resp) => {
+        const reBuildPlugin : Function = () : void => {
+            cli.exec(`vnnative3-plugin-reinstall`,(resp) : void => {
                 cli.info(resp.toString());
-            },(resp) => {
+            },(resp) : void => {
                 cli.info(resp.toString());
             });
         }

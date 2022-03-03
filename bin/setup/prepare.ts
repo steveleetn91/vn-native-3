@@ -2,7 +2,7 @@
 import * as cli from "cli";
 let fsPrepare : any = require("fs");
 const BuildSetupframeworkInfo = './framework.json';
-const firstBuild = () : void => {
+const firstBuild : Function = () : void => {
     electronPrepare(() => {
         setupConstructionPlugin(() => {
             setupConstructionGlobal(() => {
@@ -12,7 +12,7 @@ const firstBuild = () : void => {
     });
 }
 
-const setupConstructionGlobal = (callback : Function) : void  => {
+const setupConstructionGlobal : Function = (callback : Function) : void  => {
     cli.exec("cp -r .env.example .env && mkdir plugins",(resp) => {
         return callback()
     },(resp) => {
@@ -20,18 +20,18 @@ const setupConstructionGlobal = (callback : Function) : void  => {
     });    
 }
 
-const setupConstructionPlugin = (callback : Function) : void => {
-    cli.exec("rm -rf ./plugins",(resp) => {
+const setupConstructionPlugin : Function = (callback : Function) : void => {
+    cli.exec("rm -rf ./plugins",(resp) : Function => {
         return callback();
-    },(resp) => {
+    },(resp) : Function => {
         return callback();
     })
 }
 
-const electronPrepare = (callback : Function) : void => {
-    cli.exec("cp -r ./bin/electron/preload.ts ./platforms/electron/preload.ts",(resp) => {
+const electronPrepare : Function = (callback : Function) : void => {
+    cli.exec("cp -r ./bin/electron/preload.ts ./platforms/electron/preload.ts",(resp) : Function => {
         return callback();
-    },(resp) => {
+    },(resp) : Function => {
         return callback();
     });
 }

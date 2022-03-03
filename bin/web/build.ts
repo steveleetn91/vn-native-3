@@ -6,7 +6,7 @@ const BuildframeworkInfo = './framework.json';
 try {
     let BuildwebHelper : WebPackVNF;
     BuildwebHelper = new WebPackVNF();
-    const InstallIndex = (next : Function) => {
+    const InstallIndex : Function = (next : Function) : void => {
         cli.exec("cp -r ./platforms/web/views/production.ejs ./public/index.html", (resp: any) => {
             if (resp) {
                 cli.ok("Start!!!");
@@ -14,14 +14,14 @@ try {
             }
         });
     }
-    const restoreIndex = () => {
+    const restoreIndex : Function = () : void => {
         cli.exec("cp -r ./platforms/web/views/development.ejs ./public/index.html", (resp: any) => {
             if (resp) {
                 cli.ok("Stop!!!");
             }
         });
     }
-    const buildWeb = (next : Function) => {
+    const buildWeb : Function = (next : Function) : void => {
         cli.exec("cp -r ./public ./platforms/web/build && cp -r ./framework.json ./platforms/web/build/framework.json", (resp: any) => {
             if (resp) {
                 cli.ok("Done build web!!" + resp.toString());
@@ -29,7 +29,7 @@ try {
             }
         });
     }
-    const buildRouter = (next : Function) => {
+    const buildRouter : Function = (next : Function) : void => {
         cli.exec("rm -rf ./public/assets && rm -rf ./platforms/web/build", (resp: any) => {
             if (resp) {
                 cli.info("Core build" +  resp.toString());
@@ -39,21 +39,21 @@ try {
         });
 
     }
-    const cleanCachePage = (next : Function) => {
+    const cleanCachePage : Function = (next : Function) : void => {
         cli.exec("rm -rf ./platforms/web/tmp/pages/*.ts",(resp) => {
             return next();
         },(resp) => {
             return next();
         })
     }
-    const buildPage = (next : Function) => {
+    const buildPage : Function = (next : Function) : void => {
         cli.info("Some times us need the wait");
         let listPageNeedBuild : Array<any>
         listPageNeedBuild = BuildwebHelper.listPage();
         /**
          * INIT 
          */
-         const robotLoadPage = (listPageNeedBuild : Array<any>,key = 0) => {
+         const robotLoadPage : Function = (listPageNeedBuild : Array<any>,key : number = 0) : void | Function => {
             BuildwebHelper.buildSinglePage(listPageNeedBuild[key], true,() => {
                 if((key + 1) < listPageNeedBuild.length) {
                     robotLoadPage(listPageNeedBuild,key + 1);
@@ -64,7 +64,7 @@ try {
         }
         robotLoadPage(listPageNeedBuild,0);
     }
-    const prepareBuild = async (next : Function) => {
+    const prepareBuild : Function = async (next : Function) : Promise<Function> => {
         const lazyloadTemplate = await fs.readFileSync('./platforms/web/tmp/lazyload.vnf',
             { encoding: 'utf8', flag: 'r' });
         const listPage = BuildwebHelper.listPage();

@@ -9,29 +9,29 @@ try {
     myApp.set('views', __dirname + '/../../../platforms/electron/views');
     myApp.set('view engine', 'ejs');
     myApp.use('/', createProxyMiddleware({ target: `http://localhost:${PORT}/?page=`, changeOrigin: true }));
-    myApp.get('/', (req : Request, res : any) => {
+    myApp.get('/', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug/:_slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:_slug', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug/:_slug/:__slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:_slug/:__slug', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug/:_slug/:__slug/:___slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:_slug/:__slug/:___slug', (req : Request, res : any) : void => {
         res.render('index');
     });
     myApp.listen(PORT);
-    app.whenReady().then(() => {
+    app.whenReady().then(() : void => {
         createWindow()
         app.on('activate', () => {
             if (BrowserWindow.getAllWindows().length === 0) createWindow()
         })
     })
-    const createWindow = () => {
+    const createWindow : Function = () : void => {
         const win = new BrowserWindow({
             width: 800,
             height: 600,

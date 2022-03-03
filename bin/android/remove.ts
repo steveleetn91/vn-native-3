@@ -5,11 +5,12 @@ const frameworkInfo = './framework.json';
 const androidConfig = './platforms/android/app/src/main/AndroidManifest.xml';
 try {
     if (AndroidRemovefs.existsSync(frameworkInfo) && AndroidRemovefs.existsSync(androidConfig)) {
-        cli.exec("rm -rf ./platforms/android",(resp : any) =>{
+        cli.exec("rm -rf ./platforms/android",
+        (resp : any) : void =>{
             cli.info(resp.toString());
             cli.ok("Completed remove Androis OS");
-        } ,
-        (resp : any) => {
+        },
+        (resp : any) : void => {
             cli.info(resp.toString());
             cli.ok("Completed remove Androis OS");
         });

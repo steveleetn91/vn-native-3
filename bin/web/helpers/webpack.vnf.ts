@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const fs = require('fs');
 const webpack = require('webpack');
-
 const output = `${__dirname}/../../../../public/assets`;
 const iosOutput = `${__dirname}/../../../../platforms/ios/www`
 const staticDirectory = `${__dirname}/../../../../public`;
@@ -23,9 +22,9 @@ const ProxConfig = {
     changeOrigin: false
 };
 export default class WebPackVNF implements WebPackVNFInterface {
-    listPage() : Array<any> {
+    listPage() : Array<string> {
         const directoryPage = __dirname + '/../../../../pages';
-        let data : Array<any>
+        let data : Array<string>
         data = [];
         let list = fs.readdirSync(directoryPage);
         if (list.length < 1) {
@@ -33,9 +32,9 @@ export default class WebPackVNF implements WebPackVNFInterface {
         }
         return list;
     }
-    listPageNeedBuild() : Array<any>{
+    listPageNeedBuild() : Array<string>{
         const directoryPage = __dirname + '/../../../../platforms/web/tmp/pages/';
-        let data : Array<any>;
+        let data : Array<string>;
         data = []
         let list = fs.readdirSync(directoryPage);
         if (list.length < 1) {
@@ -52,7 +51,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
         }
     }
     buildSinglePage(pageName : string,rebuild : boolean = true,callback : Function) : void {
-        const build = async (next : Function) => {
+        const build : Function = async (next : Function) : Promise<Function> => {
             const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../../platforms/web/tmp/lazyload.vnf`,
                 { encoding: 'utf8', flag: 'r' });
 
@@ -127,8 +126,8 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 maxAssetSize: 2560000
             }
         }
-        build(() => {
-            webpack(config, (err : any, stats: any) => {
+        build(() : void => {
+            webpack(config, (err : any, stats: any) : void => {
                 if (err) {
                      cli.error(err.toString());
                 }
@@ -213,7 +212,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 maxAssetSize: 2560000
             }
         }
-        webpack(config, (err : any, stats : any) => {
+        webpack(config, (err : any, stats : any) : void | string => {
             if (err) {
                 return cli.error(err.toString());
             }
@@ -302,8 +301,8 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 maxAssetSize: 2560000
             }
         }
-        build(() => {
-            webpack(config, (err : any, stats : any) => {
+        build(() : void => {
+            webpack(config, (err : any, stats : any) : void | Function => {
                 if (err) {
                      cli.error(err.toString());
                 }
@@ -388,7 +387,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
                 maxAssetSize: 2560000
             }
         }
-        webpack(config, (err : any, stats : any) => {
+        webpack(config, (err : any, stats : any) : void | Function => {
             if (err) {
                 return cli.error(err.toString());
             }
