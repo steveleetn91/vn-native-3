@@ -11,7 +11,7 @@ try {
      * If is development 
      */
     if (ELECTRON_BUILD == 0) {
-        cli.exec(`vn3-web-development`, (resp : any) => {
+        cli.exec(`vn3-web-development`, (resp : any) : void => {
             cli.info(resp.toString());
         }, (resp : any) => {
             cli.info(resp.toString());
@@ -25,33 +25,33 @@ try {
     myApp.set('views', __dirname + '/../../../public');
     myApp.set('view engine', 'ejs');
     myApp.use('/', createProxyMiddleware({ target: `http://localhost:${PORT}/?page=`, changeOrigin: true }));
-    myApp.get('/', (req : Request, res : any) => {
+    myApp.get('/', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:slug', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:slugg/:slug', (req : Request, res : any) : void => {
         res.render('index');
     });
-    myApp.get('/:slug/:slugg/:slug/:slug', (req : Request, res : any) => {
+    myApp.get('/:slug/:slugg/:slug/:slug', (req : Request, res : any) : void => {
         res.render('index');
     });
     myApp.listen(PORT);
     /**
      * App
      */
-    app.whenReady().then(() => {
+    app.whenReady().then(() : void => {
         createWindow()
         app.on('activate', () => {
             if (BrowserWindow.getAllWindows().length === 0) createWindow()
         })
     })
 
-    const createWindow = () => {
+    const createWindow : Function = () : void => {
         const win = new BrowserWindow({
             width: 800,
             height: 600,
@@ -72,7 +72,7 @@ try {
             win.webContents.openDevTools();
         }
     }
-    app.on('window-all-closed', () => {
+    app.on('window-all-closed', () : void => {
         if (process.platform !== 'darwin') {
             app.quit()
         }

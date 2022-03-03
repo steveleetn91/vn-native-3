@@ -21,7 +21,7 @@ let config : {
 }
 try {
     if (BuildWinfs.existsSync(BuildWinframeworkInfo)) {
-        const installerBuild = async (type : string) => {
+        const installerBuild : Function = async (type : string) : Promise<void> => {
             try {
                 await electronInstaller.createWindowsInstaller({
                     title: config.ELECTRON_APP_TITLE,
@@ -39,7 +39,7 @@ try {
             }
         }
 
-        const osBuild = (type : string,next : Function) => {
+        const osBuild : Function = (type : string,next : Function) : void => {
             cli.exec('npx electron-packager . ' + config.ELECTRON_APP_NAME
                 + ' --platform win32 --arch ' + type 
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite --asar', 
@@ -54,15 +54,16 @@ try {
                 });
         }
 
-        const restoreIndex = () => {
+        const restoreIndex : Function = () : void => {
             cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
                 ElectronHelp.cli("ok","Restore index" + res.toString());
             });
         }
         
-        ElectronHelp.checkFlagBuild(() => {
+        ElectronHelp.checkFlagBuild(() : void => {
             ElectronHelp.cli("ok","Start electron build");
-            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (resp : any) => {
+            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', 
+            (resp : any) : void => {
                 ElectronHelp.cli("ok","Setup index " + resp.toString());
                 osBuild('ia32',() => {
                     osBuild('x64',() => {

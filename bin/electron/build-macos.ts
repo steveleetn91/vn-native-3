@@ -25,7 +25,7 @@ let env : {
 try {
     if (BuildiOSfs.existsSync(frameworkInfo)) {
         
-        const installerBuild = async () => {
+        const installerBuild : Function = async () : Promise<void> => {
             await createDMG({
                 title: env.ELECTRON_APP_TITLE,
                 description: env.ELECTRON_APP_DESC,
@@ -40,30 +40,31 @@ try {
             });
         }
 
-        const osBuild = (callback : Function) => {
+        const osBuild : Function = (callback : Function) : void => {
             cli.exec('npx electron-packager . ' + env.ELECTRON_APP_NAME
                 + ' --platform darwin --arch x64'
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.icns --overwrite',
-                async (resp : any) => {
+                async (resp : any) : Promise<Function> => {
                     cli.ok(resp.toString());
                     await installerBuild();
                     return callback();
-                }, async (err : any) => {
+                }, async (err : any) : Promise<Function>  => {
                     cli.info(err.toString());
                     await installerBuild();
                     return callback();
                 });
         }
 
-        const restoreIndex = () => {
+        const restoreIndex : Function = () : void => {
             cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
                 cli.ok("Restore index" + res.toString());
             });
         }
 
-        ElectronHelp.checkFlagBuild(() => {
+        ElectronHelp.checkFlagBuild(() : void => {
             cli.ok("Start electron build");
-            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', (res : any) => {
+            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', 
+            (res : any) : void => {
                 cli.ok("Setup index" + res.toString());
                 osBuild(() => {
                     restoreIndex();

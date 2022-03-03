@@ -5,12 +5,12 @@ let fs : any = require('fs');
 let iOSAddframeworkInfoFile : string = './framework.json';
 let help : WebPackVNF = new WebPackVNF
 
-const start = (next : Function) => {
+const start : Function = (next : Function) : Function => {
     cli.exec("cd ./platforms/ios && rm -rf ./vnf3");
     return next();
 }
 
-const buildStatic = () => {
+const buildStatic : Function = () : void => {
     help.buildRouterPageiOS(true);
     buildPage(help.listPage());
 }
@@ -25,7 +25,7 @@ const buildPage = (data : Array<any>,key = 0) => {
     })
 }
 
-const setupIndex = () => {
+const setupIndex : Function = () : void => {
     cli.exec("cp -r ./platforms/ios/views/index.html ./platforms/ios/www/index.html",
     (resp : any) => {
         cli.info("Index ready " + resp.toString());
@@ -37,7 +37,7 @@ const setupIndex = () => {
     });
 }
 
-const BuildCache = () => {
+const BuildCache : Function = () : Array<string> | void => {
     const directoryPage = __dirname + '/../../../platforms/ios/www/';
         let data : Array<any>
         data = [];
@@ -49,13 +49,13 @@ const BuildCache = () => {
         cli.ok("Completed build data ");
 }
 if (fs.existsSync(iOSAddframeworkInfoFile)) {
-    start(() => {
+    start(() : void => {
         cli.exec("cd ./platforms/ios" 
         +  "&& git clone https://github.com/steveleetn91/vn-native-3-ios.git && cd ./vn-native-3-ios && git checkout beta && cd ../" 
         + " && cp -r ./vn-native-3-ios/vnf3 ./vnf3 && rm -rf ./vn-native-3-ios && cd ./vnf3",(resp : any) => {
             cli.info(resp.toString());
             buildStatic();
-        },(resp : any) => {
+        },(resp : any) : void => {
             cli.info(resp.toString());
             buildStatic();
         });

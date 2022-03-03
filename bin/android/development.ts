@@ -6,7 +6,7 @@ const AndroiDevelopmentAndroidConfig = './platforms/android/app/src/main/Android
 const ip = require('ip');
 require('dotenv').config()
 try {
-    const installDevelopment = () => {
+    const installDevelopment : Function = () : void => {
         cli.exec("cp -r ./bin/android/java/Development.java ./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java"
         ,async (resp : any) => {
             cli.info(resp.toString());
@@ -24,7 +24,7 @@ try {
             cli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
         })
     }
-    const prepare = (next : Function) => {
+    const prepare : Function = (next : Function) : void => {
         cli.exec("cd ./platforms/android/app/src/main && rm -rf ./assets && mkdir assets",(resp : any) => {
             return next();
         },(resp : any) => {
@@ -32,19 +32,19 @@ try {
         });
     }
     if (AndroiDevelopmentfs.existsSync(AndroiDevelopmentframeworkInfo) && AndroiDevelopmentfs.existsSync(AndroiDevelopmentAndroidConfig)) {
-        prepare(() => {
+        prepare(() : void => {
             cli.exec("vn3-web-build && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",
-            (resp : any) =>{
+            (resp : any) : Function =>{
                 cli.info(resp.toString());
                 cli.ok("Completed prepare building Androis OS");
                 cli.info("Installing development");
-                installDevelopment();
+                return installDevelopment();
             },
-            (resp : any) => {
+            (resp : any) : Function => {
                 cli.info(resp.toString());
                 cli.ok("Completed prepare building Androis OS");
                 cli.info("Installing development");
-                installDevelopment();
+                return installDevelopment();
             });
         });
     }
