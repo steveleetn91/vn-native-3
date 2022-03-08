@@ -3,6 +3,7 @@ import * as cli from "cli";;
 let configHelper = require("../../../../config/config.json");
 export default class ElectronHelper implements ElectronInterfaceHelper {
     cli(type: string = "ok",message : string = ""): void {
+        message === "" ? "Done" : message
         switch (type) {
             case "ok":
                 cli.ok(message)
