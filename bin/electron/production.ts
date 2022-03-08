@@ -41,7 +41,6 @@ try {
                 preload:__dirname +"/../../platforms/electron/preload.js"
             }
         })
-        
         win.loadURL(`http://localhost:${PORT}/`);
     }
     app.on('window-all-closed', () => {

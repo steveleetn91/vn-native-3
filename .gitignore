@@ -16,3 +16,4 @@
 /platforms/ios/.DS_Store
 /dist
 /platforms/electron/preload.ts
+/config/config.json

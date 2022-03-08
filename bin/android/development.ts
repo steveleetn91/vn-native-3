@@ -4,7 +4,7 @@ const AndroiDevelopmentfs = require('fs');
 const AndroiDevelopmentframeworkInfo = './framework.json';
 const AndroiDevelopmentAndroidConfig = './platforms/android/app/src/main/AndroidManifest.xml';
 const ip = require('ip');
-require('dotenv').config()
+const config = require("../../../config/config.json");
 try {
     const installDevelopment : Function = () : void => {
         cli.exec("cp -r ./bin/android/java/Development.java ./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java"
@@ -12,14 +12,14 @@ try {
             cli.info(resp.toString());
             let javaFile = await AndroiDevelopmentfs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
             { encoding: 'utf8', flag: 'r' });
-            javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + process.env.PORT + '/index.html');
+            javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + config.PORT + '/index.html');
             await AndroiDevelopmentfs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
             cli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
         },async (resp : any) => {
             cli.info(resp.toString());
             let javaFile = await AndroiDevelopmentfs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
             { encoding: 'utf8', flag: 'r' });
-            javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + process.env.PORT);
+            javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + config.PORT);
             await AndroiDevelopmentfs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
             cli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
         })

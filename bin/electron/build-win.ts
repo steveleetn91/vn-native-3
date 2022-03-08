@@ -2,79 +2,77 @@
 import ElectronHelper from "./helpers/ElectronHelper";
 import * as cli from "cli";
 const BuildWinfs = require('fs');
-let process = require('dotenv').config();
+let process = require("../../../config/config.json");
 const electronInstaller = require('electron-winstaller');
 const BuildWinframeworkInfo = './framework.json';
-let ElectronHelp : ElectronHelper = new ElectronHelper;
-let config : {
-    ELECTRON_APP_TITLE : string,
-    ELECTRON_APP_DESC : string,
-    ELECTRON_APP_NAME : string,
-    ELECTRON_APP_AUTHOR : string,
-    ELECTRON_APP_VERSION : string
+let ElectronHelp: ElectronHelper = new ElectronHelper;
+let config: {
+    ELECTRON_APP_TITLE: string,
+    ELECTRON_APP_DESC: string,
+    ELECTRON_APP_NAME: string,
+    ELECTRON_APP_AUTHOR: string,
+    ELECTRON_APP_VERSION: string
 } = {
-    ELECTRON_APP_TITLE : process.parsed && process.parsed.ELECTRON_APP_TITLE ? process.parsed.ELECTRON_APP_TITLE : "VNF3",
-    ELECTRON_APP_DESC : process.parsed && process.parsed.ELECTRON_APP_TITLE ? process.parsed.ELECTRON_APP_TITLE : "Vn native framework version 3",
-    ELECTRON_APP_NAME : process.parsed && process.parsed.ELECTRON_APP_NAME ? process.parsed.ELECTRON_APP_NAME : "App",
-    ELECTRON_APP_AUTHOR : process.parsed && process.parsed.ELECTRON_APP_AUTHOR ? process.parsed.ELECTRON_APP_AUTHOR : "Steve lee",
-    ELECTRON_APP_VERSION : process.parsed && process.parsed.ELECTRON_APP_VERSION ? process.parsed.ELECTRON_APP_VERSION : "1.0.0"
+    ELECTRON_APP_TITLE: process && process.ELECTRON_APP_TITLE ? process.ELECTRON_APP_TITLE : "VNF3",
+    ELECTRON_APP_DESC: process && process.ELECTRON_APP_TITLE ? process.ELECTRON_APP_TITLE : "Vn native framework version 3",
+    ELECTRON_APP_NAME: process && process.ELECTRON_APP_NAME ? process.ELECTRON_APP_NAME : "App",
+    ELECTRON_APP_AUTHOR: process && process.ELECTRON_APP_AUTHOR ? process.ELECTRON_APP_AUTHOR : "Steve lee",
+    ELECTRON_APP_VERSION: process && process.ELECTRON_APP_VERSION ? process.ELECTRON_APP_VERSION : "1.0.0"
 }
 try {
     if (BuildWinfs.existsSync(BuildWinframeworkInfo)) {
-        const installerBuild : Function = async (type : string) : Promise<void> => {
+        const installerBuild: Function = async (type: string): Promise<void> => {
             try {
                 await electronInstaller.createWindowsInstaller({
                     title: config.ELECTRON_APP_TITLE,
                     description: config.ELECTRON_APP_DESC,
                     appDirectory: './platforms/electron/dist/' + config.ELECTRON_APP_NAME + '-win32-' + type,
-                    outputDirectory: './platforms/electron/dist/installer-' + config.ELECTRON_APP_NAME  + '-win32-' + type,
+                    outputDirectory: './platforms/electron/dist/installer-' + config.ELECTRON_APP_NAME + '-win32-' + type,
                     authors: config.ELECTRON_APP_AUTHOR,
                     version: config.ELECTRON_APP_VERSION,
-                    exe: config.ELECTRON_APP_NAME +'.exe',
+                    exe: config.ELECTRON_APP_NAME + '.exe',
                     name: config.ELECTRON_APP_NAME
                 });
-                ElectronHelp.cli("ok","Completed building ! "+type+" ^^");
-            }catch(err) {
-                ElectronHelp.cli("error",err.toString());
+                ElectronHelp.cli("ok", "Completed building ! " + type + " ^^");
+            } catch (err) {
+                ElectronHelp.cli("error", err.toString());
             }
         }
 
-        const osBuild : Function = (type : string,next : Function) : void => {
+        const osBuild: Function = (type: string, next: Function): void => {
             cli.exec('npx electron-packager . ' + config.ELECTRON_APP_NAME
-                + ' --platform win32 --arch ' + type 
-                + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite --asar', 
-                async (resp : any) => {
-                    ElectronHelp.cli("ok",resp.toString());
+                + ' --platform win32 --arch ' + type
+                + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite --asar',
+                async (resp: any) => {
+                    ElectronHelp.cli("ok", resp.toString());
                     await installerBuild(type);
                     return next();
-                }, async (err : any) => {
-                    ElectronHelp.cli("info",err.toString());
+                }, async (err: any) => {
+                    ElectronHelp.cli("info", err.toString());
                     await installerBuild(type);
                     return next();
                 });
         }
 
-        const restoreIndex : Function = () : void => {
-            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
-                ElectronHelp.cli("ok","Restore index" + res.toString());
+        const restoreIndex: Function = (): void => {
+            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res: any) => {
+                ElectronHelp.cli("ok", "Restore index" + res.toString());
             });
         }
-        
-        ElectronHelp.checkFlagBuild(() : void => {
-            ElectronHelp.cli("ok","Start electron build");
-            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', 
-            (resp : any) : void => {
-                ElectronHelp.cli("ok","Setup index " + resp.toString());
-                osBuild('ia32',() => {
-                    osBuild('x64',() => {
-                        osBuild('arm64',() => {
+
+        ElectronHelp.cli("ok", "Start electron build");
+        cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html',
+            (resp: any): void => {
+                ElectronHelp.cli("ok", "Setup index " + resp.toString());
+                osBuild('ia32', () => {
+                    osBuild('x64', () => {
+                        osBuild('arm64', () => {
                             restoreIndex();
                         });
                     });
                 });
-            }); 
-        })
+            });
     }
 } catch (err) {
-    ElectronHelp.cli("error",err.toString());
+    ElectronHelp.cli("error", err.toString());
 }

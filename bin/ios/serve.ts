@@ -1,10 +1,10 @@
 #!/usr/bin/env node 
 import * as cli from "cli";;
-let iOSConfig = require('dotenv').config().parsed;
+let iOSConfig = require("../../../config/config.json");
 let fs : any = require('fs');
 const iosServeIp = require('ip');
 let iOSServeframeworkInfoFile : string = './framework.json';
-const PORT = iOSConfig.PORT ? iOSConfig.PORT : 3000;
+const PORT = iOSConfig.PORT ? iOSConfig.PORT : 9000;
 if (fs.existsSync(iOSServeframeworkInfoFile)) {
     let ViewController = fs.readFileSync("./platforms/ios/ViewController.development.swift",{
         encoding:"utf-8"

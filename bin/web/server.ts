@@ -3,7 +3,7 @@ import * as cli from "cli";;
 import WebPackVNF from "./helpers/webpack.vnf";
 import * as express from "express";
 const serveFs = require('fs')
-let configWebServe = require('dotenv').config().parsed;
+let configWebServe = require("../../../config/config.json");
 const chokidar = require('chokidar');
 const watcher = chokidar.watch(__dirname + "/../../../pages", { ignored: /^\./, persistent: true });
 const _path = require('path');
@@ -13,7 +13,6 @@ const servePort : Number = configWebServe.PORT ? Number(configWebServe.PORT) : 3
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
 try {
     let webHelper : WebPackVNF;
     webHelper = new WebPackVNF();

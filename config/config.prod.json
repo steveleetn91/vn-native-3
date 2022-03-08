@@ -1,0 +1,11 @@
+{
+    "PORT" : 9000,
+    "NAME" : "Vn Native Framework",
+    "SLOGAN" : "Cross Framework",
+    "ELECTRON_BUILD": 0,
+    "ELECTRON_APP_TITLE":"VN3",
+    "ELECTRON_APP_DESC":"VN3",
+    "ELECTRON_APP_NAME":"VN3",
+    "ELECTRON_APP_AUTHOR":"Tani Technology Inc.",
+    "ELECTRON_APP_VERSION":"1.0.5"
+}

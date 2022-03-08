@@ -1,14 +1,16 @@
 {
   "name": "vn-native-3",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Vn Native Framework",
   "main": "./dist/bin/electron/production.js",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "vn3-setup",
+    "config:prod": "vn3-config-prod",
+    "config:dev": "vn3-config-dev",
     "serve:web": "vn3-web-development",
-    "serve:electron": "vn3-prepare-software-build && tsc && npx electron ./dist/bin/electron/serve.js",
+    "serve:electron": "vn3-prepare-software-build && tsc && vn3-web-build && npx electron ./dist/bin/electron/serve.js",
     "build:web": "vn3-web-build",
     "build:electron-win": "vn3-prepare-software-build && tsc && vn3-web-build && vn3-electron-build-win",
     "build:electron-macos": "vn3-prepare-software-build && tsc && vn3-web-build && vn3-electron-build-macos",
@@ -33,6 +35,8 @@
     "vn3-ios-build": "./dist/bin/ios/build.js",
     "vn3-ios-serve": "./dist/bin/ios/serve.js",
     "vn3-setup": "./dist/bin/setup/prepare.js",
+    "vn3-config-prod": "./dist/bin/setup/production.js",
+    "vn3-config-dev": "./dist/bin/setup/development.js",
     "vn3-prepare-software-build": "./dist/bin/electron/prepare-build.js"
   },
   "repository": {

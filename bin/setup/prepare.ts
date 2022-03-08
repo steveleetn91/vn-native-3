@@ -13,11 +13,12 @@ const firstBuild : Function = () : void => {
 }
 
 const setupConstructionGlobal : Function = (callback : Function) : void  => {
-    cli.exec("cp -r .env.example .env && mkdir plugins",(resp) => {
+    cli.exec("cp -r ./config/config.dev.json ./config/config.json && mkdir plugins",(resp) => {
         return callback()
     },(resp) => {
         return callback();
-    });    
+    });
+    cli.exec("cp -r ./.env.example ./.env",(resp) => {},(resp) => {});    
 }
 
 const setupConstructionPlugin : Function = (callback : Function) : void => {

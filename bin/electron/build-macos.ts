@@ -3,29 +3,29 @@ import * as cli from "cli";;
 import ElectronHelper from "./helpers/ElectronHelper";
 const BuildiOSfs = require('fs');
 
-let process = require('dotenv').config();
+let process = require("../../../config/config.json");
 const createDMG = require('electron-installer-dmg');
-let ElectronHelp : ElectronHelper = new ElectronHelper();
+let ElectronHelp: ElectronHelper = new ElectronHelper();
 const frameworkInfo = './framework.json';
-let env : {
-    ELECTRON_APP_TITLE : string,
-    ELECTRON_APP_DESC : string,
-    ELECTRON_APP_NAME : string,
-    ELECTRON_APP_AUTHOR : string,
-    ELECTRON_APP_VERSION : string,
-    ELECTRON_BUILD : number
+let env: {
+    ELECTRON_APP_TITLE: string,
+    ELECTRON_APP_DESC: string,
+    ELECTRON_APP_NAME: string,
+    ELECTRON_APP_AUTHOR: string,
+    ELECTRON_APP_VERSION: string,
+    ELECTRON_BUILD: number
 } = {
-    ELECTRON_APP_TITLE : process.parsed.ELECTRON_APP_TITLE ? process.parsed.ELECTRON_APP_TITLE : "VNF3",
-    ELECTRON_APP_DESC : process.parsed.ELECTRON_APP_TITLE ? process.parsed.ELECTRON_APP_TITLE : "Vn native framework version 3",
-    ELECTRON_APP_NAME : process.parsed.ELECTRON_APP_NAME ? process.parsed.ELECTRON_APP_NAME : "App",
-    ELECTRON_APP_AUTHOR : process.parsed.ELECTRON_APP_AUTHOR ? process.parsed.ELECTRON_APP_AUTHOR : "Steve lee",
-    ELECTRON_APP_VERSION : process.parsed.ELECTRON_APP_VERSION ? process.parsed.ELECTRON_APP_VERSION : "1.0.0",
-    ELECTRON_BUILD : process.parsed.ELECTRON_BUILD ? Number(process.parsed.ELECTRON_BUILD) : 0
+    ELECTRON_APP_TITLE: process.ELECTRON_APP_TITLE ? process.ELECTRON_APP_TITLE : "VNF3",
+    ELECTRON_APP_DESC: process.ELECTRON_APP_TITLE ? process.ELECTRON_APP_TITLE : "Vn native framework version 3",
+    ELECTRON_APP_NAME: process.ELECTRON_APP_NAME ? process.ELECTRON_APP_NAME : "App",
+    ELECTRON_APP_AUTHOR: process.ELECTRON_APP_AUTHOR ? process.ELECTRON_APP_AUTHOR : "Steve lee",
+    ELECTRON_APP_VERSION: process.ELECTRON_APP_VERSION ? process.ELECTRON_APP_VERSION : "1.0.0",
+    ELECTRON_BUILD: process.ELECTRON_BUILD ? Number(process.ELECTRON_BUILD) : 0
 }
 try {
     if (BuildiOSfs.existsSync(frameworkInfo)) {
-        
-        const installerBuild : Function = async () : Promise<void> => {
+
+        const installerBuild: Function = async (): Promise<void> => {
             await createDMG({
                 title: env.ELECTRON_APP_TITLE,
                 description: env.ELECTRON_APP_DESC,
@@ -35,42 +35,40 @@ try {
                 version: env.ELECTRON_APP_VERSION,
                 name: env.ELECTRON_APP_NAME,
                 overwrite: true,
-                productName:env.ELECTRON_APP_NAME,
-                icon : "./platforms/electron/data-build/icon.icns"
+                productName: env.ELECTRON_APP_NAME,
+                icon: "./platforms/electron/data-build/icon.icns"
             });
         }
 
-        const osBuild : Function = (callback : Function) : void => {
+        const osBuild: Function = (callback: Function): void => {
             cli.exec('npx electron-packager . ' + env.ELECTRON_APP_NAME
                 + ' --platform darwin --arch x64'
                 + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.icns --overwrite',
-                async (resp : any) : Promise<Function> => {
+                async (resp: any): Promise<Function> => {
                     cli.ok(resp.toString());
                     await installerBuild();
                     return callback();
-                }, async (err : any) : Promise<Function>  => {
+                }, async (err: any): Promise<Function> => {
                     cli.info(err.toString());
                     await installerBuild();
                     return callback();
                 });
         }
 
-        const restoreIndex : Function = () : void => {
-            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res : any) => {
+        const restoreIndex: Function = (): void => {
+            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res: any) => {
                 cli.ok("Restore index" + res.toString());
             });
         }
 
-        ElectronHelp.checkFlagBuild(() : void => {
-            cli.ok("Start electron build");
-            cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html', 
-            (res : any) : void => {
+        cli.ok("Start electron build");
+        cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html',
+            (res: any): void => {
                 cli.ok("Setup index" + res.toString());
                 osBuild(() => {
                     restoreIndex();
                 });
             });
-        })
     }
 } catch (err) {
     cli.error(err.toString());

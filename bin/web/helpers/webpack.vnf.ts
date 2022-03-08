@@ -10,14 +10,11 @@ const iosOutput = `${__dirname}/../../../../platforms/ios/www`
 const staticDirectory = `${__dirname}/../../../../public`;
 const iosStaticDirectory = `${__dirname}/../../../../public`
 
-let configWebServe = require('dotenv').config().parsed;
-
-let targetProxy : string = configWebServe.DOMAIN ? configWebServe.DOMAIN : "";
+let configWebServe = require("../../../../config/config.json");
 
 let servePort :number = configWebServe.PORT ? configWebServe.PORT : 9000;
 
 const ProxConfig = {
-    target: `${targetProxy}/index.html?page=`,
     secure: true,
     changeOrigin: false
 };
