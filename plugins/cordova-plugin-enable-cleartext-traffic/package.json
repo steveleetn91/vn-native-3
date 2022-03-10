@@ -1,0 +1,27 @@
+{
+  "name": "cordova-plugin-enable-cleartext-traffic",
+  "version": "2.1.0",
+  "description": "Cordova Plugin Enable cleartextTraffic ",
+  "cordova": {
+    "id": "cordova-plugin-enable-cleartext-traffic",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "network",
+    "internet",
+    "cleartextTraffic",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.6.0"
+    }
+  ],
+  "author": "Rahul CV",
+  "license": "MIT"
+}

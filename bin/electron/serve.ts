@@ -1,10 +1,7 @@
 import * as express from "express";
-import * as cli from "cli";;
-import { createProxyMiddleware } from "http-proxy-middleware";
+import * as cli from "cli";
 import { app, BrowserWindow } from 'electron';
-const path = require('path');
 let config = require("../../../config/config.json");
-const myApp = express();
 require('dotenv').config()
 try {
     cli.exec(`vn3-web-development`, (resp: any): void => {
@@ -26,11 +23,11 @@ try {
         const win = new BrowserWindow({
             width: 800,
             height: 600,
-            icon: "./platforms/electron/data-build/icon.png",
+            icon: "./platforms/browser/www/icons/icon.png",
             autoHideMenuBar: true,
             webPreferences: {
                 contextIsolation: true,
-                preload: __dirname + "/../../platforms/electron/preload.js"
+                preload:  __dirname +"/preload.js"
             }
         })
         

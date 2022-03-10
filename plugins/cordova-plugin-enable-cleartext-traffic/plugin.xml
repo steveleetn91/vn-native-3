@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-enable-cleartext-traffic"
+        version="2.1.0">
+
+    <name>Internet Status</name>
+    <description>Cordova Plugin Enable cleartextTraffic </description>
+    <license>MIT</license>
+    <keywords>cordova,network,internet,cleartextTraffic</keywords>
+<!-- 
+    <js-module src="www/internet.js" name="internet">
+        <clobbers target="internet"/>
+    </js-module> -->
+
+    <engines>
+        <engine name="cordova" version=">=3.6.0"></engine>
+    </engines>
+
+    <!-- android -->
+    <platform name="android">
+        
+            <hook type="before_plugin_install" src="scripts/beforePluginInstall.js" />
+            <hook type="after_plugin_install" src="scripts/afterPluginInstall.js" />
+
+<!-- //before_plugin_add -->       
+          <!--  <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+              <application android:usesCleartextTraffic="true" />
+          </edit-config> -->
+
+    </platform>
+
+    
+
+</plugin>

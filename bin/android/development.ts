@@ -1,53 +1,100 @@
 #!/usr/bin/env node
-import * as cli from "cli";;
+import * as cli from "cli";
+import * as express from "express";
+let Androidapp = express();
+const AndroidHttp = require('http').Server(Androidapp);
+const Androidio = require('socket.io')(AndroidHttp);
 const AndroiDevelopmentfs = require('fs');
 const AndroiDevelopmentframeworkInfo = './framework.json';
 const AndroiDevelopmentAndroidConfig = './platforms/android/app/src/main/AndroidManifest.xml';
+const AndroidDevchokidar = require('chokidar');
+const AndroidDevwatcher = AndroidDevchokidar.watch(__dirname + "/../../../platforms/android/app/src/main/assets/www", { ignored: /^\./, persistent: true });
 const ip = require('ip');
 const config = require("../../../config/config.json");
 try {
-    const installDevelopment : Function = () : void => {
-        cli.exec("cp -r ./bin/android/java/Development.java ./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java"
-        ,async (resp : any) => {
-            cli.info(resp.toString());
-            let javaFile = await AndroiDevelopmentfs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
+    const setupDevelopmentIndex = async (callback: Function): Promise<Function> => {
+        let developmentIndex: string = await AndroiDevelopmentfs.readFileSync('./bin/android/views/development.html',
             { encoding: 'utf8', flag: 'r' });
-            javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + config.PORT + '/index.html');
-            await AndroiDevelopmentfs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
-            cli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
-        },async (resp : any) => {
-            cli.info(resp.toString());
-            let javaFile = await AndroiDevelopmentfs.readFileSync("./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
-            { encoding: 'utf8', flag: 'r' });
-            javaFile = javaFile.replaceAll('{{development_serve}}',ip.address() + ':' + config.PORT);
-            await AndroiDevelopmentfs.writeFileSync(`./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java`, javaFile);
-            cli.ok("Android develoopment mode ready, to use reload feature you need start web then start app with android studio. ");
-        })
+        await AndroiDevelopmentfs.writeFileSync("./platforms/android/app/src/main/assets/www/index.html", developmentIndex);
+        return callback();
     }
-    const prepare : Function = (next : Function) : void => {
-        cli.exec("cd ./platforms/android/app/src/main && rm -rf ./assets && mkdir assets",(resp : any) => {
-            return next();
-        },(resp : any) => {
-            return next();
+    const setupDevelopmentConfigXml = async (): Promise<void> => {
+        let configXml: string = await AndroiDevelopmentfs.readFileSync('./platforms/android/app/src/main/res/xml/config.xml',
+            { encoding: 'utf8', flag: 'r' });
+        configXml = configXml.replaceAll("index.html", `http://${ip.address()}:${config.PORT + 1}`);
+        await AndroiDevelopmentfs.writeFileSync('./platforms/android/app/src/main/res/xml/config.xml', configXml);
+        cli.ok("Please open Android Studio and run app");
+    }
+    const AndroidDevelopmentServe = (callback: Function): void => {
+
+        /**
+         * Server Listen change or add  
+         */
+        const reloadEvent: Function = (): void => {
+            AndroidDevwatcher
+                .on('add', (path: string): void => {
+                    Androidio.emit('has reload', `Rebuild`);
+                })
+                .on('change', (path: string): void => {
+                    Androidio.emit('has reload', `Rebuild`);
+                })
+        }
+        /**
+         * SV
+         */
+
+        Androidapp.set('view engine', 'ejs');
+        Androidapp.use(express.static(`${__dirname}/../../../platforms/android/app/src/main/assets/www`));
+        Androidapp.get('/', (req: any, res: any): void => {
+            res.render(`${__dirname}/../../../platforms/android/app/src/main/assets/www/index.html`);
         });
-    }
-    if (AndroiDevelopmentfs.existsSync(AndroiDevelopmentframeworkInfo) && AndroiDevelopmentfs.existsSync(AndroiDevelopmentAndroidConfig)) {
-        prepare(() : void => {
-            cli.exec("vn3-web-build && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",
-            (resp : any) : Function =>{
-                cli.info(resp.toString());
-                cli.ok("Completed prepare building Androis OS");
-                cli.info("Installing development");
-                return installDevelopment();
-            },
-            (resp : any) : Function => {
-                cli.info(resp.toString());
-                cli.ok("Completed prepare building Androis OS");
-                cli.info("Installing development");
-                return installDevelopment();
+        Androidapp.get('/:slug', (req: any, res: any): void => {
+            res.render(`${__dirname}/../../../platforms/android/app/src/main/assets/www/index.html`);
+        });
+        Androidapp.get('/:slug/:slug', (req: any, res: any): void => {
+            res.render(`${__dirname}/../../../platforms/android/app/src/main/assets/www/index.html`);
+        });
+        Androidapp.get('/:slug/:slug/:slug', (req: any, res: any): void => {
+            res.render(`${__dirname}/../../../platforms/android/app/src/main/assets/www/index.html`);
+        });
+        Androidapp.get('/:slug/:slug/:slug/:slug', (req: any, res: any): void => {
+            res.render(`${__dirname}/../../../platforms/android/app/src/main/assets/www/index.html`);
+        });
+        Androidio.on('connection', (socket: any): void => {
+            socket.on('has reload', (msg: string) => {
+                cli.info("Has update");
             });
         });
+        AndroidHttp.listen(Number(config.PORT) + 1, (): void => {
+            cli.ok(`Server running at http://localhost:${Number(config.PORT) + 1}/`);
+            callback();
+            reloadEvent();
+        });
+
     }
-}catch(error) {
+    if (AndroiDevelopmentfs.existsSync(AndroiDevelopmentframeworkInfo) && AndroiDevelopmentfs.existsSync(AndroiDevelopmentAndroidConfig)) {
+        cli.exec("vn3-web-build && cp -r ./www/* ./platforms/android/app/src/main/assets/www",
+            (resp: any): void => {
+                cli.info(resp.toString());
+                setupDevelopmentIndex(() => {
+                    cli.ok("Completed prepare building Androis OS");
+                    cli.info("Installed development");
+                    AndroidDevelopmentServe(() => {
+                        setupDevelopmentConfigXml();
+                    });
+                })
+            },
+            (resp: any): void => {
+                cli.info(resp.toString());
+                setupDevelopmentIndex(() => {
+                    cli.ok("Completed prepare building Androis OS");
+                    cli.info("Installed development");
+                    AndroidDevelopmentServe(() => {
+                        setupDevelopmentConfigXml();
+                    });
+                })
+            });
+    }
+} catch (error) {
     cli.error(error.toString());
 }

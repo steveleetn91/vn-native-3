@@ -1,14 +1,12 @@
 import * as express from "express";
-import {createProxyMiddleware} from "http-proxy-middleware";
 import { app, BrowserWindow} from "electron";
 const myApp = express();
 try {
     if (require('electron-squirrel-startup')) {}
     const PORT = 43000 + Number(Math.floor(Math.random() * 990));
-    myApp.use(express.static(__dirname + '/../../../public'));
-    myApp.set('views', __dirname + '/../../../platforms/electron/views');
+    myApp.use(express.static(__dirname + '/../../../platforms/browser/www'));
+    myApp.set('views', __dirname + '/../../../bin/electron/views');
     myApp.set('view engine', 'ejs');
-    myApp.use('/', createProxyMiddleware({ target: `http://localhost:${PORT}/?page=`, changeOrigin: true }));
     myApp.get('/', (req : Request, res : any) : void => {
         res.render('index');
     });
@@ -36,9 +34,10 @@ try {
             width: 800,
             height: 600,
             autoHideMenuBar: true,
+            icon: "./platforms/browser/www/icons/icon.png",
             webPreferences: {
                 contextIsolation: true,
-                preload:__dirname +"/../../platforms/electron/preload.js"
+                preload:  __dirname +"/preload.js"
             }
         })
         win.loadURL(`http://localhost:${PORT}/`);

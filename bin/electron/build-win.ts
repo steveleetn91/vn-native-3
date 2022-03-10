@@ -42,7 +42,7 @@ try {
         const osBuild: Function = (type: string, next: Function): void => {
             cli.exec('npx electron-packager . ' + config.ELECTRON_APP_NAME
                 + ' --platform win32 --arch ' + type
-                + ' --out ./platforms/electron/dist --icon=./platforms/electron/data-build/icon.ico --overwrite --asar',
+                + ' --out ./platforms/electron/dist --icon=./platforms/browser/www/icons/icon.ico --overwrite --asar',
                 async (resp: any) => {
                     ElectronHelp.cli("ok", resp.toString());
                     await installerBuild(type);
@@ -54,24 +54,14 @@ try {
                 });
         }
 
-        const restoreIndex: Function = (): void => {
-            cli.exec('cp -r ./platforms/web/views/development.ejs ./public/index.html', (res: any) => {
-                ElectronHelp.cli("ok", "Restore index" + res.toString());
-            });
-        }
-
         ElectronHelp.cli("ok", "Start electron build");
-        cli.exec('cp -r ./platforms/web/views/production.ejs ./public/index.html',
-            (resp: any): void => {
-                ElectronHelp.cli("ok", "Setup index " + resp.toString());
-                osBuild('ia32', () => {
-                    osBuild('x64', () => {
-                        osBuild('arm64', () => {
-                            restoreIndex();
-                        });
-                    });
+        osBuild('ia32', () => {
+            osBuild('x64', () => {
+                osBuild('arm64', () => {
+
                 });
             });
+        });
     }
 } catch (err) {
     ElectronHelp.cli("error", err.toString());

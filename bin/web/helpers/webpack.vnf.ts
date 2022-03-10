@@ -5,10 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const fs = require('fs');
 const webpack = require('webpack');
-const output = `${__dirname}/../../../../public/assets`;
+const output = `${__dirname}/../../../../www/assets`;
 const iosOutput = `${__dirname}/../../../../platforms/ios/www`
-const staticDirectory = `${__dirname}/../../../../public`;
-const iosStaticDirectory = `${__dirname}/../../../../public`
+const staticDirectory = `${__dirname}/../../../../www`;
+const iosStaticDirectory = `${__dirname}/../../../../www`
 
 let configWebServe = require("../../../../config/config.json");
 
@@ -30,7 +30,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
         return list;
     }
     listPageNeedBuild() : Array<string>{
-        const directoryPage = __dirname + '/../../../../platforms/web/tmp/pages/';
+        const directoryPage = __dirname + '/../../../../bin/web/tmp/pages/';
         let data : Array<string>;
         data = []
         let list = fs.readdirSync(directoryPage);
@@ -40,7 +40,7 @@ export default class WebPackVNF implements WebPackVNFInterface {
         for (let i = 0; i < list.length; i++) {
             if (list[i].includes("ts")) {
                 let key = list[i].toString().replaceAll('.ts', '').replaceAll('-', '_');
-                data[key] = `${__dirname}/../../../../platforms/web/tmp/pages/${list[i]}`;
+                data[key] = `${__dirname}/../../../../bin/web/tmp/pages/${list[i]}`;
             }
             if ((i + 1) === list.length) {
                 return data;
@@ -49,15 +49,15 @@ export default class WebPackVNF implements WebPackVNFInterface {
     }
     buildSinglePage(pageName : string,rebuild : boolean = true,callback : Function) : void {
         const build : Function = async (next : Function) : Promise<Function> => {
-            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../../platforms/web/tmp/lazyload.vnf`,
+            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../../bin/web/tmp/lazyload.vnf`,
                 { encoding: 'utf8', flag: 'r' });
 
             const tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}', pageName);
-            fs.writeFileSync(`${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
+            fs.writeFileSync(`${__dirname}/../../../../bin/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
             return next();
         }
         let entry : any = {}
-        entry[pageName] = `${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`
+        entry[pageName] = `${__dirname}/../../../../bin/web/tmp/pages/${pageName}.ts`
         const config = {
             entry: entry,
             mode: "production",
@@ -223,15 +223,15 @@ export default class WebPackVNF implements WebPackVNFInterface {
     }
     buildSinglePageiOS(pageName : string,rebuild : boolean = true,callback : Function) : void {
         const build = async (next : Function) => {
-            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../../platforms/web/tmp/lazyload.vnf`,
+            const lazyloadTemplate = await fs.readFileSync(`${__dirname}/../../../../bin/web/tmp/lazyload.vnf`,
                 { encoding: 'utf8', flag: 'r' });
 
             const tmp_lazyloadTemplate = lazyloadTemplate.replaceAll('{page_name}', pageName);
-            fs.writeFileSync(`${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
+            fs.writeFileSync(`${__dirname}/../../../../bin/web/tmp/pages/${pageName}.ts`, tmp_lazyloadTemplate);
             return next();
         }
         let entry : any = {};
-        entry[pageName] = `${__dirname}/../../../../platforms/web/tmp/pages/${pageName}.ts`
+        entry[pageName] = `${__dirname}/../../../../bin/web/tmp/pages/${pageName}.ts`
         const config = {
             entry: entry,
             mode: "production",

@@ -1,0 +1,18 @@
+{
+  "cordova-plugin-device": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-device"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-enable-cleartext-traffic": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-enable-cleartext-traffic"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

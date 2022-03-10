@@ -1,38 +1,41 @@
 #!/usr/bin/env node
-import * as cli from "cli";;
+import * as cli from "cli";
+const AndroidBuildIp = require("ip");
 const AndroidBuildfs = require('fs');
 const AndroidBuildframeworkInfo = './framework.json';
 const AndroidBuildandroidConfig = './platforms/android/app/src/main/AndroidManifest.xml';
+const AndroidBuilConfigJson = require("../../../config/config.json");
 try {
-    const installProduction : Function = () : void => {
-        cli.exec("cp -r ./bin/android/java/Production.java ./platforms/android/app/src/main/java/com/example/myapplication/MainActivity.java",
-        (resp: any) : void => {
-            cli.info(resp.toString());
-            cli.ok("You need read Android document about how to upload app to Google Play! ");
-        },(resp: any) : void => {
-            cli.info(resp.toString());
-            cli.ok("You need read Android document about how to upload app to Google Play! ");
-        })
-    }
+    
     const prepare : Function = (next : Function) : void => {
-        cli.exec("cd ./platforms/android/app/src/main && rm -rf ./assets && mkdir assets",(resp : any) : Function => {
+        cli.exec("cd ./platforms/android/app/src/main/assets/www && rm -rf ./assets && mkdir assets",(resp : any) : Function => {
             return next();
         },(resp : any)  : Function => {
             return next();
         });
     }
+    const setupDevelopmentConfigXmlProd = async (callback : Function): Promise<void> => {
+        let configXml: string = await AndroidBuildfs.readFileSync('./platforms/android/app/src/main/res/xml/config.xml',
+            { encoding: 'utf8', flag: 'r' });
+        configXml = configXml.replaceAll(`http://${AndroidBuildIp.address()}:${AndroidBuilConfigJson.PORT + 1}`,"index.html");
+        await AndroidBuildfs.writeFileSync('./platforms/android/app/src/main/res/xml/config.xml', configXml);
+        cli.ok("Please open Android Studio and run app");
+        return callback();
+    }
     if (AndroidBuildfs.existsSync(AndroidBuildframeworkInfo) && AndroidBuildfs.existsSync(AndroidBuildandroidConfig)) {
         prepare(() : void => {
-            cli.exec("vn3-web-build && cp -r ./platforms/web/build/* ./platforms/android/app/src/main/assets && cp -r ./platforms/android/views/index.html ./platforms/android/app/src/main/assets/index.html",
+            cli.exec("vn3-web-build && cp -r ./www/* ./platforms/android/app/src/main/assets/www && cp -r ./bin/android/views/index.html ./platforms/android/app/src/main/assets/www/index.html",
             (resp: any) : void =>{
-                cli.info(resp.toString());
-                cli.ok("Completed prepare building Androis OS");
-                installProduction();
+                setupDevelopmentConfigXmlProd(() => {
+                    cli.info(resp.toString());
+                    cli.ok("Completed prepare building Androis OS");    
+                })
             },
             (resp: any) : void => {
-                cli.info(resp.toString());
-                cli.ok("Completed prepare building Androis OS");
-                installProduction();
+                setupDevelopmentConfigXmlProd(() => {
+                    cli.info(resp.toString());
+                    cli.ok("Completed prepare building Androis OS");    
+                })
             });
         });
     }

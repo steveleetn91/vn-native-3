@@ -3,17 +3,13 @@ import * as cli from "cli";
 let fsPrepare : any = require("fs");
 const BuildSetupframeworkInfo = './framework.json';
 const firstBuild : Function = () : void => {
-    electronPrepare(() => {
-        setupConstructionPlugin(() => {
-            setupConstructionGlobal(() => {
-                cli.ok("Done prepare construction");
-            })    
-        })
-    });
+    setupConstructionGlobal(() => {
+        cli.ok("Done prepare construction");
+    })   
 }
 
 const setupConstructionGlobal : Function = (callback : Function) : void  => {
-    cli.exec("cp -r ./config/config.dev.json ./config/config.json && mkdir plugins",(resp) => {
+    cli.exec("npm i -g cordova && cp -r ./config/config.dev.json ./config/config.json && npm install --save-dev electron-packager",(resp) => {
         return callback()
     },(resp) => {
         return callback();
@@ -21,21 +17,6 @@ const setupConstructionGlobal : Function = (callback : Function) : void  => {
     cli.exec("cp -r ./.env.example ./.env",(resp) => {},(resp) => {});    
 }
 
-const setupConstructionPlugin : Function = (callback : Function) : void => {
-    cli.exec("rm -rf ./plugins",(resp) : Function => {
-        return callback();
-    },(resp) : Function => {
-        return callback();
-    })
-}
-
-const electronPrepare : Function = (callback : Function) : void => {
-    cli.exec("cp -r ./bin/electron/preload.ts ./platforms/electron/preload.ts",(resp) : Function => {
-        return callback();
-    },(resp) : Function => {
-        return callback();
-    });
-}
 
 if(fsPrepare.existsSync(BuildSetupframeworkInfo)) {
     firstBuild();

@@ -1,5 +1,6 @@
 {
   "name": "vn-native-3",
+  "displayName": "HelloWorld",
   "version": "1.5.2",
   "description": "Vn Native Framework",
   "main": "./dist/bin/electron/production.js",
@@ -10,23 +11,27 @@
     "config:prod": "vn3-config-prod",
     "config:dev": "vn3-config-dev",
     "serve:web": "vn3-web-development",
-    "serve:electron": "vn3-prepare-software-build && tsc && vn3-web-build && npx electron ./dist/bin/electron/serve.js",
+    "serve:electron": "vn3-web-build && npx electron ./dist/bin/electron/serve.js",
     "build:web": "vn3-web-build",
-    "build:electron-win": "vn3-prepare-software-build && tsc && vn3-web-build && vn3-electron-build-win",
-    "build:electron-macos": "vn3-prepare-software-build && tsc && vn3-web-build && vn3-electron-build-macos",
-    "add:android": "vn3-android-clone && vnnative3-plugin-reinstall",
-    "add:ios": "vn3-ios-clone && vnnative3-plugin-reinstall",
-    "build:ios": "vn3-ios-clone && vn3-ios-build && vnnative3-plugin-reinstall",
-    "development:ios": "vn3-ios-serve && vnnative3-plugin-reinstall",
-    "build:android": "vn3-android-build && vnnative3-plugin-reinstall",
+    "build:electron-win": "vn3-web-build && vn3-electron-build-win",
+    "build:electron-macos": "vn3-web-build && vn3-electron-build-macos",
+    "add:android": "vn3-android-clone",
+    "add:ios": "vn3-ios-clone ",
+    "add:electron": "vn3-electron-add",
+    "build:ios": "vn3-ios-clone && vn3-ios-build ",
+    "development:ios": "vn3-ios-serve ",
+    "build:android": "vn3-android-build",
     "remove:android": "vn3-android-remove",
-    "development:android": "vn3-android-development && vnnative3-plugin-reinstall"
+    "remove:electron": "vn3-electron-remove",
+    "development:android": "vn3-android-development "
   },
   "bin": {
     "vn3-web-build": "./dist/bin/web/build.js",
     "vn3-web-development": "./dist/bin/web/server.js",
+    "vn3-electron-add": "./dist/bin/electron/add.js",
     "vn3-electron-build-win": "./dist/bin/electron/build-win.js",
     "vn3-electron-build-macos": "./dist/bin/electron/build-macos.js",
+    "vn3-electron-remove": "./dist/bin/electron/remove.js",
     "vn3-android-clone": "./dist/bin/android/add.js",
     "vn3-android-build": "./dist/bin/android/build.js",
     "vn3-android-remove": "./dist/bin/android/remove.js",
@@ -36,8 +41,7 @@
     "vn3-ios-serve": "./dist/bin/ios/serve.js",
     "vn3-setup": "./dist/bin/setup/prepare.js",
     "vn3-config-prod": "./dist/bin/setup/production.js",
-    "vn3-config-dev": "./dist/bin/setup/development.js",
-    "vn3-prepare-software-build": "./dist/bin/electron/prepare-build.js"
+    "vn3-config-dev": "./dist/bin/setup/development.js"
   },
   "repository": {
     "type": "git",
@@ -53,6 +57,8 @@
     "@types/mini-css-extract-plugin": "^2.4.0",
     "@types/node": "^16.11.22",
     "@types/webpack-dev-server": "^4.5.0",
+    "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-enable-cleartext-traffic": "^2.1.0",
     "css-minimizer-webpack-plugin": "^3.2.0",
     "electron": "^17.0.1",
     "electron-installer-dmg": "^3.0.0",
@@ -90,8 +96,12 @@
     "mustache": "^4.2.0",
     "socket.io": "^4.4.0",
     "vnnative3-console": "^1.0.0",
+    "vnnative3-form": "^1.0.13",
     "vnnative3-location": "^1.0.2",
     "vnnative3-router": "^1.0.8",
     "vnnative3-webview": "^1.0.0"
+  },
+  "cordova": {
+    "platforms": []
   }
 }
