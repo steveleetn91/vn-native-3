@@ -6,3 +6,5 @@
 /dist
 /config/config.json
 /platforms/electron/dist
+/resources/android
+/resources/ios
