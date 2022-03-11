@@ -4,21 +4,24 @@ import { app, BrowserWindow } from 'electron';
 let config = require("../../../config/config.json");
 require('dotenv').config()
 try {
+
     cli.exec(`vn3-web-development`, (resp: any): void => {
         cli.info(resp.toString());
-    }, (resp: any) => {
+    }, (resp: any): void => {
         cli.info(resp.toString());
     });
+
     /**
      * App
      */
-    app.whenReady().then((): void => {
-        createWindow()
-        app.on('activate', () => {
-            if (BrowserWindow.getAllWindows().length === 0) createWindow()
-        })
+     app.whenReady().then((): void => {
+        setTimeout(() => {
+            createWindow()
+            app.on('activate', () => {
+                if (BrowserWindow.getAllWindows().length === 0) createWindow()
+            })
+        },2000);
     })
-
     const createWindow: Function = (): void => {
         const win = new BrowserWindow({
             width: 800,
@@ -27,13 +30,13 @@ try {
             autoHideMenuBar: true,
             webPreferences: {
                 contextIsolation: true,
-                preload:  __dirname +"/preload.js"
+                preload: __dirname + "/preload.js"
             }
         })
-        
+
         win.loadURL(`http://localhost:${config.PORT}/`);
-        if(config.ELECTRON_DEBUG_TOOL && config.ELECTRON_DEBUG_TOOL == 1 ) {
-            
+        if (config.ELECTRON_DEBUG_TOOL && config.ELECTRON_DEBUG_TOOL == 1) {
+
             win.webContents.openDevTools();
         }
     }
@@ -42,6 +45,8 @@ try {
             app.quit()
         }
     })
+
+
 } catch (err) {
     console.error(err.toString());
 }

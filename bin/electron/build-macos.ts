@@ -34,7 +34,7 @@ try {
                 name: env.ELECTRON_APP_NAME,
                 overwrite: true,
                 productName: env.ELECTRON_APP_NAME,
-                icon: "./platforms/electron/www/icons/icon.icns"
+                icon: "./platforms/browser/www/icons/icon.icns"
             });
         }
 
