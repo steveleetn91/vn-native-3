@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.example.tani" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Vnf3</name>
-    <description>Sample Apache Cordova App</description>
+    <description>Vn Native 3 Application</description>
     <author email="hoang.le.tn91@gmail.com" href="https://tani.technology">
         Tani Technology
     </author>

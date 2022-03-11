@@ -53,16 +53,19 @@ try {
             for (let i = 0; i < platforms.length; i++) {
                 switch (platforms[i]) {
                     case "browser":
-                        cli.exec("cp -r ./www/assets/* ./platforms/browser/www/assets");
+                        (() => {
+                            cli.exec("cp -r ./www/assets/* ./platforms/browser/www/assets");
+                        })
                         break;
                     case "android":
-                        cli.exec("cp -r ./www/assets/* ./platforms/android/app/src/main/assets/www/assets");
+                        (() => {
+                            cli.exec("cp -r ./www/assets/* ./platforms/android/app/src/main/assets/www/assets");
+                        })
                         break;
                     case "ios":
-                        cli.exec("cp -r ./www/assets/* ./platforms/ios/www/assets");
-                        break;
-                    case "electron":
-                        
+                        (() => {
+                            cli.exec("cp -r ./www/assets/* ./platforms/ios/www/assets");
+                        })
                         break;
                 }
             }
