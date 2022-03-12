@@ -10,12 +10,11 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-navigation href="*" />
-    <preference name="SplashScreenDelay" value="1000" />
     <platform name="android">
-        
+        <preference name="SplashScreenDelay" value="1000" />
     </platform>
     <platform name="ios">
-        
+        <preference name="SplashScreenDelay" value="1000" />
     </platform>
     <platform name="browser">
         <preference name="SplashScreen" value="/icons/icon.png" />
