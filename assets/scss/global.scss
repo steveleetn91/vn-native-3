@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+body {
+    font-family: 'Roboto Slab', serif;
+    a {
+        color : rgb(66, 66, 248)
+    }
+    a:hover {
+        cursor: pointer;
+    }
+    h1 { 
+        color: red;
+    }
+    .box-container {
+        width: 80%;
+        margin: auto;
+    }
+    .button-default {
+        background: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 10px;
+    }
+}

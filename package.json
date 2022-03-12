@@ -1,7 +1,7 @@
 {
   "name": "vn-native-3",
   "displayName": "HelloWorld",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "Vn Native Framework",
   "main": "./dist/bin/electron/production.js",
   "scripts": {
@@ -108,8 +108,6 @@
     "sharp": "^0.30.2",
     "socket.io": "^4.4.0",
     "vnnative3-console": "^1.0.0",
-    "vnnative3-form": "^1.0.13",
-    "vnnative3-location": "^1.0.2",
     "vnnative3-router": "^1.0.8",
     "vnnative3-webview": "^1.0.0"
   },

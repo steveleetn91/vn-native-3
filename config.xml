@@ -20,7 +20,7 @@
     <platform name="browser">
         <preference name="SplashScreen" value="/icons/icon.png" />
         <preference name="AutoHideSplashScreen" value="true" />
-        <preference name="SplashScreenDelay" value="1000" />
+        <preference name="SplashScreenDelay" value="0" />
         <preference name="SplashScreenBackgroundColor" value="white" />
         <preference name="SplashScreenWidth" value="600" />
         <preference name="SplashScreenHeight" value="300" />

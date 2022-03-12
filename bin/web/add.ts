@@ -4,14 +4,25 @@ const BrowserAddFs = require('fs');
 const BrowserAddframeworkInfo = './framework.json';
 try {
     if (BrowserAddFs.existsSync(BrowserAddframeworkInfo)) {
-        cli.exec("cordova platform add browser",(resp) : void => {
+        const setupDevWeb: Function = (callback: Function): void => {
+            cli.exec("rm -rf ./platforms/browser/www/index.html", (resp): Function => {
+                return callback();
+            }, (resp): Function => {
+                return callback();
+            })
+        }
+        cli.exec("cordova platform add browser", (resp): void => {
             cli.info(resp.toString());
-            cli.ok("Added");
-        },(resp) : void => {
+            setupDevWeb(() => {
+                cli.ok("Added");
+            })
+        }, (resp): void => {
             cli.info(resp.toString());
-            cli.ok("Added");
+            setupDevWeb(() => {
+                cli.ok("Added");
+            })
         })
     }
-}catch(error) {
+} catch (error) {
     cli.error(error.toString());
 }

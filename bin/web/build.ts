@@ -7,7 +7,7 @@ try {
     let BuildwebHelper: WebPackVNF;
     BuildwebHelper = new WebPackVNF();
     const buildWeb: Function = (next: Function): void => {
-        cli.exec("cp -r ./www/* ./platforms/browser/www && cp -r ./framework.json ./platforms/browser/www/framework.json", (resp: any) => {
+        cli.exec("cp -r ./www/* ./platforms/browser/www && cp -r ./framework.json ./platforms/browser/www/framework.json && cp -r ./bin/web/views/production.ejs ./platforms/browser/www/index.html", (resp: any) => {
             if (resp) {
                 cli.ok("Done build web!!" + resp.toString());
                 return next();
