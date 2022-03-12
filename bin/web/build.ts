@@ -15,7 +15,7 @@ try {
         });
     }
     const buildRouter: Function = (next: Function): void => {
-        cli.exec("rm -rf ./www/assets", (resp: any) => {
+        cli.exec("rm -rf ./www/assets", (resp: any) : Function => {
             if (resp) {
                 cli.info("Core build" + resp.toString());
                 BuildwebHelper.buildRouterPage();
@@ -25,20 +25,20 @@ try {
 
     }
     const cleanCachePage: Function = (next: Function): void => {
-        cli.exec("rm -rf ./bin/web/tmp/pages/*.ts", (resp) => {
+        cli.exec("rm -rf ./bin/web/tmp/pages/*.ts", (resp) : Function => {
             return next();
-        }, (resp) => {
+        }, (resp) : Function => {
             return next();
         })
     }
     const buildPage: Function = (next: Function): void => {
         cli.info("Some times us need the wait");
-        let listPageNeedBuild: Array<any>
+        let listPageNeedBuild: Array<string>
         listPageNeedBuild = BuildwebHelper.listPage();
         /**
          * INIT 
          */
-        const robotLoadPage: Function = (listPageNeedBuild: Array<any>, key: number = 0): void | Function => {
+        const robotLoadPage: Function = (listPageNeedBuild: Array<string>, key: number = 0): void | Function => {
             BuildwebHelper.buildSinglePage(listPageNeedBuild[key], true, () => {
                 if ((key + 1) < listPageNeedBuild.length) {
                     robotLoadPage(listPageNeedBuild, key + 1);
@@ -65,7 +65,7 @@ try {
         }
     }
     if (fs.existsSync(BuildframeworkInfo)) {
-        cli.exec('rm -rf ./bin/web/tmp/pages/*.ts', (resp: any) => {
+        cli.exec('rm -rf ./bin/web/tmp/pages/*.ts', (resp: any) : void => {
             if (resp) {
                 prepareBuild(() => {
                     buildRouter(() => {

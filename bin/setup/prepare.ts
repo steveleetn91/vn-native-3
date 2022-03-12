@@ -9,8 +9,8 @@ const firstBuild : Function = () : void => {
 }
 
 const setupConstructionGlobal : Function = (callback : Function) : void  => {
-    cli.exec("npm i -g cordova && cp -r ./config/config.dev.json ./config/config.json && npm install --save-dev electron-packager",(resp) => {
-        return callback()
+    cli.exec("npm i -g cordova && cp -r ./config/config.dev.json ./config/config.json",(resp) => {
+        return callback();
     },(resp) => {
         return callback();
     });

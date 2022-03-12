@@ -22,7 +22,7 @@ try {
             { encoding: 'utf8', flag: 'r' });
         configXml = configXml.replaceAll("index.html", `http://${AndroidAddIP.address()}:${AndroidAddConfig.PORT + 1}`);
         await Androidfs.writeFileSync('./platforms/android/app/src/main/res/xml/config.xml', configXml);
-        cli.ok("Please start development Android to develop");
+        cli.ok("Please open Android Studio before start development Android");
     }
 } catch (error) {
     cli.error(error.toString());

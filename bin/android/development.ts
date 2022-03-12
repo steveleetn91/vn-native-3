@@ -65,7 +65,7 @@ try {
                 cli.ok("Completed prepare building Androis OS");
                 cli.info("Installed development");
                 AndroidDevelopmentServe(() => {
-                    cli.ok("Please open Android Studio and run app")
+                    cli.ok("Please run app by Android Studio")
                 });
             },
             (resp: any): void => {
@@ -73,7 +73,7 @@ try {
                 cli.ok("Completed prepare building Androis OS");
                 cli.info("Installed development");
                 AndroidDevelopmentServe(() => {
-                    cli.ok("Please open Android Studio and run app")
+                    cli.ok("Please run app by Android Studio")
                 });
             });
     }

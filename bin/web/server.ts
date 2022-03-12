@@ -47,7 +47,7 @@ try {
             });
         }
 
-        const applyChangeForPlatforms = (callback: Function) => {
+        const applyChangeForPlatforms : Function = (callback: Function) : Function => {
 
             let platforms = packageJSON.cordova.platforms;
             for (let i = 0; i < platforms.length; i++) {
