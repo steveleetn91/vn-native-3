@@ -1,7 +1,7 @@
 {
   "name": "vn-native-3",
   "displayName": "HelloWorld",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Vn Native Framework",
   "main": "./dist/bin/electron/production.js",
   "scripts": {
