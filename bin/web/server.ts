@@ -47,7 +47,7 @@ try {
             });
         }
 
-        const applyChangeForPlatforms : Function = (callback: Function) : Function => {
+        const applyChangeForPlatforms : Function = (callback: Function) : void => {
 
             let platforms = packageJSON.cordova.platforms;
             for (let i = 0; i < platforms.length; i++) {
@@ -63,7 +63,9 @@ try {
                         break;
                 }
             }
-            return callback();
+            setTimeout(() : Function => {
+                return callback()
+            },3000);
         }
 
         /**
