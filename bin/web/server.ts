@@ -47,25 +47,23 @@ try {
             });
         }
 
-        const applyChangeForPlatforms : Function = (callback: Function) : void => {
+        const applyChangeForPlatforms : Function = (name: string, callback: Function) : void => {
 
             let platforms = packageJSON.cordova.platforms;
             for (let i = 0; i < platforms.length; i++) {
                 switch (platforms[i]) {
                     case "browser":
-                        cli.exec("cp -r ./www/assets/* ./platforms/browser/www/assets");
+                        cli.exec(`cp -r ./www/assets/${name} ./platforms/browser/www/assets`);
                         break;
                     case "android":
-                        cli.exec("cp -r ./www/assets/* ./platforms/android/app/src/main/assets/www/assets");
+                        cli.exec(`cp -r ./www/assets/${name} ./platforms/android/app/src/main/assets/www/assets`);
                         break;
                     case "ios":
-                        cli.exec("cp -r ./www/assets/* ./platforms/ios/www/assets");
+                        cli.exec(`cp -r ./www/assets/${name} ./platforms/ios/www/assets`);
                         break;
                 }
             }
-            setTimeout(() : Function => {
-                return callback()
-            },3000);
+            return callback();
         }
 
         /**
@@ -92,7 +90,7 @@ try {
                             name += totalString[i];
                             if ((i + 1) === (totalString.length / 2)) {
                                 webHelper.buildSinglePage(name, true, () => {
-                                    applyChangeForPlatforms(() => {
+                                    applyChangeForPlatforms(name,() => {
                                         io.emit('has reload', `Rebuild ${name}`);
                                         cli.ok(`Rebuild ${name}`)
                                     })

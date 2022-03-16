@@ -19,10 +19,14 @@ try {
         const reloadEvent: Function = (): void => {
             AndroidDevwatcher
                 .on('add', (path: string): void => {
-                    Androidio.emit('has reload', `Rebuild`);
+                    setTimeout(() => {
+                        Androidio.emit('has reload', `Rebuild`);
+                    },2000);
                 })
                 .on('change', (path: string): void => {
-                    Androidio.emit('has reload', `Rebuild`);
+                    setTimeout(() => {
+                        Androidio.emit('has reload', `Rebuild`);
+                    },2000);
                 })
         }
         /**

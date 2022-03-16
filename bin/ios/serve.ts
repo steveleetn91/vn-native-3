@@ -19,11 +19,15 @@ if (iOSSvevelopmentfs.existsSync(iOSSvevelopmentframeworkInfo)) {
             iOSSvDevwatcher
                 .on('add', (path: string): void => {
                     cli.info("add " + path.toString());
-                    iOSSvio.emit('has reload', `Rebuild`);
+                    setTimeout(() => {
+                        iOSSvio.emit('has reload', `Rebuild`);
+                    },2000);
                 })
                 .on('change', (path: string): void => {
                     cli.info("change " + path.toString());
-                    iOSSvio.emit('has reload', `Rebuild`);
+                    setTimeout(() => {
+                        iOSSvio.emit('has reload', `Rebuild`);
+                    },2000);
                 })
         }
         /**
