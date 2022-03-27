@@ -1,9 +1,9 @@
 {
   "name": "vn-native-3",
   "displayName": "HelloWorld",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Vn Native Framework",
-  "main": "./dist/bin/electron/production.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
