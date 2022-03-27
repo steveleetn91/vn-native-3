@@ -40,7 +40,7 @@ try {
         }
 
         const osBuild: Function = (type: string, next: Function): void => {
-            cli.exec('npx electron-packager . ' + config.ELECTRON_APP_NAME
+            cli.exec('npx electron-packager ./platforms/electron/app ' + config.ELECTRON_APP_NAME
                 + ' --platform win32 --arch ' + type
                 + ' --out ./platforms/electron/dist --icon=./platforms/browser/www/icons/icon.ico --overwrite --asar',
                 async (resp: any) => {
@@ -54,14 +54,23 @@ try {
                 });
         }
 
-        ElectronHelp.cli("ok", "Start electron build");
-        osBuild('ia32', () => {
-            osBuild('x64', () => {
-                osBuild('arm64', () => {
-
+        const makeStatic : Function = (callback: Function) : void => {
+            cli.exec("cp -r ./platforms/browser/www/* ./platforms/electron/app && cp -r ./bin/electron/views/index.ejs ./platforms/electron/app/index.html",(resp) : Function => {
+                return callback()
+            },(resp) : Function => {
+                return callback();
+            })
+        }
+        makeStatic(() => {
+            osBuild('ia32', () => {
+                osBuild('x64', () => {
+                    osBuild('arm64', () => {
+                        ElectronHelp.cli("success", "Done");
+                    });
                 });
-            });
-        });
+            });    
+        })
+        
     }
 } catch (err) {
     ElectronHelp.cli("error", err.toString());

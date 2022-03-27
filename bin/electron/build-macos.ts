@@ -34,12 +34,12 @@ try {
                 name: env.ELECTRON_APP_NAME,
                 overwrite: true,
                 productName: env.ELECTRON_APP_NAME,
-                icon: "./platforms/browser/www/icons/icon.icns"
+                icon: "./platforms/electron/icons/icon.icns"
             });
         }
 
         const osBuild: Function = (callback: Function): void => {
-            cli.exec('npx electron-packager . ' + env.ELECTRON_APP_NAME
+            cli.exec('npx electron-packager ./platforms/electron/app ' + env.ELECTRON_APP_NAME
                 + ' --platform darwin --arch x64'
                 + ' --out ./platforms/electron/dist --icon=./platforms/browser/www/icons/icon.icns --overwrite',
                 async (resp: any): Promise<Function> => {
@@ -53,10 +53,18 @@ try {
                 });
         }
 
-        cli.ok("Start electron build");
-        osBuild(() => {
-            cli.ok("Done");
-        });
+        const makeStaticMacos : Function = (callback: Function) : void => {
+            cli.exec("cp -r ./platforms/browser/www/* ./platforms/electron/app && cp -r ./bin/electron/views/index.ejs ./platforms/electron/app/index.html",(resp) : Function => {
+                return callback()
+            },(resp) : Function => {
+                return callback();
+            })
+        }
+        makeStaticMacos(() => {
+            osBuild(() => {
+                cli.ok("Done");
+            });    
+        })
     }
 } catch (err) {
     cli.error(err.toString());
