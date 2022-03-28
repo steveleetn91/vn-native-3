@@ -3,7 +3,7 @@
   "displayName": "HelloWorld",
   "version": "1.6.2",
   "description": "Vn Native Framework",
-  "main": "./dist/index.js",
+  "main": "./dist/bin/electron/serve.js",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
