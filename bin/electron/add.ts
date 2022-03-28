@@ -4,6 +4,15 @@ const ElectronAddFs = require('fs');
 const ElectgronAddframeworkInfo = './framework.json';
 try {
     if (ElectronAddFs.existsSync(ElectgronAddframeworkInfo)) {
+        const ElectronClearForAdd : Function = (callback: Function) : void => {
+            cli.exec("cd ./platforms && rm -rf ./electron",(resp) : Function => {
+                cli.info(resp.toString());
+                return callback()
+            },(resp) : Function => {
+                cli.info(resp.toString());
+                return callback()
+            })
+        }
         const ElectronPrepareAdd : Function = (callback : Function) => {
             cli.exec("cd platforms && mkdir electron && cd ./electron && git clone https://github.com/steveleetn91/vnnative3-software.git app",(resp) : Function => {
                 cli.info(resp.toString());
@@ -29,9 +38,11 @@ try {
                 cli.info(resp.toString());
             })
         }
-        ElectronPrepareAdd(() => {
-            ElectronMakePreloadAdd();
-            ElectronSetupAdd();
+        ElectronClearForAdd(() => {
+            ElectronPrepareAdd(() => {
+                ElectronMakePreloadAdd();
+                ElectronSetupAdd();
+            });    
         });
     }
 }catch(error) {
