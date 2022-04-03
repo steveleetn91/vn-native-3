@@ -1,7 +1,7 @@
 {
   "name": "vn-native-3",
-  "displayName": "HelloWorld",
-  "version": "1.6.2",
+  "displayName": "Vn Native 3",
+  "version": "1.6.3",
   "description": "Vn Native Framework",
   "main": "./dist/bin/electron/serve.js",
   "scripts": {
