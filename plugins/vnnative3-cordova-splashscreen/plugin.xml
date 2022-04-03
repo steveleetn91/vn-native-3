@@ -19,14 +19,14 @@
 -->
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-splashscreen"
-        version="6.0.0">
+        id="vnnative3-cordova-splashscreen"
+        version="1.0.0">
     <name>Splashscreen</name>
-    <description>Cordova Splashscreen Plugin</description>
-    <license>Apache 2.0</license>
-    <keywords>cordova,splashscreen</keywords>
-    <repo>https://github.com/apache/cordova-plugin-splashscreen.git</repo>
-    <issue>https://github.com/apache/cordova-plugin-splashscreen/issues</issue>
+    <description>Vn Native Splashscreen</description>
+    <license>MIT</license>
+    <keywords>vnnative3,cordova,splashscreen</keywords>
+    <repo>https://github.com/steveleetn91/vnnative3-cordova-splashscreen</repo>
+    <issue>https://github.com/steveleetn91/vnnative3-cordova-splashscreen/issues</issue>
 
     <engines>
         <engine name="cordova-android" version=">=3.6.0" /><!-- Requires CordovaPlugin.preferences -->
@@ -43,28 +43,6 @@
         </config-file>
 
         <source-file src="src/android/SplashScreen.java" target-dir="src/org/apache/cordova/splashscreen" />
-
-        <js-module src="www/splashscreen.js" name="SplashScreen">
-            <clobbers target="navigator.splashscreen" />
-        </js-module>
-    </platform>
-
-    <!-- windows -->
-    <platform name="windows">
-        <js-module src="src/windows/SplashScreenProxy.js" name="SplashScreenProxy">
-            <runs />
-        </js-module>
-
-        <js-module src="www/splashscreen.js" name="SplashScreen">
-            <clobbers target="navigator.splashscreen" />
-        </js-module>
-    </platform>
-
-    <!-- browser -->
-    <platform name="browser">
-        <js-module src="src/browser/SplashScreenProxy.js" name="SplashScreenProxy">
-            <runs />
-        </js-module>
 
         <js-module src="www/splashscreen.js" name="SplashScreen">
             <clobbers target="navigator.splashscreen" />

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.example.tani" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Vnf3</name>
-    <description>Vn Native 3 Application</description>
+    <description>Vn Native 3</description>
     <author email="hoang.le.tn91@gmail.com" href="https://tani.technology">
         Tani Technology
     </author>
@@ -15,13 +15,5 @@
     </platform>
     <platform name="ios">
         <preference name="SplashScreenDelay" value="1000" />
-    </platform>
-    <platform name="browser">
-        <preference name="SplashScreen" value="/img/logo.png" />
-        <preference name="AutoHideSplashScreen" value="true" />
-        <preference name="SplashScreenDelay" value="0" />
-        <preference name="SplashScreenBackgroundColor" value="white" />
-        <preference name="SplashScreenWidth" value="600" />
-        <preference name="SplashScreenHeight" value="300" />
     </platform>
 </widget>

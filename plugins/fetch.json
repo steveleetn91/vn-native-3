@@ -15,10 +15,10 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-splashscreen": {
+  "vnnative3-cordova-splashscreen": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-splashscreen@6.0.0"
+      "id": "https://github.com/steveleetn91/vnnative3-cordova-splashscreen"
     },
     "is_top_level": true,
     "variables": {}

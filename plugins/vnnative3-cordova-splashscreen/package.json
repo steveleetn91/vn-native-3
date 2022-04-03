@@ -1,6 +1,6 @@
 {
-  "name": "cordova-plugin-splashscreen",
-  "version": "6.0.0",
+  "name": "vnnative3-cordova-splashscreen",
+  "version": "1.0.0",
   "description": "Cordova Splashscreen Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
@@ -11,8 +11,13 @@
       "browser"
     ]
   },
-  "repository": "github:apache/cordova-plugin-splashscreen",
-  "bugs": "https://github.com/apache/cordova-plugin-splashscreen/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache/cordova-plugin-splashscreen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/apache/cordova-plugin-splashscreen/issues"
+  },
   "keywords": [
     "cordova",
     "splashscreen",
@@ -40,9 +45,13 @@
     }
   },
   "author": "Apache Software Foundation",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "devDependencies": {
     "@cordova/eslint-config": "^3.0.0"
   },
-  "homepage": "https://github.com/apache/cordova-plugin-splashscreen#readme"
+  "homepage": "https://github.com/apache/cordova-plugin-splashscreen#readme",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  }
 }
